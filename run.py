@@ -65,29 +65,49 @@ def task_validation(choice):
     return True
 
 
+def is_empty_string(data):
+    """
+    Checks that the inputted data is not an empty string.
+    """
+    try:
+        if data == "":
+            raise ValueError("You need to provide the requested information!")
+    except ValueError as e:
+        print(f"Invalid data: {e}")
+        return True
+    return False
+
+
 def add_new_client():
     """
     Takes the client data as input
     """
     print("You're adding a new client! Insert the following information.\n")
-    name = input("Full name:")
-    gender = input("Gender(F or M):")
-    age = input("Age:")
-    height = input("Height(cm):")
-    weight = input("Weight(kg):")
-    print("For the following requested information, choose one of the following:")
-    print("Sedentary: SED")
-    print("Lightly active: LA")
-    print("Moderately active: MA")
-    print("Very active: VA")
-    print("Extremely active: EA")
-    activity = input("Activity level:")
-    body_fat = input("Body fat (Do not type %, example: 12):")
-    print("Now, what's the client's main goal?")
-    print("A. Weight maintenance")
-    print("B. Weight loss / cutting")
-    print("C. Weight gain / bulking")
-    goal = input("Goal (A, B or C):")
+    # Input name
+    while True: 
+            name = input("Full name:")
+            if is_empty_string(name):
+                print("Please insert client's name.")
+                continue
+            else:
+                while True:
+                    gender = input("Gender(F or M):")
+                    age = input("Age:")
+                    height = input("Height(cm):")
+                    weight = input("Weight(kg):")
+                    print("For the following requested information, choose one of the following:")
+                    print("Sedentary: SED")
+                    print("Lightly active: LA")
+                    print("Moderately active: MA")
+                    print("Very active: VA")
+                    print("Extremely active: EA")
+                    activity = input("Activity level:")
+                    body_fat = input("Body fat (Do not type %, example: 12):")
+                    print("Now, what's the client's main goal?")
+                    print("A. Weight maintenance")
+                    print("B. Weight loss / cutting")
+                    print("C. Weight gain / bulking")
+                    goal = input("Goal (A, B or C):")
 
 
 def check_progress():
