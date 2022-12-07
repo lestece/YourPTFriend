@@ -262,17 +262,25 @@ def add_new_client():
         print("A. Weight maintenance")
         print("B. Weight loss / cutting")
         print("C. Weight gain / bulking")
-        goal = input("Goal (A, B or C):")
+        goal_letter = input("Goal (A, B or C):")
+        goal_capitalize = goal_letter.upper()
         # Checks that the inputted goal is not an empty string
-        if is_empty_string(goal):
+        if is_empty_string(goal_capitalize):
             print("Please insert client's goal")
             continue
         # Checks that the inserted goal is one of the available options
-        elif (goal.upper() != 'A') and (goal.upper() != 'B') and (goal.upper() != 'C'):
+        elif (goal_capitalize != 'A') and (goal_capitalize != 'B') and (goal_capitalize != 'C'):
             print("Please choose one of the available options.")
             continue
         else:
-            print("All validation is completed!")
+            goal = ""
+            if goal_capitalize == 'A':
+                goal = 'maintain weight'
+            elif goal_capitalize == 'B':
+                goal = 'lose weight'
+            else:
+                goal = 'gain weight'
+                
             new_client.append(goal)
             break
 
