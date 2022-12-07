@@ -85,33 +85,60 @@ def add_new_client():
     print("You're adding a new client! Insert the following information.\n")
     # Input name
     while True: 
-            name = input("Full name:")
-            if is_empty_string(name):
-                print("Please insert client's name.")
-                continue
-            elif clients_init_conditions.find(name):
-                print("There's already another client registered with the same name.")
-                print("Please provide an extra identification for this client")
-                print("so that he/she can be discerned.")
-            else:
-                while True:
-                    gender = input("Gender(F or M):")
-                    age = input("Age:")
-                    height = input("Height(cm):")
-                    weight = input("Weight(kg):")
-                    print("For the following requested information, choose one of the following:")
-                    print("Sedentary: SED")
-                    print("Lightly active: LA")
-                    print("Moderately active: MA")
-                    print("Very active: VA")
-                    print("Extremely active: EA")
-                    activity = input("Activity level:")
-                    body_fat = input("Body fat (Do not type %, example: 12):")
-                    print("Now, what's the client's main goal?")
-                    print("A. Weight maintenance")
-                    print("B. Weight loss / cutting")
-                    print("C. Weight gain / bulking")
-                    goal = input("Goal (A, B or C):")
+        name = input("Full name:")
+        # Checks that the inputted name is not blank space
+        if is_empty_string(name):
+            print("Please insert client's name.")
+            continue
+        # Checks if the name is already in the records
+        elif clients_init_conditions.find(name):
+            print("There's already another client registered with the same name.")
+            print("Please provide an extra identification for this client")
+            print("so that he/she can be discerned.")
+            continue
+        else:
+            while True:
+                gender = input("Gender(F or M):")
+                # Checks that the inputted gender is not blank space
+                if is_empty_string(gender):
+                    print("Please insert client's gender.")
+                    continue
+                # Makes sure the gender is either F or M
+                elif (gender.upper() != 'F') and (gender.upper() != 'M'):
+                    print("Please answer with either 'F' or 'M'")
+                    continue
+                else:
+                    while True:
+                        age = input("Age:")
+                        # Checks that the inputted age is not blank space
+                        if is_empty_string(age):
+                            print("Please insert client's age.")
+                            continue
+                        # Checks that the insterted age is a number
+                        elif not age.isnumeric():
+                            print("Inserted age needs to be a number.")
+                            continue
+                        # Makes sure the age is a realistic value
+                        elif (int(age) < 14) or (int(age) > 100):
+                            print("Please insert a valid age.")
+                            continue
+                        else:
+                            while True:
+                                height = input("Height(cm):")
+                                weight = input("Weight(kg):")
+                                print("For the following requested information, choose one of the following:")
+                                print("Sedentary: SED")
+                                print("Lightly active: LA")
+                                print("Moderately active: MA")
+                                print("Very active: VA")
+                                print("Extremely active: EA")
+                                activity = input("Activity level:")
+                                body_fat = input("Body fat (Do not type %, example: 12):")
+                                print("Now, what's the client's main goal?")
+                                print("A. Weight maintenance")
+                                print("B. Weight loss / cutting")
+                                print("C. Weight gain / bulking")
+                                goal = input("Goal (A, B or C):")
 
 
 def check_progress():
