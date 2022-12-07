@@ -89,6 +89,27 @@ def update_worksheet(data, worksheet):
     print(f"{worksheet} updated successfully!")
 
 
+def translate_activity_factor(activity_level):
+    """
+    Assigns the corresponding activity factor to the 
+    activity level inserted by the user
+    """
+    activity_factor = ""
+
+    if activity_level == "SED":
+        activity_factor = 1.2
+    elif activity_level == "LA":
+        activity_factor = 1.375
+    elif activity_level == "MA":
+        activity_factor = 1.55
+    elif activity_level == "VA":
+        activity_factor = 1.725
+    else:
+        activity_factor = 1.9
+    
+    return activity_factor
+
+
 def add_new_client():
     """
     Takes the client data as input.
@@ -212,7 +233,8 @@ def add_new_client():
                 print("Please choose a valid activity level from the options provided.")
                 continue
         else:
-            new_client.append(activity)
+            activity_factor = translate_activity_factor(activity.upper())
+            new_client.append(activity_factor)
             break
 
     # Input body fat percentage
