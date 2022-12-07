@@ -89,6 +89,10 @@ def add_new_client():
             if is_empty_string(name):
                 print("Please insert client's name.")
                 continue
+            elif clients_init_conditions.find(name):
+                print("There's already another client registered with the same name.")
+                print("Please provide an extra identification for this client")
+                print("so that he/she can be discerned.")
             else:
                 while True:
                     gender = input("Gender(F or M):")
