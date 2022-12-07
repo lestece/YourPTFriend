@@ -1,31 +1,47 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# YourPTFriend
 
-Welcome lestece,
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+**A Python based program to support Personal Trainers in their job**
 
-## Reminders
+[View the program here]()
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+## TABLE OF CONTENTS
 
-## Creating the Heroku app
+1. [INTRODUCTION](#1-introduction)
+2. [INSTRUCTIONS](#2-instructions)
+3. [PROGRAM GOALS](#3-program-goals)
+4. [FEATURES](#4-features)
+   - [Existing features](#existing-features)
+   - [Features to implement in the future](#features-to-implement-in-the-future)
+5. [TESTING](#5-testing)
+6. [TECHNOLOGIES USED](#6-technologies-used)
+7. [CREDITS](#6-credits)
+8. [DEPLOYMENT](#7-deployment)
+9. [ACKNOWLEDGEMENTS](#8-acknowledgements)
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+- - - 
+## 1. INTRODUCTION
 
-1. `heroku/python`
-2. `heroku/nodejs`
+YourPTFriend is an interactable command-line based program that handles data automation as a supporting tool for personal trainers.
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+Based on the client's data provided by the PT, the program calculates the client's TDEE and, based on the weight goal (maintenance, cutting, bulking) it returns the amount of daily calorie intake that the client should consume.
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+The program also allows the user to periodically check the progress of a specific client, or to delete a client from the records when they decide to end the coaching.
 
-Connect your GitHub repository and deploy as normal.
+The program goal is to automate a repetitive task related to nutrition so that the user (the PT) can entirely focus on designing the workouts.
 
-## Constraints
+## 2. INSTRUCTIONS
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+## 3. PROGRAM GOALS
 
------
-Happy coding!
+## 4. FEATURES
+
+## 5. TESTING
+
+## 6. TECHNOLOGIES USED
+
+## 7. CREDITS
+
+## 8. DEPLOYMENT
+
+## 9. ACKNOWLEDGEMENTS
