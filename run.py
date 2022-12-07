@@ -97,117 +97,141 @@ def add_new_client():
             print("so that he/she can be discerned.")
             continue
         else:
-            # Input gender
-            while True:
-                gender = input("Gender(F or M):")
-                # Checks that the inputted gender is not blank space
-                if is_empty_string(gender):
-                    print("Please insert client's gender.")
-                    continue
-                # Makes sure the gender is either F or M
-                elif (gender.upper() != 'F') and (gender.upper() != 'M'):
-                    print("Please answer with either 'F' or 'M'")
-                    continue
-                else:
-                    #Input age
-                    while True:
-                        age = input("Age:")
-                        # Checks that the inputted age is not blank space
-                        if is_empty_string(age):
-                            print("Please insert client's age.")
-                            continue
-                        # Checks that the insterted age is a number
-                        elif not age.isnumeric():
-                            print("Inserted age needs to be a number.")
-                            continue
-                        # Makes sure the age is a realistic value
-                        elif (int(age) < 14) or (int(age) > 100):
-                            print("Please insert a valid age.")
-                            continue
-                        else:
-                            while True:
-                                # Input height
-                                height = input("Height(cm):")
-                                # Checks that the inputted height is not blank space
-                                if is_empty_string(height):
-                                    print("Please insert client's height.")
-                                    continue
-                                # Checks that the insterted height is a number
-                                elif not height.isnumeric():
-                                    print("Inserted height needs to be a number.")
-                                    continue
-                                # Makes sure the height is in cm and not feet
-                                # Also checks that the inserted height is realistic
-                                # Takes into account the heights of shortest and tallest people in the world
-                                elif (int(height) < 63) or (int(height) > 272):
-                                    print("Please insert a valid height in cm.")
-                                    print("Example: 167")
-                                    continue
-                                else:
-                                    # Input weight
-                                    while True:
-                                        weight = input("Weight(kg):")
-                                        # Checks that the inputted weight is not blank space
-                                        if is_empty_string(weight):
-                                            print("Please insert client's weight.")
-                                            continue
-                                        # Checks that the inserted weight is a number
-                                        elif not weight.isnumeric():
-                                            print("Inserted weight needs to be a number.")
-                                            continue
-                                        # Makes sure the weight insterted is realistic
-                                        # Takes into account the weights of heaviest and lightest people in the world
-                                        elif (int(weight) < 24) or (int(weight) > 635):
-                                            print("Please insert a valid weight in kg.")
-                                            print("Example: 87")
-                                            continue
-                                        else:
-                                            # Input activity level
-                                            while True:
-                                                print("For the following requested information, choose one of the following:")
-                                                print("Sedentary: SED")
-                                                print("Lightly active: LA")
-                                                print("Moderately active: MA")
-                                                print("Very active: VA")
-                                                print("Extremely active: EA")
-                                                activity = input("Activity level:")
-                                                # Checks that the inputted activity level is not blank space
-                                                if is_empty_string(activity):
-                                                    print("Please insert client's activity level.")
-                                                    continue
-                                                # Checks that the inserted activity level is valid
-                                                elif (
-                                                    (activity.upper() != 'SED') and
-                                                    (activity.upper() != 'LA') and
-                                                    (activity.upper() != 'MA') and
-                                                    (activity.upper() != 'VA') and
-                                                    (activity.upper() != 'EA')
-                                                    ):
-                                                        print("Please choose a valid activity level from the options provided.")
-                                                        continue
-                                                else:
-                                                    # Input body fat percentage
-                                                    while True:
-                                                        body_fat = input("Body fat (Do not type %, example: 12): %")
-                                                        # Checks that the inputted body fat % is not an empty string
-                                                        if is_empty_string(body_fat):
-                                                            print("Please insert client's body fat %.")
-                                                            continue
-                                                        # Makes sure the insterted body fat percentage is a number
-                                                        elif not body_fat.isnumeric():
-                                                            print("Body fat percentage needs to be a numeric value.\n Example: 22")
-                                                            continue
-                                                        # Checks that the inserted body fat percentage is realistic
-                                                        elif (int(body_fat) < 5) or (int(body_fat) > 40):
-                                                            print("Please insert a correct body fat percentage.")
-                                                            continue
-                                                        else:
-                                                            while True:
-                                                                print("Now, what's the client's main goal?")
-                                                                print("A. Weight maintenance")
-                                                                print("B. Weight loss / cutting")
-                                                                print("C. Weight gain / bulking")
-                                                                goal = input("Goal (A, B or C):")
+            break
+           
+    # Input gender
+    while True:
+        gender = input("Gender(F or M):")
+        # Checks that the inputted gender is not blank space
+        if is_empty_string(gender):
+            print("Please insert client's gender.")
+            continue
+        # Makes sure the gender is either F or M
+        elif (gender.upper() != 'F') and (gender.upper() != 'M'):
+            print("Please answer with either 'F' or 'M'")
+            continue
+        else:
+            break
+    # Input age
+    while True: 
+        age = input("Age:")
+        # Checks that the inputted age is not blank space
+        if is_empty_string(age):
+            print("Please insert client's age.")
+            continue
+        # Checks that the insterted age is a number
+        elif not age.isnumeric():
+            print("Inserted age needs to be a number.")
+            continue
+        # Makes sure the age is a realistic value
+        elif (int(age) < 14) or (int(age) > 100):
+            print("Please insert a valid age.")
+            continue
+        else:
+            break
+
+    # Input height
+    while True:
+        height = input("Height(cm):")
+        # Checks that the inputted height is not blank space
+        if is_empty_string(height):
+            print("Please insert client's height.")
+            continue
+        # Checks that the insterted height is a number
+        elif not height.isnumeric():
+            print("Inserted height needs to be a number.")
+            continue
+        # Makes sure the height is in cm and not feet
+        # Also checks that the inserted height is realistic
+        # Takes into account the heights of shortest and tallest people in the world
+        elif (int(height) < 63) or (int(height) > 272):
+            print("Please insert a valid height in cm.")
+            print("Example: 167")
+            continue
+        else:
+            break
+
+    # Input weight
+    while True:
+        weight = input("Weight(kg):")
+        # Checks that the inputted weight is not blank space
+        if is_empty_string(weight):
+            print("Please insert client's weight.")
+            continue
+        # Checks that the inserted weight is a number
+        elif not weight.isnumeric():
+            print("Inserted weight needs to be a number.")
+            continue
+        # Makes sure the weight insterted is realistic
+        # Takes into account the weights of heaviest and lightest people in the world
+        elif (int(weight) < 24) or (int(weight) > 635):
+            print("Please insert a valid weight in kg.")
+            print("Example: 87")
+            continue
+        else:
+            break
+
+    # Input activity level
+    while True:
+        print("Sedentary: SED")
+        print("Lightly active: LA")
+        print("Moderately active: MA")
+        print("Very active: VA")
+        print("Extremely active: EA")
+        activity = input("Activity level:")
+        # Checks that the inputted activity level is not blank space
+        if is_empty_string(activity):
+            print("Please insert client's activity level.")
+            continue
+        # Checks that the inserted activity level is valid
+        elif (
+            (activity.upper() != 'SED') and
+            (activity.upper() != 'LA') and
+            (activity.upper() != 'MA') and
+            (activity.upper() != 'VA') and
+            (activity.upper() != 'EA')
+            ):
+                print("Please choose a valid activity level from the options provided.")
+                continue
+        else:
+            break
+
+    # Input body fat percentage
+    while True:
+        body_fat = input("Body fat (Do not type %, example: 12): %")
+        # Checks that the inputted body fat % is not an empty string
+        if is_empty_string(body_fat):
+            print("Please insert client's body fat %.")
+            continue
+        # Makes sure the insterted body fat percentage is a number
+        elif not body_fat.isnumeric():
+            print("Body fat percentage needs to be a numeric value.\n Example: 22")
+            continue
+        # Checks that the inserted body fat percentage is realistic
+        elif (int(body_fat) < 5) or (int(body_fat) > 40):
+            print("Please insert a correct body fat percentage.")
+            continue
+        else:
+            break
+
+    # Input client's goal
+    print("Now, what's the client's main goal?")
+    while True:
+        print("A. Weight maintenance")
+        print("B. Weight loss / cutting")
+        print("C. Weight gain / bulking")
+        goal = input("Goal (A, B or C):")
+        # Checks that the inputted goal is not an empty string
+        if is_empty_string(goal):
+            print("Please insert client's goal")
+            continue
+        # Checks that the inserted goal is one of the available options
+        elif (goal.upper() != 'A') and (goal.upper() != 'B') and (goal.upper() != 'C'):
+            print("Please choose one of the available options.")
+            continue
+        else:
+            print("All validation is completed!")
+            break                                                      
 
 
 def check_progress():
