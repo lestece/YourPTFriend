@@ -14,8 +14,8 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Your-PT-Friend')
 
-clients_init_conditions = SHEET.worksheet('clients_initial_conditions')
-clients_progress = SHEET.worksheet('clients_progress')
+clients_init_conditions = SHEET.worksheet('clients initial conditions')
+clients_progress = SHEET.worksheet('clients progress')
 
 
 def start_program():
@@ -78,10 +78,23 @@ def is_empty_string(data):
     return False
 
 
+def update_worksheet(data, worksheet):
+    """
+    Receives a list containing data to insert 
+    in the relevant worksheet
+    """
+    print(f"Updating {worksheet} records...\n")
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(data)
+    print(f"{worksheet} updated successfully!")
+
+
 def add_new_client():
     """
-    Takes the client data as input
+    Takes the client data as input.
+    After input validation, the data is inserted in a new_client list.
     """
+    new_client = []
     print("You're adding a new client! Insert the following information.\n")
     # Input name
     while True: 
@@ -97,6 +110,7 @@ def add_new_client():
             print("so that he/she can be discerned.")
             continue
         else:
+            new_client.append(name.capitalize())
             break
            
     # Input gender
@@ -111,6 +125,7 @@ def add_new_client():
             print("Please answer with either 'F' or 'M'")
             continue
         else:
+            new_client.append(gender.upper())
             break
     # Input age
     while True: 
@@ -128,6 +143,7 @@ def add_new_client():
             print("Please insert a valid age.")
             continue
         else:
+            new_client.append(age)
             break
 
     # Input height
@@ -149,6 +165,7 @@ def add_new_client():
             print("Example: 167")
             continue
         else:
+            new_client.append(height)
             break
 
     # Input weight
@@ -169,6 +186,7 @@ def add_new_client():
             print("Example: 87")
             continue
         else:
+            new_client.append(weight)
             break
 
     # Input activity level
@@ -194,6 +212,7 @@ def add_new_client():
                 print("Please choose a valid activity level from the options provided.")
                 continue
         else:
+            new_client.append(activity)
             break
 
     # Input body fat percentage
@@ -212,6 +231,7 @@ def add_new_client():
             print("Please insert a correct body fat percentage.")
             continue
         else:
+            new_client.append(body_fat)
             break
 
     # Input client's goal
@@ -231,7 +251,10 @@ def add_new_client():
             continue
         else:
             print("All validation is completed!")
-            break                                                      
+            new_client.append(goal)
+            break
+
+    update_worksheet(new_client, 'clients initial conditions')                                                     
 
 
 def check_progress():
