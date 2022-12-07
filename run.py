@@ -17,6 +17,7 @@ SHEET = GSPREAD_CLIENT.open('Your-PT-Friend')
 clients_init_conditions = SHEET.worksheet('clients_initial_conditions')
 clients_progress = SHEET.worksheet('clients_progress')
 
+
 def start_program():
     """
     Welcomes the PT and asks what action needs to be taken:
@@ -33,7 +34,15 @@ def start_program():
     option = (input("Insert a number from the above options (1, 2 or 3):\n"))
     
     if task_validation(option):
-        print("Valid option choice!")
+        choice = int(option)
+
+        if choice == 1:
+            add_new_client()
+        elif choice == 2:
+            check_progress()
+        else:
+            delete_client()
+
     
 def task_validation(choice):
     """
@@ -49,10 +58,23 @@ def task_validation(choice):
                 )
     except ValueError as e:
         print(
-            f"Invalid data: {e}. Please choose an option between 1, 2 or 3"
+            f"Invalid data: {e}. Please choose an option between 1, 2 or 3."
             )
         return False
 
     return True
+
+
+def add_new_client():
+    print("Going to the new client page")
+
+
+def check_progress():
+    print("Going to the check progress page")
+
+
+def delete_client():
+    print("Going to delete client page")
+
 
 start_program()
