@@ -125,20 +125,53 @@ def add_new_client():
                         else:
                             while True:
                                 height = input("Height(cm):")
-                                weight = input("Weight(kg):")
-                                print("For the following requested information, choose one of the following:")
-                                print("Sedentary: SED")
-                                print("Lightly active: LA")
-                                print("Moderately active: MA")
-                                print("Very active: VA")
-                                print("Extremely active: EA")
-                                activity = input("Activity level:")
-                                body_fat = input("Body fat (Do not type %, example: 12):")
-                                print("Now, what's the client's main goal?")
-                                print("A. Weight maintenance")
-                                print("B. Weight loss / cutting")
-                                print("C. Weight gain / bulking")
-                                goal = input("Goal (A, B or C):")
+                                # Checks that the inputted height is not blank space
+                                if is_empty_string(height):
+                                    print("Please insert client's height.")
+                                    continue
+                                # Checks that the insterted height is a number
+                                elif not height.isnumeric():
+                                    print("Inserted height needs to be a number.")
+                                    continue
+                                # Makes sure the height is in cm and not feet
+                                # Also checks that the inserted height is realistic
+                                # Takes into account the heights of shortest and tallest people in the world
+                                elif (int(height) < 63) or (int(height) > 272):
+                                    print("Please insert a valid height in cm.")
+                                    print("Example: 167")
+                                    continue
+                                else:
+                                    while True:
+                                        weight = input("Weight(kg):")
+                                        # Checks that the inputted weight is not blank space
+                                        if is_empty_string(weight):
+                                            print("Please insert client's weight.")
+                                            continue
+                                        # Checks that the inserted weight is a number
+                                        elif not weight.isnumeric():
+                                            print("Inserted weight needs to be a number.")
+                                            continue
+                                        # Makes sure the weight insterted is realistic
+                                        # Takes into account the weights of heaviest and lightest people in the world
+                                        elif (int(weight) < 24) or (int(weight) > 635):
+                                            print("Please insert a valid weight in kg.")
+                                            print("Example: 87")
+                                            continue
+                                        else:
+                                            while True:
+                                                print("For the following requested information, choose one of the following:")
+                                                print("Sedentary: SED")
+                                                print("Lightly active: LA")
+                                                print("Moderately active: MA")
+                                                print("Very active: VA")
+                                                print("Extremely active: EA")
+                                                activity = input("Activity level:")
+                                                body_fat = input("Body fat (Do not type %, example: 12):")
+                                                print("Now, what's the client's main goal?")
+                                                print("A. Weight maintenance")
+                                                print("B. Weight loss / cutting")
+                                                print("C. Weight gain / bulking")
+                                                goal = input("Goal (A, B or C):")
 
 
 def check_progress():
