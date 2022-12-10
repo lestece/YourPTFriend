@@ -423,7 +423,23 @@ def check_new_client_data(client_data):
 
 
 def check_progress():
-    print("Going to the check progress page")
+    """
+    Checks the client's progress by comparing 
+    the latest inserted weight and body fat percentage
+    with the ones that are being inserted and,
+    based on what the original goal was,
+    gives a response
+    """
+    client_name = input("Insert the client name: ").lower()
+    clients_record = clients_progress.col_values(1)
+    clients_list = []
+
+    for client in clients_record:
+        clients_list.append(client.lower())
+        
+    if client_name in clients_list:
+        print("okay")
+
 
 
 def delete_client():
