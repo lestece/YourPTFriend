@@ -103,17 +103,6 @@ def is_empty_string(data):
     return False
 
 
-def update_worksheet(data, worksheet):
-    """
-    Receives a list containing data to insert 
-    in the relevant worksheet
-    """
-    print(f"Updating {worksheet} records...\n")
-    worksheet_to_update = SHEET.worksheet(worksheet)
-    worksheet_to_update.append_row(data)
-    print(f"{worksheet} updated successfully!")
-
-
 def translate_activity_factor(activity_level):
     """
     Assigns the corresponding activity factor to the 
@@ -133,6 +122,18 @@ def translate_activity_factor(activity_level):
         activity_factor = 1.9
     
     return activity_factor
+
+
+def update_new_client_worksheet(data):
+    """
+    Receives a list containing data to insert 
+    in the relevant worksheet
+    """
+    client_dict = data.__dict__
+    client_list = list(client_dict.values())
+    print("Updating clients records...")
+    clients_init_conditions.append_row(client_list)
+    print("New client correctly insterted in your clients records!")
 
 
 def take_client_data():
@@ -312,7 +313,17 @@ def check_new_client_data(client_data):
         f"The details of the new client are as follows:"
         f"{client_data.client_description()}"
     ) 
-    correct = input("Is all data correct? y/n")                                                 
+
+    while True:
+        correct = input("Is client data correct? (y/n):")
+        if correct.lower() == 'y':
+            update_new_client_worksheet(client_data)
+        elif correct.lower() == 'n':
+            print("Please reinstert the new client data!")
+            take_client_data()
+        else:
+            print("Please answer with yes or no.")
+            continue
 
 
 def check_progress():
