@@ -306,13 +306,13 @@ def take_client_data():
 
 def calculate_weekly_kcal_burnt():
     """
-    Calculates the ideal daily calorie intake.
-    It takes into account the client's goal,
-    availability and tdee.
+    Calculates an average of how many calories per week
+    the client will burn from workouts
     """
-    availability = input("How many days per week can your client train?"
-                         "Please insert a number between 1 - 5"
-                        )
+    availability = int(input("How many days per week can your client train?"
+                             "Please insert a number between 1 - 5:"
+                             )
+                       )
     # Client's availability input validation                    
     while True:
         # Checks that the insterted value is not an empty string
@@ -332,6 +332,23 @@ def calculate_weekly_kcal_burnt():
     return weekly_kcal_burnt
 
 
+def calculate_daily_calorie_intake(goal, tdee):
+    """
+    Calculateshow many calories per day should be consumed.
+    It takes into account the amount of calories burnt per week
+    during workouts, the client's goal and the tdee.
+    """
+    weekly_kcal_burnt = calculate_weekly_kcal_burnt()
+
+    if goal == 'maintain weight':
+        daily_kcal_intake = tdee + weekly_kcal_burnt
+    elif goal == 'lose weight':
+        daily_kcal_intake = tdee + weekly_kcal_burnt - 500
+    else:
+        daily_kcal_intake = tdee + weekly_kcal_burnt + 500
+
+    return daily_kcal_intake
+
 def check_new_client_data(client_data):
     """
     Checks that the inserted client data is correct and
@@ -348,7 +365,15 @@ def check_new_client_data(client_data):
             update_new_client_worksheet(client_data)
             update_clients_progress(client_data.name, client_data.weight,
                                     client_data.body_fat)
-            calculate_daily_calorie_intake(client_data.goal, client_data.tdee)
+            daily_calorie_intake = calculate_daily_calorie_intake(
+                                   client_data.goal, 
+                                   client_data.tdee)
+            print(
+                f"{client_data.name} recommended daily calorie intake,"
+                f"based on the {client_data.goal} goal and"
+                f"on the number of workouts per week,"
+                f"is around {daily_calorie_intake} kcal.")
+
         elif correct.lower() == 'n':
             print("Please reinstert the new client data!")
             take_client_data()
