@@ -1,4 +1,4 @@
-# Import packages
+# # Import packages
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -24,7 +24,7 @@ class Client:
     """
     Client class
     """
-    def __init__(self, name, gender, age, height, weight, activity, 
+    def __init__(self, name, gender, age, height, weight, activity,
                  body_fat, goal, tdee):
         self.name = name
         self.gender = gender
@@ -38,12 +38,54 @@ class Client:
 
     def client_description(self):
         return (
-            f"{self.name} is a {self.age} years old {self.gender} client,"
-            f"{self.height} tall and that weights {self.weight}."
-            f"Taking into account that the client's activity level is {self.activity},"
-            f"body fat is {self.body_fat} %, tdee is {self.tdee} and the goal is to {self.goal},"
-            f"the estimated daily calorie intake is..."
+            f"{self.name} is a {self.age} years old {self.gender} client, "
+            f"{self.height} tall and that weights {self.weight}. "
+            f"Taking into account that the client's activity level is "
+            f"{self.activity}, body fat is {self.body_fat} %, tdee is "
+            f"{self.tdee} and the goal is to {self.goal}."
         )
+
+
+def task(option):
+    """
+    Based on the user inputted choice, 
+    it calls the relevant function connected
+    to the task.
+    """
+    if task_validation(option):
+        choice = int(option)
+
+        if choice == 1:
+            take_client_data()
+        elif choice == 2:
+            check_progress()
+        elif choice == 3:
+            delete_client()
+        else:
+            exit()
+    else:
+        next_task()
+
+
+def task_validation(choice):
+    """
+    Inside the try, convert the chosen option into an integer.
+    Raises a value error if the string can't be converted into an integer
+    or if the choice is not 1, 2 or 3.
+    """
+    try:
+        task = int(choice)
+        if (task != 1) and (task != 2) and (task != 3) and (task != 4):
+            raise ValueError(
+                f"{task} is not a valid option!"
+                )
+    except ValueError as e:
+        print(
+            f"Invalid data: {e}. Please choose an option between the options above: "
+            )
+        return False
+
+    return True
 
 
 def start_program():
@@ -60,37 +102,7 @@ def start_program():
           "3. Say goodbye to a client\n")
 
     option = (input("Insert a number from the above options (1, 2 or 3):\n"))
-    
-    if task_validation(option):
-        choice = int(option)
-
-        if choice == 1:
-            take_client_data()
-        elif choice == 2:
-            check_progress()
-        else:
-            delete_client()
-
-    
-def task_validation(choice):
-    """
-    Inside the try, convert the chosen option into an integer.
-    Raises a value error if the string can't be converted into an integer
-    or if the choice is not 1, 2 or 3.
-    """
-    try:
-        task = int(choice)
-        if (task != 1) and (task != 2) and (task != 3):
-            raise ValueError(
-                f"{task} is not a valid option!"
-                )
-    except ValueError as e:
-        print(
-            f"Invalid data: {e}. Please choose an option between 1, 2 or 3."
-            )
-        return False
-
-    return True
+    task(option)
 
 
 def is_empty_string(data):
@@ -108,8 +120,8 @@ def is_empty_string(data):
 
 def update_clients_progress(name, weight, body_fat):
     """
-    Updates the clients progress worksheet with 
-    the latest weight and body fat percentages 
+    Updates the clients progress worksheet with
+    the latest weight and body fat percentages
     of a specified client.
     """
     print("Updating client progress records")
@@ -120,7 +132,7 @@ def update_clients_progress(name, weight, body_fat):
 
 def update_new_client_worksheet(data):
     """
-    Receives a list containing data to insert 
+    Receives a list containing data to insert
     in the relevant worksheet
     """
     client_dict = data.__dict__
@@ -134,7 +146,6 @@ def update_new_client_worksheet(data):
           )
 
 
-
 def take_client_data():
     """
     Takes the client data as input.
@@ -142,7 +153,7 @@ def take_client_data():
     """
     print("You're adding a new client! Insert the following information.\n")
     # Input name
-    while True: 
+    while True:
         name = input("Full name:")
         # Checks that the inputted name is not blank space
         if is_empty_string(name):
@@ -150,13 +161,15 @@ def take_client_data():
             continue
         # Checks if the name is already in the records
         elif clients_init_conditions.find(name):
-            print("There's already another client registered with the same name.")
-            print("Please provide an extra identification for this client")
-            print("so that he/she can be discerned.")
+            print("There's already another client registered with"
+                  " the same name.\n Please provide an extra identification"
+                  "for this client so that he/she can be discerned from the"
+                  "one already existing"
+                  )
             continue
         else:
             break
-           
+
     # Input gender
     while True:
         gender = input("Gender(F or M):")
@@ -171,7 +184,7 @@ def take_client_data():
         else:
             break
     # Input age
-    while True: 
+    while True:
         age = input("Age:")
         # Checks that the inputted age is not blank space
         if is_empty_string(age):
@@ -201,7 +214,8 @@ def take_client_data():
             continue
         # Makes sure the height is in cm and not feet
         # Also checks that the inserted height is realistic
-        # Takes into account the heights of shortest and tallest people in the world
+        # Takes into account the heights of shortest and
+        # tallest people in the world
         elif (int(height) < 63) or (int(height) > 272):
             print("Please insert a valid height in cm.")
             print("Example: 167")
@@ -221,7 +235,8 @@ def take_client_data():
             print("Inserted weight needs to be a number.")
             continue
         # Makes sure the weight insterted is realistic
-        # Takes into account the weights of heaviest and lightest people in the world
+        # Takes into account the weights of heaviest and
+        # lightest people in the world
         elif (int(weight) < 24) or (int(weight) > 635):
             print("Please insert a valid weight in kg.")
             print("Example: 87")
@@ -249,7 +264,9 @@ def take_client_data():
             (activity.upper() != 'VA') and
             (activity.upper() != 'EA')
              ):
-            print("Please choose a valid activity level from the options provided.")
+            print("Please choose a valid activity level"
+                  "from the options provided."
+                  )
             continue
         else:
             break
@@ -263,7 +280,8 @@ def take_client_data():
             continue
         # Makes sure the insterted body fat percentage is a number
         elif not body_fat.isnumeric():
-            print("Body fat percentage needs to be a numeric value.\n Example: 22")
+            print("Body fat percentage needs to be a numeric value.\n"
+                  "Example: 22")
             continue
         # Checks that the inserted body fat percentage is realistic
         elif (int(body_fat) < 5) or (int(body_fat) > 40):
@@ -285,7 +303,11 @@ def take_client_data():
             print("Please insert client's goal")
             continue
         # Checks that the inserted goal is one of the available options
-        elif (goal_capitalize != 'A') and (goal_capitalize != 'B') and (goal_capitalize != 'C'):
+        elif (
+              (goal_capitalize != 'A') and
+              (goal_capitalize != 'B') and
+              (goal_capitalize != 'C')
+        ):
             print("Please choose one of the available options.")
             continue
         else:
@@ -298,9 +320,10 @@ def take_client_data():
                 goal = 'gain weight'
             break
 
-    tdee = tdee_formulas.calculate_tdee(gender, int(weight), int(height), 
-                                        activity.upper()) 
-    new_client = Client(name, gender, age, height, weight, activity, body_fat, goal, tdee) 
+    tdee = tdee_formulas.calculate_tdee(gender, int(weight), int(height),
+                                        activity.upper())
+    new_client = Client(name, gender, age, height, weight, activity,
+                        body_fat, goal, tdee)
     check_new_client_data(new_client)
 
 
@@ -313,7 +336,7 @@ def calculate_weekly_kcal_burnt():
                              "Please insert a number between 1 - 5:"
                              )
                        )
-    # Client's availability input validation                    
+    # Client's availability input validation
     while True:
         # Checks that the insterted value is not an empty string
         if is_empty_string(availability):
@@ -328,26 +351,42 @@ def calculate_weekly_kcal_burnt():
             kcal_per_workout = 300
             weekly_kcal_burnt = kcal_per_workout * availability
             break
-        
+
     return weekly_kcal_burnt
 
 
 def calculate_daily_calorie_intake(goal, tdee):
     """
-    Calculateshow many calories per day should be consumed.
+    Calculates how many calories per day should be consumed.
     It takes into account the amount of calories burnt per week
     during workouts, the client's goal and the tdee.
     """
     weekly_kcal_burnt = calculate_weekly_kcal_burnt()
+    spreaded_weekly_kcal = weekly_kcal_burnt / 7
 
     if goal == 'maintain weight':
-        daily_kcal_intake = tdee + weekly_kcal_burnt
+        daily_kcal_intake = tdee + spreaded_weekly_kcal
     elif goal == 'lose weight':
-        daily_kcal_intake = tdee + weekly_kcal_burnt - 500
+        daily_kcal_intake = tdee + spreaded_weekly_kcal - 500
     else:
-        daily_kcal_intake = tdee + weekly_kcal_burnt + 500
+        daily_kcal_intake = tdee + spreaded_weekly_kcal + 500
 
-    return daily_kcal_intake
+    return round(daily_kcal_intake)
+
+
+def next_task():
+    """
+    Asks the user what to do next
+    """
+    print("What do you want to do now?\n"
+          "1. Add a new client\n"
+          "2. Check a client's progress\n"
+          "3. Say goodbye to a client\n"
+          "4. Exit the program\n"
+          ) 
+    option = int(input("Choose between the options above."))
+    task(option)
+
 
 def check_new_client_data(client_data):
     """
@@ -357,7 +396,7 @@ def check_new_client_data(client_data):
     print(
         f"The details of the new client are as follows:"
         f"{client_data.client_description()}"
-    ) 
+    )
 
     while True:
         correct = input("Is client data correct? (y/n):")
@@ -366,13 +405,14 @@ def check_new_client_data(client_data):
             update_clients_progress(client_data.name, client_data.weight,
                                     client_data.body_fat)
             daily_calorie_intake = calculate_daily_calorie_intake(
-                                   client_data.goal, 
+                                   client_data.goal,
                                    client_data.tdee)
             print(
-                f"{client_data.name} recommended daily calorie intake,"
-                f"based on the {client_data.goal} goal and"
-                f"on the number of workouts per week,"
+                f"{client_data.name} recommended daily calorie intake, "
+                f"based on the {client_data.goal} goal and "
+                f"on the number of workouts per week, "
                 f"is around {daily_calorie_intake} kcal.")
+            next_task()
 
         elif correct.lower() == 'n':
             print("Please reinstert the new client data!")
