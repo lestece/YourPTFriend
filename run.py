@@ -25,7 +25,7 @@ class Client:
     Client class
     """
     def __init__(self, name, gender, age, height, weight, activity, 
-                 body_fat, goal):
+                 body_fat, goal, tdee):
         self.name = name
         self.gender = gender
         self.age = age
@@ -34,13 +34,14 @@ class Client:
         self.activity = activity
         self.body_fat = body_fat
         self.goal = goal
+        self.tdee = tdee
 
     def client_description(self):
         return (
             f"{self.name} is a {self.age} years old {self.gender} client,"
             f"{self.height} tall and that weights {self.weight}."
             f"Taking into account that the client's activity level is {self.activity},"
-            f"body fat is {self.body_fat} %, tdee is ... and the goal is to {self.goal},"
+            f"body fat is {self.body_fat} %, tdee is {self.tdee} and the goal is to {self.goal},"
             f"the estimated daily calorie intake is..."
         )
 
@@ -279,8 +280,11 @@ def take_client_data():
             else:
                 goal = 'gain weight'
             break
-    
-    new_client = Client(name, gender, age, height, weight, activity, body_fat, goal) 
+
+    tdee = tdee_formulas.calculate_tdee(gender, int(weight), int(height), 
+                                        activity.upper()) 
+    print(tdee)
+    new_client = Client(name, gender, age, height, weight, activity, body_fat, goal, tdee) 
     check_new_client_data(new_client)
 
 
