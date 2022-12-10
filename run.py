@@ -62,7 +62,7 @@ def start_program():
         choice = int(option)
 
         if choice == 1:
-            add_new_client()
+            take_client_data()
         elif choice == 2:
             check_progress()
         else:
@@ -135,7 +135,7 @@ def translate_activity_factor(activity_level):
     return activity_factor
 
 
-def add_new_client():
+def take_client_data():
     """
     Takes the client data as input.
     After input validation, the data is inserted in a new_client list.
@@ -298,9 +298,21 @@ def add_new_client():
             else:
                 goal = 'gain weight'
             break
-
+    
     new_client = Client(name, gender, age, height, weight, activity_factor, body_fat, goal) 
-    print(new_client.client_description())                                                   
+    check_new_client_data(new_client)
+
+
+def check_new_client_data(client_data):
+    """
+    Checks that the inserted client data is correct and
+    there's no errors.
+    """
+    print(
+        f"The details of the new client are as follows:"
+        f"{client_data.client_description()}"
+    ) 
+    correct = input("Is all data correct? y/n")                                                 
 
 
 def check_progress():
