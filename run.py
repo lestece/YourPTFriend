@@ -115,8 +115,7 @@ def update_clients_progress(name, weight, body_fat):
     print("Updating client progress records")
     values = [name, weight, body_fat]
     clients_progress.append_row(values)
-    print("Client progress successfully added to the records!")
-
+    print("Client data successfully added to the progress records!")
 
 
 def update_new_client_worksheet(data):
@@ -128,7 +127,11 @@ def update_new_client_worksheet(data):
     client_list = list(client_dict.values())
     print("Updating clients records...")
     clients_init_conditions.append_row(client_list)
-    print("New client correctly insterted in your clients records!")
+    print("New client correctly insterted in your clients records!"
+          "Some of your client data will also be added to the"
+          "client progress records so that you can keep track of the"
+          "changes in weight and body fat"
+          )
 
 
 
@@ -301,6 +304,34 @@ def take_client_data():
     check_new_client_data(new_client)
 
 
+def calculate_weekly_kcal_burnt():
+    """
+    Calculates the ideal daily calorie intake.
+    It takes into account the client's goal,
+    availability and tdee.
+    """
+    availability = input("How many days per week can your client train?"
+                         "Please insert a number between 1 - 5"
+                        )
+    # Client's availability input validation                    
+    while True:
+        # Checks that the insterted value is not an empty string
+        if is_empty_string(availability):
+            print("Please type an answer.")
+            continue
+        elif (availability < 1) or (availability > 5):
+            print("Please insert a valid number of times per week.")
+            continue
+        else:
+            # Calculates an avg of how many kcal per week
+            # are burnt from workouts
+            kcal_per_workout = 300
+            weekly_kcal_burnt = kcal_per_workout * availability
+            break
+        
+    return weekly_kcal_burnt
+
+
 def check_new_client_data(client_data):
     """
     Checks that the inserted client data is correct and
@@ -317,6 +348,7 @@ def check_new_client_data(client_data):
             update_new_client_worksheet(client_data)
             update_clients_progress(client_data.name, client_data.weight,
                                     client_data.body_fat)
+            calculate_daily_calorie_intake(client_data.goal, client_data.tdee)
         elif correct.lower() == 'n':
             print("Please reinstert the new client data!")
             take_client_data()
