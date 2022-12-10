@@ -103,27 +103,6 @@ def is_empty_string(data):
     return False
 
 
-def translate_activity_factor(activity_level):
-    """
-    Assigns the corresponding activity factor to the 
-    activity level inserted by the user
-    """
-    activity_factor = ""
-
-    if activity_level == "SED":
-        activity_factor = 1.2
-    elif activity_level == "LA":
-        activity_factor = 1.375
-    elif activity_level == "MA":
-        activity_factor = 1.55
-    elif activity_level == "VA":
-        activity_factor = 1.725
-    else:
-        activity_factor = 1.9
-    
-    return activity_factor
-
-
 def update_new_client_worksheet(data):
     """
     Receives a list containing data to insert 
@@ -253,7 +232,6 @@ def take_client_data():
             print("Please choose a valid activity level from the options provided.")
             continue
         else:
-            activity_factor = translate_activity_factor(activity.upper())
             break
 
     # Input body fat percentage
@@ -300,7 +278,7 @@ def take_client_data():
                 goal = 'gain weight'
             break
     
-    new_client = Client(name, gender, age, height, weight, activity_factor, body_fat, goal) 
+    new_client = Client(name, gender, age, height, weight, activity, body_fat, goal) 
     check_new_client_data(new_client)
 
 
