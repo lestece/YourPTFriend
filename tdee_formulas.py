@@ -67,6 +67,5 @@ def calculate_tdee(gender, weight, height, activity_level):
     tea = calculate_tea(bmr, activity_level)
 
     tdee = bmr + tea + tef
-    print(bmr, tef, tea)
 
     return tdee

@@ -106,6 +106,19 @@ def is_empty_string(data):
     return False
 
 
+def update_clients_progress(name, weight, body_fat):
+    """
+    Updates the clients progress worksheet with 
+    the latest weight and body fat percentages 
+    of a specified client.
+    """
+    print("Updating client progress records")
+    values = [name, weight, body_fat]
+    clients_progress.append_row(values)
+    print("Client progress successfully added to the records!")
+
+
+
 def update_new_client_worksheet(data):
     """
     Receives a list containing data to insert 
@@ -116,6 +129,7 @@ def update_new_client_worksheet(data):
     print("Updating clients records...")
     clients_init_conditions.append_row(client_list)
     print("New client correctly insterted in your clients records!")
+
 
 
 def take_client_data():
@@ -283,7 +297,6 @@ def take_client_data():
 
     tdee = tdee_formulas.calculate_tdee(gender, int(weight), int(height), 
                                         activity.upper()) 
-    print(tdee)
     new_client = Client(name, gender, age, height, weight, activity, body_fat, goal, tdee) 
     check_new_client_data(new_client)
 
@@ -302,6 +315,8 @@ def check_new_client_data(client_data):
         correct = input("Is client data correct? (y/n):")
         if correct.lower() == 'y':
             update_new_client_worksheet(client_data)
+            update_clients_progress(client_data.name, client_data.weight,
+                                    client_data.body_fat)
         elif correct.lower() == 'n':
             print("Please reinstert the new client data!")
             take_client_data()
