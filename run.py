@@ -18,6 +18,31 @@ clients_init_conditions = SHEET.worksheet('clients initial conditions')
 clients_progress = SHEET.worksheet('clients progress')
 
 
+class Client:
+    """
+    Client class
+    """
+    def __init__(self, name, gender, age, height, weight, activity, 
+                 body_fat, goal):
+        self.name = name
+        self.gender = gender
+        self.age = age
+        self.height = height
+        self.weight = weight
+        self.activity = activity
+        self.body_fat = body_fat
+        self.goal = goal
+
+    def client_description(self):
+        return (
+            f"{self.name} is a {self.age} years old {self.gender} client,"
+            f"{self.height} tall and that weights {self.weight}."
+            f"Taking into account that the client's activity level is {self.activity},"
+            f"body fat is {self.body_fat} %, tdee is ... and the goal is to {self.goal},"
+            f"the estimated daily calorie intake is..."
+        )
+
+
 def start_program():
     """
     Welcomes the PT and asks what action needs to be taken:
@@ -25,11 +50,11 @@ def start_program():
     -Checking an existing client's progress
     -Deleting a client from the records
     """
-    print("Welcome! How can I help you today?\n")
-    print("Choose an option between the following:")
-    print("1. Add a new client")
-    print("2. Check a client's progress")
-    print("3. Say goodbye to a client")
+    print("Welcome! How can I help you today?\n"
+          "Choose an option between the following:\n"
+          "1. Add a new client\n"
+          "2. Check a client's progress\n"
+          "3. Say goodbye to a client\n")
 
     option = (input("Insert a number from the above options (1, 2 or 3):\n"))
     
@@ -115,7 +140,6 @@ def add_new_client():
     Takes the client data as input.
     After input validation, the data is inserted in a new_client list.
     """
-    new_client = []
     print("You're adding a new client! Insert the following information.\n")
     # Input name
     while True: 
@@ -131,7 +155,6 @@ def add_new_client():
             print("so that he/she can be discerned.")
             continue
         else:
-            new_client.append(name.capitalize())
             break
            
     # Input gender
@@ -146,7 +169,6 @@ def add_new_client():
             print("Please answer with either 'F' or 'M'")
             continue
         else:
-            new_client.append(gender.upper())
             break
     # Input age
     while True: 
@@ -164,7 +186,6 @@ def add_new_client():
             print("Please insert a valid age.")
             continue
         else:
-            new_client.append(age)
             break
 
     # Input height
@@ -186,7 +207,6 @@ def add_new_client():
             print("Example: 167")
             continue
         else:
-            new_client.append(height)
             break
 
     # Input weight
@@ -207,7 +227,6 @@ def add_new_client():
             print("Example: 87")
             continue
         else:
-            new_client.append(weight)
             break
 
     # Input activity level
@@ -229,12 +248,11 @@ def add_new_client():
             (activity.upper() != 'MA') and
             (activity.upper() != 'VA') and
             (activity.upper() != 'EA')
-            ):
-                print("Please choose a valid activity level from the options provided.")
-                continue
+             ):
+            print("Please choose a valid activity level from the options provided.")
+            continue
         else:
             activity_factor = translate_activity_factor(activity.upper())
-            new_client.append(activity_factor)
             break
 
     # Input body fat percentage
@@ -253,7 +271,6 @@ def add_new_client():
             print("Please insert a correct body fat percentage.")
             continue
         else:
-            new_client.append(body_fat)
             break
 
     # Input client's goal
@@ -280,11 +297,10 @@ def add_new_client():
                 goal = 'lose weight'
             else:
                 goal = 'gain weight'
-                
-            new_client.append(goal)
             break
 
-    update_worksheet(new_client, 'clients initial conditions')                                                     
+    new_client = Client(name, gender, age, height, weight, activity_factor, body_fat, goal) 
+    print(new_client.client_description())                                                   
 
 
 def check_progress():
