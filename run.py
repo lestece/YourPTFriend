@@ -153,7 +153,7 @@ def body_fat_validation(body_fat):
     # Makes sure the insterted body fat percentage is a number
     elif not body_fat.isnumeric():
         print("Body fat percentage needs to be a numeric value.\n"
-                         "Example: 22")
+              "Example: 22")
         return False
     # Checks that the inserted body fat percentage is realistic
     elif (int(body_fat) < 5) or (int(body_fat) > 40):
@@ -170,7 +170,7 @@ def update_clients_progress(name, weight, body_fat):
     of a specified client.
     """
     print("Updating client progress records")
-    values = [name, weight, body_fat]
+    values = [name.capitalize(), weight, body_fat]
     clients_progress.append_row(values)
     print("Client data successfully added to the progress records!")
 
@@ -343,8 +343,8 @@ def take_client_data():
 
     tdee = tdee_formulas.calculate_tdee(gender, int(weight), int(height),
                                         activity.upper())
-    new_client = Client(name.capitalize(), gender, age, height, weight, activity,
-                        body_fat, goal, tdee)
+    new_client = Client(name.capitalize(), gender, age, height, weight, 
+                        activity, body_fat, goal, tdee)
     check_new_client_data(new_client)
 
 
@@ -612,15 +612,26 @@ def delete_client():
     Deletes a specified client from the records
     """
     client_to_delete = input("Please insert the name of the client "
-                             "we are saying goodbye to: ")
+                             "we are saying goodbye to: \n")
     # Check that the client exists in the records
     client_find = clients_init_conditions.find(client_to_delete.capitalize())
     if client_find:
+        # If client exists, remove from initial conditions worksheet
         client_row = client_find.row
         clients_init_conditions.delete_rows(client_row)
     else:
         print(f"There's no client under name of {client_to_delete}.")
         delete_client()  
-
+    
+    while True:
+        client_progress_find = clients_progress.find(client_to_delete
+                                                     .capitalize())
+        if client_progress_find:
+            client_progress_row = client_progress_find.row
+            clients_progress.delete_rows(client_progress_row)
+            continue
+        else:
+            break
+            
 
 start_program()
