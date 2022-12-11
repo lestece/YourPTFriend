@@ -125,11 +125,11 @@ def weight_validation(weight):
     """
     # Checks that the inputted weight is not blank space
     if is_empty_string(weight):
-        weight = input("Please insert client's weight.")
+        print("Please insert client's weight.")
         return False
     # Checks that the inserted weight is a number
     elif not weight.isnumeric():
-        weight = input("Inserted weight needs to be a number.")
+        print("Inserted weight needs to be a number.")
         return False
     # Makes sure the weight insterted is realistic
     # Takes into account the weights of heaviest and
@@ -137,6 +137,27 @@ def weight_validation(weight):
     elif (int(weight) < 24) or (int(weight) > 635):
         print("Please insert a valid weight in kg.")
         print("Example: 87")
+        return False
+    else:
+        return True
+
+
+def body_fat_validation(body_fat):
+    """
+    Validates the inputted body fat
+    """
+    # Checks that the inputted body fat % is not an empty string
+    if is_empty_string(body_fat):
+        print("Please insert client's body fat %.")
+        return False
+    # Makes sure the insterted body fat percentage is a number
+    elif not body_fat.isnumeric():
+        print("Body fat percentage needs to be a numeric value.\n"
+                         "Example: 22")
+        return False
+    # Checks that the inserted body fat percentage is realistic
+    elif (int(body_fat) < 5) or (int(body_fat) > 40):
+        print("Please insert a correct body fat percentage.")
         return False
     else:
         return True
@@ -285,21 +306,10 @@ def take_client_data():
     # Input body fat percentage
     while True:
         body_fat = input("Body fat (Do not type %, example: 12): %")
-        # Checks that the inputted body fat % is not an empty string
-        if is_empty_string(body_fat):
-            print("Please insert client's body fat %.")
-            continue
-        # Makes sure the insterted body fat percentage is a number
-        elif not body_fat.isnumeric():
-            print("Body fat percentage needs to be a numeric value.\n"
-                  "Example: 22")
-            continue
-        # Checks that the inserted body fat percentage is realistic
-        elif (int(body_fat) < 5) or (int(body_fat) > 40):
-            print("Please insert a correct body fat percentage.")
-            continue
-        else:
+        if body_fat_validation(body_fat):
             break
+        else:
+            continue
 
     # Input client's goal
     print("Now, what's the client's main goal?")
