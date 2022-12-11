@@ -541,25 +541,47 @@ def check_progress():
     
     if 'lose' in goal:
         if old_weight > new_weight:
-            print("Congrats!")
+            print(f"Well done! \n"
+                  f"{client_name} original goal was to {goal}c"
+                  f"and based on the new data insterted we can "
+                  f"establish a {old_weight - new_weight} kg weight loss.")
         elif old_weight < new_weight:
-            print("Oops!")
+            print(f"Something needs to be changed.\n"
+                  f"{client_name} wants to {goal} but based on the "
+                  f"new insterted weight there's been a weight gain "
+                  f"of {new_weight - old_weight} kg.")
         else:
-            print("We need to work harder!")
+            print(f"We need to work harder!\n"
+                  f"{client_name}'s weight doesn't seems to want to change!")
     elif 'gain' in goal:
         if old_weight > new_weight:
-            print("Oops!")
+            print(f"Something needs to be changed. "
+                  f"{client_name} wants to {goal} but based on the "
+                  f"new insterted weight there's been a weight loss "
+                  f"of {old_weight - new_weight} kg.")
         elif old_weight < new_weight:
-            print("Congrats!")
+            print(f"Well done! \n"
+                  f"{client_name} original goal was to {goal} "
+                  f"and based on the new data insterted we can "
+                  f"establish a {new_weight - old_weight} kg weight gain.")
         else:
-            print("We need to work harder!")
+            print(f"We need to work harder!"
+                  f"{client_name}'s weight doesn't seems to want to change!")
     else:
         if old_weight > new_weight:
-            print("Oops!")
+            print(f"Something needs to be changed.\n"
+                  f"{client_name} wants to {goal} but based on the "
+                  f"new insterted weight there's been a weight loss "
+                  f"of {old_weight - new_weight} kg.")
         elif old_weight < new_weight:
-            print("Oops!")
+            print(f"Something needs to be changed.\n"
+                  f"{client_name} wants to {goal} but based on the "
+                  f"new insterted weight there's been a weight gain "
+                  f"of {new_weight - old_weight} kg.")
         else:
-             print("Congrats!")
+            print(f"Well done!\n"
+                  f"{client_name} original goal was to {goal} "
+                  f"and at today it has stayed the same!")
         
 
 def delete_client():
