@@ -470,9 +470,11 @@ def get_latest_data(row):
     Gets the latest inserted data for that client
     """
     latest_entry = clients_progress.row_values(row)
-    latest_weight = latest_entry[1]
-    latest_body_fat = latest_entry[2]
-    return latest_weight, latest_body_fat
+    latest_entry.pop(0)
+    keys = ["weight", "body_fat"]
+    old_data = dict(zip(keys, latest_entry))
+    
+    return old_data
 
 
 def get_new_data():
@@ -482,22 +484,23 @@ def get_new_data():
     and stores the values
     in a list
     """
-    new_data = []
+    new_data_list = []
     while True:
         new_weight = input("Please provide client's new weight:")
         if weight_validation(new_weight):
-            new_data.append(new_weight)
+            new_data_list.append(new_weight)
             break
         else:
             continue
     while True:
         new_body_fat = input("Please provide client's new body fat:")
         if body_fat_validation(new_body_fat):
-            new_data.append(new_body_fat)
+            new_data_list.append(new_body_fat)
             break
         else:
             continue
-
+    keys = ["weight", "body_fat"]
+    new_data = dict(zip(keys, new_data_list))
     return new_data
 
 
@@ -530,6 +533,7 @@ def check_progress():
           f"Getting the latest weight and body fat in the records...")
     old_data = get_latest_data(client_row)
     new_data = get_new_data()
+    print(old_data, new_data)
     goal = get_goal(client_name)
     # Compare old data and new data at the same time
     comparation = []
