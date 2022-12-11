@@ -490,9 +490,14 @@ def get_new_data():
             break
         else:
             continue
-    
-    new_body_fat = input("Please provide client's new body fat:")
-    new_data.append(new_body_fat)
+    while True:
+        new_body_fat = input("Please provide client's new body fat:")
+        if body_fat_validation(new_body_fat):
+            new_data.append(new_body_fat)
+            break
+        else:
+            continue
+        
     return new_data
 
 
