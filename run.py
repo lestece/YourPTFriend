@@ -532,16 +532,21 @@ def check_progress():
     print(f"Client exists in records!\n"
           f"Getting the latest weight and body fat in the records...")
     old_data = get_latest_data(client_row)
+    old_weight = int(old_data['weight'])
+    old_body_fat = int(old_data['body_fat'])
     new_data = get_new_data()
-    print(old_data, new_data)
+    new_weight = int(new_data['weight'])
+    new_body_fat = int(new_data['body_fat'])
     goal = get_goal(client_name)
-    # Compare old data and new data at the same time
-    comparation = []
-    for old, new in zip(old_data, new_data):
-        difference = int(old) - int(new)
-        comparation.append(difference)
-    print(comparation)
     
+    if 'lose' in goal:
+        if old_weight > new_weight:
+            print("Congrats!")
+        elif old_weight < new_weight:
+            print("Oops!")
+        else:
+            print("We need to work harder!")
+        
 
 def delete_client():
     print("Going to delete client page")
