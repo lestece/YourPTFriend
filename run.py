@@ -81,7 +81,8 @@ def task_validation(choice):
                 )
     except ValueError as e:
         print(
-            f"Invalid data: {e}. Please choose an option between the options above: "
+            f"Invalid data: {e}. Please choose an option between"
+            f"the options above: "
             )
         return False
 
@@ -454,6 +455,21 @@ def get_latest_data(row):
     return latest_weight, latest_body_fat
 
 
+def get_new_data():
+    """
+    Get's client's new weight
+    and body fat through user input
+    and stores the values
+    in a list
+    """
+    new_data = []
+    new_weight = input("Please provide client's new weight:")
+    new_data.append(new_weight)
+    new_body_fat = input("Please provide client's new body fat:")
+    new_data.append(new_body_fat)
+    return new_data
+
+
 def check_progress():
     """
     Checks the client's progress by comparing 
@@ -464,10 +480,12 @@ def check_progress():
     """
     client_name = input("Insert the client name: ").lower()
     client_row = check_client_exists(client_name)
-    print(f"Client exists in records!/n"
+    print(f"Client exists in records!\n"
           f"Getting the latest weight and body fat in the records...")
-    last_record = get_latest_data(client_row)
+    old_data = get_latest_data(client_row)
+    new_data = get_new_data()
     
+    print(new_data)
     
 
 def delete_client():
