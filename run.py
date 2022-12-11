@@ -531,8 +531,8 @@ def check_body_fat_improvement(client_name, old_body_fat, new_body_fat):
               f" {client_name} overall health has improved.")
     elif old_body_fat < new_body_fat:
         print(f"{client_name} body fat has increased since last time."
-              f" with a {new_body_fat - old_body_fat} % more, "
-              f"something needs to change.")
+              f" with a {new_body_fat - old_body_fat} % more body fat, "
+              f"some changes need to occur.")
     else:
         print(f"{client_name}'s body fat hasn't changed, "
               f"so maybe we should consider tweacking up a bit the program")
@@ -608,7 +608,15 @@ def check_progress():
 
 
 def delete_client():
-    print("Going to delete client page")
-
-
+    """
+    Deletes a specified client from the records
+    """
+    client_to_delete = input("Please insert the name of the client "
+                             "we are saying goodbye to: ")
+    # Check that the client exists in the records
+    if clients_init_conditions.find(client_to_delete):
+        print("Client exists!")
+    else:
+        print(f"There's no client under name of {client_to_delete}.")
+        delete_client()  
 start_program()
