@@ -422,6 +422,34 @@ def check_new_client_data(client_data):
             continue
 
 
+def check_client_exists(name):
+    """
+    Check that the inputted client's name exists
+    in the clients progress worksheet.
+    """
+    clients_record = clients_progress.col_values(1)
+    clients_lower = [client.lower() for client in clients_record]
+
+    for i, e in reversed(list(enumerate(clients_lower))):
+        if e == name:
+            index = i + 1
+            return index
+    else:
+        print(f"{name} cannot be found in the records."
+              f"Please enter a correct name to check the progress"
+              f" of an existing client")
+        check_progress()
+
+
+def get_latest_data(name):
+    """
+    Gets the latest inserted data for that client
+    """
+    cell_list = clients_progress.findall(name)
+    for cell in cell_list:
+        print(cell.row)
+
+
 def check_progress():
     """
     Checks the client's progress by comparing 
@@ -431,16 +459,10 @@ def check_progress():
     gives a response
     """
     client_name = input("Insert the client name: ").lower()
-    clients_record = clients_progress.col_values(1)
-    clients_list = []
-
-    for client in clients_record:
-        clients_list.append(client.lower())
-        
-    if client_name in clients_list:
-        print("okay")
-
-
+    client_row = check_client_exists(client_name)
+    print(f"Client exists in records!. Index is {client_row}")
+    get_latest_data(client_name)
+    
 
 def delete_client():
     print("Going to delete client page")
