@@ -513,7 +513,7 @@ def get_goal(client_name):
     client_row = clients_init_conditions.row_values(client_find.row)
     for data in client_row:
         if 'weight' in data:
-            print(data)
+            return data
 
 
 def check_progress():
@@ -531,8 +531,12 @@ def check_progress():
     old_data = get_latest_data(client_row)
     new_data = get_new_data()
     goal = get_goal(client_name)
-    
-    print(new_data)
+    # Compare old data and new data at the same time
+    comparation = []
+    for old, new in zip(old_data, new_data):
+        difference = int(old) - int(new)
+        comparation.append(difference)
+    print(comparation)
     
 
 def delete_client():
