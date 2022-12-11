@@ -119,6 +119,29 @@ def is_empty_string(data):
     return False
 
 
+def weight_validation(weight):
+    """
+    Validates the inputted weight
+    """
+    # Checks that the inputted weight is not blank space
+    if is_empty_string(weight):
+        weight = input("Please insert client's weight.")
+        return False
+    # Checks that the inserted weight is a number
+    elif not weight.isnumeric():
+        weight = input("Inserted weight needs to be a number.")
+        return False
+    # Makes sure the weight insterted is realistic
+    # Takes into account the weights of heaviest and
+    # lightest people in the world
+    elif (int(weight) < 24) or (int(weight) > 635):
+        print("Please insert a valid weight in kg.")
+        print("Example: 87")
+        return False
+    else:
+        return True
+
+
 def update_clients_progress(name, weight, body_fat):
     """
     Updates the clients progress worksheet with
@@ -227,23 +250,10 @@ def take_client_data():
     # Input weight
     while True:
         weight = input("Weight(kg):")
-        # Checks that the inputted weight is not blank space
-        if is_empty_string(weight):
-            print("Please insert client's weight.")
-            continue
-        # Checks that the inserted weight is a number
-        elif not weight.isnumeric():
-            print("Inserted weight needs to be a number.")
-            continue
-        # Makes sure the weight insterted is realistic
-        # Takes into account the weights of heaviest and
-        # lightest people in the world
-        elif (int(weight) < 24) or (int(weight) > 635):
-            print("Please insert a valid weight in kg.")
-            print("Example: 87")
-            continue
-        else:
+        if weight_validation(weight):
             break
+        else:
+            continue
 
     # Input activity level
     while True:
