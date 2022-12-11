@@ -1,6 +1,10 @@
 # # Import packages
+import os
+from time import sleep
+import sys
 import gspread
 from google.oauth2.service_account import Credentials
+
 
 import tdee_formulas
 
@@ -56,10 +60,13 @@ def task(option):
         choice = int(option)
 
         if choice == 1:
+            os.system('cls' if os.name == 'nt' else 'clear')
             take_client_data()
         elif choice == 2:
+            os.system('cls' if os.name == 'nt' else 'clear')
             check_progress()
         elif choice == 3:
+            os.system('cls' if os.name == 'nt' else 'clear')
             delete_client()
         else:
             exit()
@@ -96,13 +103,49 @@ def start_program():
     -Checking an existing client's progress
     -Deleting a client from the records
     """
-    print("Welcome! How can I help you today?\n"
-          "Choose an option between the following:\n"
-          "1. Add a new client\n"
-          "2. Check a client's progress\n"
-          "3. Say goodbye to a client\n")
+    print("""\
+    
+    ██╗   ██╗ ██████╗ ██╗   ██╗██████╗       
+    ╚██╗ ██╔╝██╔═══██╗██║   ██║██╔══██╗      
+     ╚████╔╝ ██║   ██║██║   ██║██████╔╝      
+      ╚██╔╝  ██║   ██║██║   ██║██╔══██╗      
+       ██║   ╚██████╔╝╚██████╔╝██║  ██║      
+       ╚═╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝      
+                                             
+            ██████╗ ████████╗                
+            ██╔══██╗╚══██╔══╝                
+            ██████╔╝   ██║                   
+            ██╔═══╝    ██║                   
+            ██║        ██║                   
+            ╚═╝        ╚═╝                   
+                                             
+███████╗██████╗ ██╗███████╗███╗   ██╗██████╗ 
+██╔════╝██╔══██╗██║██╔════╝████╗  ██║██╔══██╗
+█████╗  ██████╔╝██║█████╗  ██╔██╗ ██║██║  ██║
+██╔══╝  ██╔══██╗██║██╔══╝  ██║╚██╗██║██║  ██║
+██║     ██║  ██║██║███████╗██║ ╚████║██████╔╝
+╚═╝     ╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═══╝╚═════╝ 
+                                             
 
-    option = (input("Insert a number from the above options (1, 2 or 3):\n"))
+    """)
+    sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    # typing effect implemented thanks to Stack Overflow:
+    # https://stackoverflow.com/questions/20302331/typing-effect-in-python
+    words = ("Welcome coach!\n\n\n"
+             "My job is to support you in your PT occupation\n" 
+             "by taking charge of the boring tasks so that\n"
+             "you can entirely focus on creating those sweaty workouts.\n\n"
+             "What do you want me to do for you today?\n\n"
+             "1. Add a new client to your client's records\n"
+             "2. Check a client's progress\n"
+             "3. Say goodbye to a client\n\n")
+    for char in words:
+        sleep(0.05)
+        sys.stdout.write(char)
+        sys.stdout.flush()
+
+    option = (input("Choose an option from the above (1, 2 or 3):\n"))
     task(option)
 
 
@@ -197,6 +240,7 @@ def take_client_data():
     After input validation, the data is inserted in a new_client list.
     """
     print("You're adding a new client! Insert the following information.\n")
+    time.sleep(1)
     # Input name
     while True:
         name = input("Full name:")
@@ -542,9 +586,9 @@ def check_progress():
     """
     Checks the client's progress by comparing 
     the latest inserted weight and body fat percentage
-    with the ones that are being inserted and,
+    with the ones that are currently being inserted and,
     based on what the original goal was,
-    gives a response
+    gives a positive or negative response.
     """
     client_name = (input("Insert the client name: ").lower())
     client_row = check_client_exists(client_name)
@@ -609,7 +653,9 @@ def check_progress():
 
 def delete_client():
     """
-    Deletes a specified client from the records
+    Deletes a specified client from the records.
+    Client is removed both from the initial conditions worksheet
+    and the progress worksheet.
     """
     client_to_delete = input("Please insert the name of the client "
                              "we are saying goodbye to: \n")
@@ -617,12 +663,14 @@ def delete_client():
     client_find = clients_init_conditions.find(client_to_delete.capitalize())
     if client_find:
         # If client exists, remove from initial conditions worksheet
+        print("Removing client from records...")
         client_row = client_find.row
         clients_init_conditions.delete_rows(client_row)
     else:
         print(f"There's no client under name of {client_to_delete}.")
         delete_client()  
-    
+    # Loop that deletes every row containing that client name
+    # in the client progress worksheet
     while True:
         client_progress_find = clients_progress.find(client_to_delete
                                                      .capitalize())
@@ -631,7 +679,9 @@ def delete_client():
             clients_progress.delete_rows(client_progress_row)
             continue
         else:
-            break
-            
+            print("Client successfully removed! "
+                  "Now you have an extra availability.")
+            next_task()
+
 
 start_program()
