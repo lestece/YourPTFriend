@@ -429,7 +429,10 @@ def check_client_exists(name):
     """
     clients_record = clients_progress.col_values(1)
     clients_lower = [client.lower() for client in clients_record]
-
+    # Gets the row number of the latest entry for the specified name
+    # thanks to a list iteration in reversed.
+    # Instructions found on StackOverflow:
+    # https://stackoverflow.com/questions/529424/traverse-a-list-in-reverse-order-in-python
     for i, e in reversed(list(enumerate(clients_lower))):
         if e == name:
             index = i + 1
@@ -441,13 +444,14 @@ def check_client_exists(name):
         check_progress()
 
 
-def get_latest_data(name):
+def get_latest_data(row):
     """
     Gets the latest inserted data for that client
     """
-    cell_list = clients_progress.findall(name)
-    for cell in cell_list:
-        print(cell.row)
+    latest_entry = clients_progress.row_values(row)
+    latest_weight = latest_entry[1]
+    latest_body_fat = latest_entry[2]
+    return latest_weight, latest_body_fat
 
 
 def check_progress():
@@ -460,8 +464,10 @@ def check_progress():
     """
     client_name = input("Insert the client name: ").lower()
     client_row = check_client_exists(client_name)
-    print(f"Client exists in records!. Index is {client_row}")
-    get_latest_data(client_name)
+    print(f"Client exists in records!/n"
+          f"Getting the latest weight and body fat in the records...")
+    last_record = get_latest_data(client_row)
+    
     
 
 def delete_client():
