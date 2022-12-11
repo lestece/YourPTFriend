@@ -343,7 +343,7 @@ def take_client_data():
 
     tdee = tdee_formulas.calculate_tdee(gender, int(weight), int(height),
                                         activity.upper())
-    new_client = Client(name, gender, age, height, weight, activity,
+    new_client = Client(name.capitalize(), gender, age, height, weight, activity,
                         body_fat, goal, tdee)
     check_new_client_data(new_client)
 
@@ -497,8 +497,23 @@ def get_new_data():
             break
         else:
             continue
-        
+
     return new_data
+
+
+def get_goal(client_name):
+    """
+    Gets client's goal from the
+    clients initial conditions worksheet
+    """
+    # clients = clients_init_conditions.col_values(1)
+    # clients_lower = clients.lower()
+    # print(clients)
+    client_find = clients_init_conditions.find(client_name.capitalize())
+    client_row = clients_init_conditions.row_values(client_find.row)
+    for data in client_row:
+        if 'weight' in data:
+            print(data)
 
 
 def check_progress():
@@ -509,12 +524,13 @@ def check_progress():
     based on what the original goal was,
     gives a response
     """
-    client_name = input("Insert the client name: ").lower()
+    client_name = (input("Insert the client name: ").lower())
     client_row = check_client_exists(client_name)
     print(f"Client exists in records!\n"
           f"Getting the latest weight and body fat in the records...")
     old_data = get_latest_data(client_row)
     new_data = get_new_data()
+    goal = get_goal(client_name)
     
     print(new_data)
     
