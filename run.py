@@ -519,6 +519,25 @@ def get_goal(client_name):
             return data
 
 
+def check_body_fat_improvement(client_name, old_body_fat, new_body_fat):
+    """
+    Establishes an improvement or not
+    of the client's health by comparing
+    the body fat data
+    """
+    if old_body_fat > new_body_fat:
+        print(f"We can notice a body fat reduction of "
+              f"{old_body_fat - new_body_fat} so the"
+              f" {client_name} overall health has improved.")
+    elif old_body_fat < new_body_fat:
+        print(f"{client_name} body fat has increased since last time."
+              f" with a {new_body_fat - old_body_fat} % more, "
+              f"something needs to change.")
+    else:
+        print(f"{client_name}'s body fat hasn't changed, "
+              f"so maybe we should consider tweacking up a bit the program")
+
+
 def check_progress():
     """
     Checks the client's progress by comparing 
@@ -582,7 +601,11 @@ def check_progress():
             print(f"Well done!\n"
                   f"{client_name} original goal was to {goal} "
                   f"and at today it has stayed the same!")
-        
+
+    check_body_fat_improvement(client_name, old_body_fat, new_body_fat)
+    update_clients_progress(client_name, new_weight, new_body_fat)
+    next_task()
+
 
 def delete_client():
     print("Going to delete client page")
