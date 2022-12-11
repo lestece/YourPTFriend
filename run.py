@@ -546,6 +546,20 @@ def check_progress():
             print("Oops!")
         else:
             print("We need to work harder!")
+    elif 'gain' in goal:
+        if old_weight > new_weight:
+            print("Oops!")
+        elif old_weight < new_weight:
+            print("Congrats!")
+        else:
+            print("We need to work harder!")
+    else:
+        if old_weight > new_weight:
+            print("Oops!")
+        elif old_weight < new_weight:
+            print("Oops!")
+        else:
+             print("Congrats!")
         
 
 def delete_client():
