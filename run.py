@@ -43,10 +43,10 @@ class Client:
     def client_description(self):
         return (
             f"{self.name} is a {self.age} years old {self.gender} client, "
-            f"{self.height} tall and that weights {self.weight}. "
+            f"{self.height}cm tall and that weights {self.weight}kg. "
             f"Taking into account that the client's activity level is "
             f"{self.activity}, body fat is {self.body_fat} %, tdee is "
-            f"{self.tdee} and the goal is to {self.goal}."
+            f"{self.tdee}kcal and the goal is to {self.goal}.\n\n"
         )
 
 
@@ -95,6 +95,18 @@ def task_validation(choice):
 
     return True
 
+def typing_effect(words):
+    """
+    It creates a sort of typing effect when displaying
+    the string passed as parameter.
+    This has been implemented thanks to Stack Overflow at the link:
+    https://stackoverflow.com/questions/20302331/typing-effect-in-python
+    """
+    for char in words:
+        sleep(0.038)
+        sys.stdout.write(char)
+        sys.stdout.flush()
+
 
 def start_program():
     """
@@ -128,10 +140,8 @@ def start_program():
                                              
 
     """)
-    sleep(3)
+    sleep(1.5)
     os.system('cls' if os.name == 'nt' else 'clear')
-    # typing effect implemented thanks to Stack Overflow:
-    # https://stackoverflow.com/questions/20302331/typing-effect-in-python
     words = ("Welcome coach!\n\n\n"
              "My job is to support you in your PT occupation\n" 
              "by taking charge of the boring tasks so that\n"
@@ -140,10 +150,7 @@ def start_program():
              "1. Add a new client to your client's records\n"
              "2. Check a client's progress\n"
              "3. Say goodbye to a client\n\n")
-    for char in words:
-        sleep(0.05)
-        sys.stdout.write(char)
-        sys.stdout.flush()
+    typing_effect(words)
 
     option = (input("Choose an option from the above (1, 2 or 3):\n"))
     task(option)
@@ -212,10 +219,8 @@ def update_clients_progress(name, weight, body_fat):
     the latest weight and body fat percentages
     of a specified client.
     """
-    print("Updating client progress records")
     values = [name.capitalize(), weight, body_fat]
     clients_progress.append_row(values)
-    print("Client data successfully added to the progress records!")
 
 
 def update_new_client_worksheet(data):
@@ -225,74 +230,79 @@ def update_new_client_worksheet(data):
     """
     client_dict = data.__dict__
     client_list = list(client_dict.values())
-    print("Updating clients records...")
+    words = ("Updating clients records...\n\n")
+    typing_effect(words)
     clients_init_conditions.append_row(client_list)
-    print("New client correctly insterted in your clients records!"
-          "Some of your client data will also be added to the"
-          "client progress records so that you can keep track of the"
-          "changes in weight and body fat"
-          )
-
+    sleep(1)
+    print("New client correctly insterted in your clients records!\n\n")
+    sleep(2)
 
 def take_client_data():
     """
     Takes the client data as input.
     After input validation, the data is inserted in a new_client list.
     """
-    print("You're adding a new client! Insert the following information.\n")
-    time.sleep(1)
+    print("You're adding a new client!\n\n"
+          "Please insert the following information.\n")
+    sleep(1)
     # Input name
     while True:
-        name = input("Full name:")
+        name = input("Full name: ")
         # Checks that the inputted name is not blank space
         if is_empty_string(name):
-            print("Please insert client's name.")
+            print("You need to insert the client's name.\n")
             continue
         # Checks if the name is already in the records
-        elif clients_init_conditions.find(name):
-            print("There's already another client registered with"
-                  " the same name.\n Please provide an extra identification"
-                  "for this client so that he/she can be discerned from the"
-                  "one already existing"
-                  )
+        elif clients_init_conditions.find(name.capitalize()):
+            words = ("\nThere's already another client registered with "
+                     "the same name.\nPlease provide extra identification "
+                     "for this client so that he/she can be discerned "
+                     "from the one already existing with the same name.\n\n"
+                     )
+            typing_effect(words)
             continue
         else:
             break
 
     # Input gender
     while True:
-        gender = input("Gender(F or M):")
+        sleep(0.3)
+        gender = input("Gender(F or M): ")
         # Checks that the inputted gender is not blank space
         if is_empty_string(gender):
             print("Please insert client's gender.")
             continue
         # Makes sure the gender is either F or M
         elif (gender.upper() != 'F') and (gender.upper() != 'M'):
-            print("Please answer with either 'F' or 'M'")
+            print("Please answer with either 'F' or 'M'.")
             continue
         else:
             break
     # Input age
     while True:
-        age = input("Age:")
+        sleep(0.3)
+        age = input("Age: ")
         # Checks that the inputted age is not blank space
         if is_empty_string(age):
             print("Please insert client's age.")
             continue
         # Checks that the insterted age is a number
         elif not age.isnumeric():
-            print("Inserted age needs to be a number.")
+            print("Age needs to be a number.")
             continue
         # Makes sure the age is a realistic value
         elif (int(age) < 14) or (int(age) > 100):
-            print("Please insert a valid age.")
+            print("Please insert a valid age. "
+                  "Clients cannot be younger than 14 "
+                  "or older than 100.\n\n")
             continue
         else:
             break
 
     # Input height
     while True:
-        height = input("Height(cm):")
+        sleep(0.3)
+        height = input("Height(cm): ")
         # Checks that the inputted height is not blank space
         if is_empty_string(height):
             print("Please insert client's height.")
@@ -314,7 +324,8 @@ def take_client_data():
 
     # Input weight
     while True:
-        weight = input("Weight(kg):")
+        sleep(0.3)
+        weight = input("Weight(kg): ")
         if weight_validation(weight):
             break
         else:
@@ -322,12 +333,16 @@ def take_client_data():
 
     # Input activity level
     while True:
-        print("Sedentary: SED")
-        print("Lightly active: LA")
-        print("Moderately active: MA")
-        print("Very active: VA")
-        print("Extremely active: EA")
-        activity = input("Activity level:")
+        sleep(0.2)
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("Please choose one of the following activity levels.\n\n"
+              "Sedentary: SED\n"
+              "Lightly active: LA\n"
+              "Moderately active: MA\n"
+              "Very active: VA\n"
+              "Extremely active: EA\n\n")
+
+        activity = input("Activity level: ")
         # Checks that the inputted activity level is not blank space
         if is_empty_string(activity):
             print("Please insert client's activity level.")
@@ -340,8 +355,8 @@ def take_client_data():
             (activity.upper() != 'VA') and
             (activity.upper() != 'EA')
              ):
-            print("Please choose a valid activity level"
-                  "from the options provided."
+            print("Please choose a valid activity level "
+                  "from the options provided.\n \n"
                   )
             continue
         else:
@@ -349,19 +364,20 @@ def take_client_data():
 
     # Input body fat percentage
     while True:
-        body_fat = input("Body fat (Do not type %, example: 12): %")
+        body_fat = input("Body fat: % ")
         if body_fat_validation(body_fat):
             break
         else:
             continue
 
     # Input client's goal
-    print("Now, what's the client's main goal?")
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print(f"Now, what's {name.capitalize()}'s main goal?\n\n")
     while True:
         print("A. Weight maintenance")
         print("B. Weight loss / cutting")
-        print("C. Weight gain / bulking")
-        goal_letter = input("Goal (A, B or C):")
+        print("C. Weight gain / bulking\n\n")
+        goal_letter = input("Goal (A, B or C): ")
         goal_capitalize = goal_letter.upper()
         # Checks that the inputted goal is not an empty string
         if is_empty_string(goal_capitalize):
@@ -397,10 +413,11 @@ def calculate_weekly_kcal_burnt():
     Calculates an average of how many calories per week
     the client will burn from workouts
     """
-    availability = int(input("How many days per week can your client train?"
-                             "Please insert a number between 1 - 5:"
-                             )
-                       )
+    sleep(0.3)
+    os.system('cls' if os.name == 'nt' else 'clear')
+    words = ("How many days per week can the client train?\n\n")
+    typing_effect(words)
+    availability = int(input("Please insert a number between 1 - 5: "))
     # Client's availability input validation
     while True:
         # Checks that the insterted value is not an empty string
@@ -455,16 +472,18 @@ def next_task():
 
 def check_new_client_data(client_data):
     """
-    Checks that the inserted client data is correct and
-    there's no errors.
+    Checks with the user if all of the inserted client data
+    is correct and there's no errors.
     """
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(
-        f"The details of the new client are as follows:"
-        f"{client_data.client_description()}"
-    )
+        f"The details of the new client are as follows: \n \n")
+    words = (f"{client_data.client_description()}")
+    typing_effect(words)
 
     while True:
-        correct = input("Is client data correct? (y/n):")
+        correct = input("Does all of the data look correct? (y/n): ")
+        os.system('cls' if os.name == 'nt' else 'clear')
         if correct.lower() == 'y':
             update_new_client_worksheet(client_data)
             update_clients_progress(client_data.name, client_data.weight,
@@ -472,11 +491,14 @@ def check_new_client_data(client_data):
             daily_calorie_intake = calculate_daily_calorie_intake(
                                    client_data.goal,
                                    client_data.tdee)
-            print(
-                f"{client_data.name} recommended daily calorie intake, "
-                f"based on the {client_data.goal} goal and "
-                f"on the number of workouts per week, "
-                f"is around {daily_calorie_intake} kcal.")
+            sleep(0.1)
+            os.system('cls' if os.name == 'nt' else 'clear')                       
+            words = (
+                    f"{client_data.name}'s recommended daily calorie intake, "
+                    f"based on the {client_data.goal} goal and "
+                    f"on the number of workouts per week, "
+                    f"is around {daily_calorie_intake} kcal.\n\n")
+            typing_effect(words)
             next_task()
 
         elif correct.lower() == 'n':
