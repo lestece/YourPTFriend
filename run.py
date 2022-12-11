@@ -614,9 +614,13 @@ def delete_client():
     client_to_delete = input("Please insert the name of the client "
                              "we are saying goodbye to: ")
     # Check that the client exists in the records
-    if clients_init_conditions.find(client_to_delete):
-        print("Client exists!")
+    client_find = clients_init_conditions.find(client_to_delete.capitalize())
+    if client_find:
+        client_row = client_find.row
+        clients_init_conditions.delete_rows(client_row)
     else:
         print(f"There's no client under name of {client_to_delete}.")
         delete_client()  
+
+
 start_program()
