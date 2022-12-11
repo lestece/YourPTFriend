@@ -473,8 +473,14 @@ def get_new_data():
     in a list
     """
     new_data = []
-    new_weight = input("Please provide client's new weight:")
-    new_data.append(new_weight)
+    while True:
+        new_weight = input("Please provide client's new weight:")
+        if weight_validation(new_weight):
+            new_data.append(new_weight)
+            break
+        else:
+            continue
+    
     new_body_fat = input("Please provide client's new body fat:")
     new_data.append(new_body_fat)
     return new_data
