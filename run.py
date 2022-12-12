@@ -4,6 +4,7 @@ from time import sleep
 # https://medium.com/analytics-vidhya/how-to-print-emojis-using-python-2e4f93443f7e
 from emoji import emojize
 import sys
+import click
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -175,7 +176,7 @@ def is_empty_string(data):
         if data == "":
             raise ValueError("You need to provide the requested information!")
     except ValueError as e:
-        print(f"Invalid data: {e}")
+        print(f"You didn't answer. {e}")
         return True
     return False
 
@@ -186,18 +187,18 @@ def weight_validation(weight):
     """
     # Checks that the inputted weight is not blank space
     if is_empty_string(weight):
-        print("Please insert client's weight.")
+        print("\nPlease insert client's weight.")
         return False
     # Checks that the inserted weight is a number
     elif not weight.isnumeric():
-        print("Inserted weight needs to be a number.")
+        print("\nInserted weight needs to be a number.")
         return False
     # Makes sure the weight insterted is realistic
     # Takes into account the weights of heaviest and
     # lightest people in the world
     elif (int(weight) < 24) or (int(weight) > 635):
-        print("Please insert a valid weight in kg.")
-        print("Example: 87")
+        print("\nPlease insert a valid weight in kg."
+              "Example: 87")
         return False
     else:
         return True
@@ -255,7 +256,7 @@ def take_client_data():
     After input validation, the data is inserted in a new_client list.
     """
     print("You're adding a new client!\n\n"
-          "Please insert the following information.\n")
+          "Please insert the following requested information.\n\n")
     sleep(1)
     # Input name
     while True:
@@ -264,6 +265,11 @@ def take_client_data():
         if is_empty_string(name):
             print("You need to insert the client's name.\n")
             continue
+        # Checks that the inserted name is not a number
+        elif name.isnumeric():
+            print("\nClient's name cannot be a number.\n"
+                  "\nPlease insert a valid one.\n")
+        
         # Checks if the name is already in the records
         elif clients_init_conditions.find(name.capitalize()):
             words = ("\nThere's already another client registered with "
@@ -279,34 +285,34 @@ def take_client_data():
     # Input gender
     while True:
         sleep(0.3)
-        gender = input("Gender(F or M): ")
+        gender = input("\nGender(F or M): ")
         # Checks that the inputted gender is not blank space
         if is_empty_string(gender):
-            print("Please insert client's gender.")
+            print("\nPlease insert client's gender.")
             continue
         # Makes sure the gender is either F or M
         elif (gender.upper() != 'F') and (gender.upper() != 'M'):
-            print("Please answer with either 'F' or 'M'.")
+            print("\nPlease answer with either 'F' or 'M'.")
             continue
         else:
             break
     # Input age
     while True:
         sleep(0.3)
-        age = input("Age: ")
+        age = input("\nAge: ")
         # Checks that the inputted age is not blank space
         if is_empty_string(age):
             print("Please insert client's age.")
             continue
         # Checks that the insterted age is a number
         elif not age.isnumeric():
-            print("Age needs to be a number.")
+            print("\nAge needs to be a number.")
             continue
         # Makes sure the age is a realistic value
         elif (int(age) < 14) or (int(age) > 100):
-            print("Please insert a valid age. "
-                  "Clients cannot be younger than 14 "
-                  "or older than 100.\n\n")
+            print("\nPlease insert a valid age.\n"
+                  "Clients cannot be younger than 14\n"
+                  "or older than 100.\n")
             continue
         else:
             break
@@ -314,22 +320,22 @@ def take_client_data():
     # Input height
     while True:
         sleep(0.3)
-        height = input("Height(cm): ")
+        height = input("\nHeight(cm): ")
         # Checks that the inputted height is not blank space
         if is_empty_string(height):
-            print("Please insert client's height.")
+            print("\nPlease insert client's height.")
             continue
         # Checks that the insterted height is a number
         elif not height.isnumeric():
-            print("Inserted height needs to be a number.")
+            print("\nInserted height needs to be a number.")
             continue
         # Makes sure the height is in cm and not feet
         # Also checks that the inserted height is realistic
         # Takes into account the heights of shortest and
         # tallest people in the world
         elif (int(height) < 63) or (int(height) > 272):
-            print("Please insert a valid height in cm.")
-            print("Example: 167")
+            print("\nPlease insert a valid height in cm.\n"
+                  "Example: 167")
             continue
         else:
             break
@@ -337,7 +343,7 @@ def take_client_data():
     # Input weight
     while True:
         sleep(0.3)
-        weight = input("Weight(kg): ")
+        weight = input("\nWeight(kg): ")
         if weight_validation(weight):
             break
         else:
@@ -347,12 +353,17 @@ def take_client_data():
     while True:
         sleep(0.2)
         os.system('cls' if os.name == 'nt' else 'clear')
-        print("Please choose one of the following activity levels.\n\n"
-              "Sedentary: SED\n"
-              "Lightly active: LA\n"
-              "Moderately active: MA\n"
-              "Very active: VA\n"
-              "Extremely active: EA\n\n")
+        print("Please choose one of the following activity levels.\n")
+        click.echo("- Sedentary: " + click.style("SED\n"
+                   , fg="magenta", underline=True) + 
+                   "- Lightly active: " + click.style("LA\n"
+                   , fg="magenta", underline=True) +
+                   "- Moderately active: " + click.style("MA\n"
+                   , fg="magenta", underline=True) +
+                   "- Very active: " + click.style("VA\n"
+                   , fg="magenta", underline=True) +
+                   "- Extremely active: " + click.style("EA\n"
+                   , fg="magenta", underline=True))
 
         activity = input("Activity level: ")
         # Checks that the inputted activity level is not blank space
