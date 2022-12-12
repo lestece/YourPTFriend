@@ -199,18 +199,18 @@ def weight_validation(weight):
     """
     # Checks that the inputted weight is not blank space
     if is_empty_string(weight):
-        print("\nPlease insert client's weight.")
+        print("\nPlease insert client's weight.\n")
         return False
     # Checks that the inserted weight is a number
     elif not weight.isnumeric():
-        print("\nInserted weight needs to be a number.")
+        print("\nInserted weight needs to be a number.\n")
         return False
     # Makes sure the weight insterted is realistic
     # Takes into account the weights of heaviest and
     # lightest people in the world
     elif (int(weight) < 24) or (int(weight) > 635):
-        print("\nPlease insert a valid weight in kg."
-              "Example: 87")
+        print("\nPlease insert a valid weight in kg.\n"
+              "Example: 87\n\n")
         return False
     else:
         return True
@@ -577,8 +577,8 @@ def check_client_exists(name):
             index = i + 1
             return index
     else:
-        print(f"\n'{name}' cannot be found in the records."
-              f"Please enter a correct name to check the progress"
+        print(f"\n'{name}' cannot be found in the records.\n"
+              f"Please enter a correct name to check the progress\n"
               f" of an existing client.\n")
         return False
 
@@ -604,14 +604,14 @@ def get_new_data():
     """
     new_data_list = []
     while True:
-        new_weight = input("Please provide client's new weight:")
+        new_weight = input("Provide client's new weight: ")
         if weight_validation(new_weight):
             new_data_list.append(new_weight)
             break
         else:
             continue
     while True:
-        new_body_fat = input("Please provide client's new body fat:")
+        new_body_fat = input("\n\nProvide client's new body fat: ")
         if body_fat_validation(new_body_fat):
             new_data_list.append(new_body_fat)
             break
@@ -677,8 +677,10 @@ def check_progress():
             if not client_row:
                 continue
             else:
-                print("Client exists in records!\n"
-                    "Getting the latest weight and body fat in the records...")
+                print("\nClient exists in records!\n")
+                words = ("Getting the latest weight and " 
+                         "body fat registered...\n\n")
+                typing_effect(words)
                 old_data = get_latest_data(client_row)
                 old_weight = int(old_data['weight'])
                 old_body_fat = int(old_data['body_fat'])
@@ -687,49 +689,66 @@ def check_progress():
                 new_body_fat = int(new_data['body_fat'])
                 goal = get_goal(client_name)
                 
+                words = "\n\nBear with me while I do some math..."
+                typing_effect(words)
+                sleep(2)
+                os.system('cls' if os.name == 'nt' else 'clear')
+                client_capitalized = client_name.capitalize()
                 if 'lose' in goal:
                     if old_weight > new_weight:
                         print(f"Well done! \n"
-                            f"{client_name} original goal was to {goal}c"
-                            f"and based on the new data insterted we can "
-                            f"establish a {old_weight - new_weight} kg weight loss.")
+                              f"{client_capitalized} original goal was to\n"
+                              f"{goal} and based on the new data insterted we\n"
+                              f"can establish a {old_weight - new_weight} kg\n" 
+                              f"weight loss {emojize(':flexed_biceps:')}\n")
                     elif old_weight < new_weight:
                         print(f"Something needs to be changed.\n"
-                            f"{client_name} wants to {goal} but based on the "
-                            f"new insterted weight there's been a weight gain "
-                            f"of {new_weight - old_weight} kg.")
+                              f"{client_capitalized} wants to {goal} but based\n"
+                              f"on the new insterted weight there's been a\n"
+                              f"weight gain of {new_weight - old_weight} kg"
+                              f" {emojize(':frowning_face:')}\n")
                     else:
-                        print(f"We need to work harder!\n"
-                            f"{client_name}'s weight doesn't seems to want to change!")
+                        print(f"We need to work harder!\n\n"
+                              f"{client_capitalized}'s weight doesn't seem\n"
+                              f"to want to change! {emojize(':confused_face:')}")
+                    break
                 elif 'gain' in goal:
                     if old_weight > new_weight:
                         print(f"Something needs to be changed. "
-                            f"{client_name} wants to {goal} but based on the "
-                            f"new insterted weight there's been a weight loss "
-                            f"of {old_weight - new_weight} kg.")
+                              f"{client_capitalized} wants to {goal} but based on the"
+                              f" new insterted weight there's been a weight "
+                              f"loss of {old_weight - new_weight} kg."
+                              f" {emojize(':frowning_face:')}\n")
                     elif old_weight < new_weight:
                         print(f"Well done! \n"
-                            f"{client_name} original goal was to {goal} "
-                            f"and based on the new data insterted we can "
-                            f"establish a {new_weight - old_weight} kg weight gain.")
+                              f"{client_capitalized} original goal was to {goal} "
+                              f"and based on the new data insterted we can "
+                              f"establish a {new_weight - old_weight} kg "
+                              f"weight gain {emojize(':flexed_biceps:')}")
                     else:
                         print(f"We need to work harder!"
-                            f"{client_name}'s weight doesn't seems to want to change!")
+                              f"{client_capitalized}'s weight doesn't seem to "
+                              f"want to change! {emojize(':confused_face:')}")
+                    break
                 else:
                     if old_weight > new_weight:
                         print(f"Something needs to be changed.\n"
-                            f"{client_name} wants to {goal} but based on the "
-                            f"new insterted weight there's been a weight loss "
-                            f"of {old_weight - new_weight} kg.")
+                              f"{client_capitalized} wants to {goal} but based on the"
+                              f" new insterted weight there's been a weight "
+                              f"loss of {old_weight - new_weight} kg."
+                              f" {emojize(':frowning_face:')}\n")
                     elif old_weight < new_weight:
                         print(f"Something needs to be changed.\n"
-                            f"{client_name} wants to {goal} but based on the "
-                            f"new insterted weight there's been a weight gain "
-                            f"of {new_weight - old_weight} kg.")
+                              f"{client_capitalized} wants to {goal} but based on the"
+                              f" new insterted weight there's been a weight "
+                              f"gain of {new_weight - old_weight} kg."
+                              f" {emojize(':frowning_face:')}\n")
                     else:
                         print(f"Well done!\n"
-                            f"{client_name} original goal was to {goal} "
-                            f"and at today it has stayed the same!")
+                              f"{client_capitalized} original goal was to {goal} "
+                              f"and at today it has stayed the same!"
+                              f"{emojize(':flexed_biceps:')}")
+                    break
 
     check_body_fat_improvement(client_name, old_body_fat, new_body_fat)
     update_clients_progress(client_name, new_weight, new_body_fat)
