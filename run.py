@@ -4,6 +4,7 @@ from time import sleep
 # https://medium.com/analytics-vidhya/how-to-print-emojis-using-python-2e4f93443f7e
 from emoji import emojize
 import sys
+# https://mauricebrg.com/article/2020/08/cli_text_styling_progress_bars_and_prompts_with_click.html
 import click
 import gspread
 from google.oauth2.service_account import Credentials
@@ -45,13 +46,24 @@ class Client:
 
     def client_description(self):
         return (
-            f"{self.name} is a {self.age} years old {self.gender} client, "
-            f"{self.height}cm tall and that weights {self.weight}kg. "
-            f"Taking into account that the client's activity level is "
-            f"{self.activity}, body fat is {self.body_fat} %, tdee is "
-            f"{self.tdee}kcal and the goal is to {self.goal}.\n\n"
-        )
-
+                click.style(self.name, fg="blue", bold=True) +
+                " is a " +
+                click.style(self.age, fg="blue", bold=True) +
+                " years old " +
+                click.style(self.gender, fg="blue", bold=True) +
+                " client, " +
+                click.style(self.height, fg="blue", bold=True) +
+                " tall and that weights " +
+                click.style(self.weight, fg="blue", bold=True) +
+                " kg . The client's activity level is " +
+                click.style(self.activity, fg="blue", bold=True) +
+                ", body fat is " + 
+                click.style(self.body_fat, fg="blue", bold=True) +
+                " %, TDEE is " + 
+                click.style(self.tdee, fg="blue", bold=True) +
+                " kcal and the goal is to " + 
+                click.style(self.goal, fg="blue", bold=True) + ".\n\n")
+            
 
 def task(option):
     """
@@ -210,16 +222,16 @@ def body_fat_validation(body_fat):
     """
     # Checks that the inputted body fat % is not an empty string
     if is_empty_string(body_fat):
-        print("Please insert client's body fat %.")
+        print("\nPlease insert client's body fat %.")
         return False
     # Makes sure the insterted body fat percentage is a number
     elif not body_fat.isnumeric():
-        print("Body fat percentage needs to be a numeric value.\n"
+        print("\nBody fat percentage needs to be a numeric value.\n"
               "Example: 22")
         return False
     # Checks that the inserted body fat percentage is realistic
     elif (int(body_fat) < 5) or (int(body_fat) > 40):
-        print("Please insert a correct body fat percentage.")
+        print("\nPlease insert a correct body fat percentage.")
         return False
     else:
         return True
@@ -285,16 +297,20 @@ def take_client_data():
     # Input gender
     while True:
         sleep(0.3)
-        gender = input("\nGender(F or M): ")
+        gender_letter = input("\nGender(F or M): ")
         # Checks that the inputted gender is not blank space
-        if is_empty_string(gender):
+        if is_empty_string(gender_letter):
             print("\nPlease insert client's gender.")
             continue
         # Makes sure the gender is either F or M
-        elif (gender.upper() != 'F') and (gender.upper() != 'M'):
+        elif (gender_letter.upper() != 'F') and (gender_letter.upper() != 'M'):
             print("\nPlease answer with either 'F' or 'M'.")
             continue
         else:
+            if gender_letter.upper() == 'F':
+                gender = "female"
+            else:
+                gender = "male"
             break
     # Input age
     while True:
@@ -378,16 +394,26 @@ def take_client_data():
             (activity.upper() != 'VA') and
             (activity.upper() != 'EA')
              ):
-            print("Please choose a valid activity level "
-                  "from the options provided.\n \n"
-                  )
+            words = (f"\n'{activity}' is not an option!")
+            typing_effect(words)
+            sleep(1)
             continue
         else:
+            if activity.upper() == 'SED':
+                activity_level = 'sedentary'
+            elif activity.upper() == 'LA':
+                activity_level = 'lightly active'
+            elif activity.upper() == 'MA':
+                activity_level = 'moderately active'
+            elif activity.upper() == 'VA':
+                activity_level = 'very active'
+            elif activity.upper() == 'EA':
+                activity_level = 'extremely active'
             break
 
     # Input body fat percentage
     while True:
-        body_fat = input("Body fat: % ")
+        body_fat = input("\nBody fat: % ")
         if body_fat_validation(body_fat):
             break
         else:
@@ -397,22 +423,26 @@ def take_client_data():
     os.system('cls' if os.name == 'nt' else 'clear')
     print(f"Now, what's {name.capitalize()}'s main goal?\n\n")
     while True:
-        print("A. Weight maintenance")
-        print("B. Weight loss / cutting")
-        print("C. Weight gain / bulking\n\n")
-        goal_letter = input("Goal (A, B or C): ")
+        click.echo(click.style("A.", fg="green", bold=True) + 
+                   " Weight maintenance\n" +
+                   click.style("B.", fg="green", bold=True) +
+                   " Weight loss / cutting\n" +
+                   click.style("C.", fg="green", bold=True) +
+                   " Weight gain / bulking\n")
+        goal_letter = input("Client's goal (A, B or C): ")
         goal_capitalize = goal_letter.upper()
         # Checks that the inputted goal is not an empty string
         if is_empty_string(goal_capitalize):
-            print("Please insert client's goal")
+            print("\nPlease insert client's goal!")
             continue
         # Checks that the inserted goal is one of the available options
         elif (
               (goal_capitalize != 'A') and
               (goal_capitalize != 'B') and
               (goal_capitalize != 'C')
-        ):
-            print("Please choose one of the available options.")
+        ):  
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("\nPlease choose one of the available options.")
             continue
         else:
             goal = ""
@@ -427,7 +457,7 @@ def take_client_data():
     tdee = tdee_formulas.calculate_tdee(gender, int(weight), int(height),
                                         activity.upper())
     new_client = Client(name.capitalize(), gender, age, height, weight, 
-                        activity, body_fat, goal, tdee)
+                        activity_level, body_fat, goal, tdee)
     check_new_client_data(new_client)
 
 
@@ -499,8 +529,7 @@ def check_new_client_data(client_data):
     is correct and there's no errors.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
-    print(
-        f"The details of the new client are as follows: \n \n")
+    print("The details of the new client are as follows: \n \n")
     words = (f"{client_data.client_description()}")
     typing_effect(words)
 
@@ -637,8 +666,8 @@ def check_progress():
     """
     client_name = (input("Insert the client name: ").lower())
     client_row = check_client_exists(client_name)
-    print(f"Client exists in records!\n"
-          f"Getting the latest weight and body fat in the records...")
+    print("Client exists in records!\n"
+          "Getting the latest weight and body fat in the records...")
     old_data = get_latest_data(client_row)
     old_weight = int(old_data['weight'])
     old_body_fat = int(old_data['body_fat'])
