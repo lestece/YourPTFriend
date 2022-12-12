@@ -84,6 +84,22 @@ def task(option):
             os.system('cls' if os.name == 'nt' else 'clear')
             delete_client()
         else:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            words = (f"Thank you for relying on my service!\n"
+                     f"See you next time "
+                     f"{emojize(':smiling_face_with_smiling_eyes:')}\n\n\n\n")
+            typing_effect(words)
+            sleep(2)
+            print("""\
+
+            ██████╗ ██╗   ██╗███████╗██╗
+            ██╔══██╗╚██╗ ██╔╝██╔════╝██║
+            ██████╔╝ ╚████╔╝ █████╗  ██║
+            ██╔══██╗  ╚██╔╝  ██╔══╝  ╚═╝
+            ██████╔╝   ██║   ███████╗██╗
+            ╚═════╝    ╚═╝   ╚══════╝╚═╝
+                  """)
+            sleep(10)
             exit()
     else:
         next_task()
@@ -126,7 +142,7 @@ def typing_effect(words):
     https://stackoverflow.com/questions/20302331/typing-effect-in-python
     """
     for char in words:
-        sleep(0.02)
+        sleep(0.03)
         sys.stdout.write(char)
         sys.stdout.flush()
 
@@ -163,7 +179,7 @@ def start_program():
                                              
 
     """)
-    sleep(1.5)
+    sleep(2.5)
     os.system('cls' if os.name == 'nt' else 'clear')
     words = (f"Welcome coach!\n\n\n"
              f"My job is to support you in your PT occupation\n" 
