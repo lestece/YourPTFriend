@@ -643,17 +643,21 @@ def check_body_fat_improvement(client_name, old_body_fat, new_body_fat):
     of the client's health by comparing
     the body fat data
     """
+    sleep(2)
     if old_body_fat > new_body_fat:
-        print(f"We can notice a body fat reduction of "
-              f"{old_body_fat - new_body_fat} so the"
-              f" {client_name} overall health has improved.")
+        print(f"And we can notice a body fat reduction of\n"
+              f"{old_body_fat - new_body_fat} so "
+              f"{client_name}'s overall health " 
+              f"has improved. {emojize(':party_popper:')}\n\n\n\n\n")
     elif old_body_fat < new_body_fat:
-        print(f"{client_name} body fat has increased since last time."
-              f" with a {new_body_fat - old_body_fat} % more body fat, "
-              f"some changes need to occur.")
+        print(f"And {client_name}'s body fat has increased since last time "
+              f"{emojize(':face_screaming_in_fear:')}\n"
+              f"With a {new_body_fat - old_body_fat} % more body fat, "
+              f"some changes need to occur.\n\n\n\n\n")
     else:
-        print(f"{client_name}'s body fat hasn't changed, "
-              f"so maybe we should consider tweacking up a bit the program")
+        print(f"And {client_name}'s body fat has stayed the same, "
+              f"so maybe we should consider tweaking up a bit the program "
+              f"{emojize(':face_with_monocle:')}\n\n\n\n\n")
 
 
 def check_progress():
@@ -700,17 +704,17 @@ def check_progress():
                               f"{client_capitalized} original goal was to\n"
                               f"{goal} and based on the new data insterted we\n"
                               f"can establish a {old_weight - new_weight} kg\n" 
-                              f"weight loss {emojize(':flexed_biceps:')}\n")
+                              f"weight loss {emojize(':flexed_biceps:')}\n\n\n")
                     elif old_weight < new_weight:
                         print(f"Something needs to be changed.\n"
                               f"{client_capitalized} wants to {goal} but based\n"
                               f"on the new insterted weight there's been a\n"
                               f"weight gain of {new_weight - old_weight} kg"
-                              f" {emojize(':frowning_face:')}\n")
+                              f" {emojize(':frowning_face:')}\n\n\n")
                     else:
-                        print(f"We need to work harder!\n\n"
+                        print(f"We need to work harder!\n"
                               f"{client_capitalized}'s weight doesn't seem\n"
-                              f"to want to change! {emojize(':confused_face:')}")
+                              f"to want to change! {emojize(':confused_face:')}\n\n\n")
                     break
                 elif 'gain' in goal:
                     if old_weight > new_weight:
@@ -718,17 +722,17 @@ def check_progress():
                               f"{client_capitalized} wants to {goal} but based on the"
                               f" new insterted weight there's been a weight "
                               f"loss of {old_weight - new_weight} kg."
-                              f" {emojize(':frowning_face:')}\n")
+                              f" {emojize(':frowning_face:')}\n\n\n")
                     elif old_weight < new_weight:
                         print(f"Well done! \n"
                               f"{client_capitalized} original goal was to {goal} "
                               f"and based on the new data insterted we can "
                               f"establish a {new_weight - old_weight} kg "
-                              f"weight gain {emojize(':flexed_biceps:')}")
+                              f"weight gain {emojize(':flexed_biceps:')}\n\n\n")
                     else:
                         print(f"We need to work harder!"
                               f"{client_capitalized}'s weight doesn't seem to "
-                              f"want to change! {emojize(':confused_face:')}")
+                              f"want to change! {emojize(':confused_face:')}\n\n\n")
                     break
                 else:
                     if old_weight > new_weight:
@@ -736,21 +740,21 @@ def check_progress():
                               f"{client_capitalized} wants to {goal} but based on the"
                               f" new insterted weight there's been a weight "
                               f"loss of {old_weight - new_weight} kg."
-                              f" {emojize(':frowning_face:')}\n")
+                              f" {emojize(':frowning_face:')}\n\n\n")
                     elif old_weight < new_weight:
                         print(f"Something needs to be changed.\n"
                               f"{client_capitalized} wants to {goal} but based on the"
                               f" new insterted weight there's been a weight "
                               f"gain of {new_weight - old_weight} kg."
-                              f" {emojize(':frowning_face:')}\n")
+                              f" {emojize(':frowning_face:')}\n\n\n")
                     else:
                         print(f"Well done!\n"
                               f"{client_capitalized} original goal was to {goal} "
                               f"and at today it has stayed the same!"
-                              f"{emojize(':flexed_biceps:')}")
+                              f"{emojize(':flexed_biceps:')}\n\n\n")
                     break
 
-    check_body_fat_improvement(client_name, old_body_fat, new_body_fat)
+    check_body_fat_improvement(client_capitalized, old_body_fat, new_body_fat)
     update_clients_progress(client_name, new_weight, new_body_fat)
     next_task()
 
@@ -767,11 +771,11 @@ def delete_client():
     client_find = clients_init_conditions.find(client_to_delete.capitalize())
     if client_find:
         # If client exists, remove from initial conditions worksheet
-        print("Removing client from records...")
+        print("\n\nRemoving client from records...\n\n")
         client_row = client_find.row
         clients_init_conditions.delete_rows(client_row)
     else:
-        print(f"There's no client under name of {client_to_delete}.")
+        print(f"\n\nThere's no client under name of {client_to_delete}.\n\n")
         delete_client()  
     # Loop that deletes every row containing that client name
     # in the client progress worksheet
@@ -783,8 +787,9 @@ def delete_client():
             clients_progress.delete_rows(client_progress_row)
             continue
         else:
-            print("Client successfully removed! "
-                  "Now you have an extra availability.")
+            print(f"{client_to_delete.capitalize()} successfully removed!\n"
+                  "Now you have an extra availability\n\n\n\n\n")
+            sleep(2)
             next_task()
 
 
