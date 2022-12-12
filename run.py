@@ -186,9 +186,9 @@ def is_empty_string(data):
     """
     try:
         if data == "":
-            raise ValueError("You need to provide the requested information!")
+            raise ValueError("You need to provide the requested information!\n")
     except ValueError as e:
-        print(f"You didn't answer. {e}")
+        print(f"\nYou didn't answer. {e}")
         return True
     return False
 
@@ -577,10 +577,10 @@ def check_client_exists(name):
             index = i + 1
             return index
     else:
-        print(f"{name} cannot be found in the records."
+        print(f"\n'{name}' cannot be found in the records."
               f"Please enter a correct name to check the progress"
-              f" of an existing client")
-        check_progress()
+              f" of an existing client.\n")
+        return False
 
 
 def get_latest_data(row):
@@ -664,61 +664,72 @@ def check_progress():
     based on what the original goal was,
     gives a positive or negative response.
     """
-    client_name = (input("Insert the client name: ").lower())
-    client_row = check_client_exists(client_name)
-    print("Client exists in records!\n"
-          "Getting the latest weight and body fat in the records...")
-    old_data = get_latest_data(client_row)
-    old_weight = int(old_data['weight'])
-    old_body_fat = int(old_data['body_fat'])
-    new_data = get_new_data()
-    new_weight = int(new_data['weight'])
-    new_body_fat = int(new_data['body_fat'])
-    goal = get_goal(client_name)
-    
-    if 'lose' in goal:
-        if old_weight > new_weight:
-            print(f"Well done! \n"
-                  f"{client_name} original goal was to {goal}c"
-                  f"and based on the new data insterted we can "
-                  f"establish a {old_weight - new_weight} kg weight loss.")
-        elif old_weight < new_weight:
-            print(f"Something needs to be changed.\n"
-                  f"{client_name} wants to {goal} but based on the "
-                  f"new insterted weight there's been a weight gain "
-                  f"of {new_weight - old_weight} kg.")
+    words = (f"You're checking a client's progress!\n\n"
+             f"Please provide the information requested below "
+             f"{emojize(':down_arrow:')}\n\n")
+    typing_effect(words)
+    while True:
+        client_name = (input("Insert the client's name: ").lower())
+        if is_empty_string(client_name):
+            continue
         else:
-            print(f"We need to work harder!\n"
-                  f"{client_name}'s weight doesn't seems to want to change!")
-    elif 'gain' in goal:
-        if old_weight > new_weight:
-            print(f"Something needs to be changed. "
-                  f"{client_name} wants to {goal} but based on the "
-                  f"new insterted weight there's been a weight loss "
-                  f"of {old_weight - new_weight} kg.")
-        elif old_weight < new_weight:
-            print(f"Well done! \n"
-                  f"{client_name} original goal was to {goal} "
-                  f"and based on the new data insterted we can "
-                  f"establish a {new_weight - old_weight} kg weight gain.")
-        else:
-            print(f"We need to work harder!"
-                  f"{client_name}'s weight doesn't seems to want to change!")
-    else:
-        if old_weight > new_weight:
-            print(f"Something needs to be changed.\n"
-                  f"{client_name} wants to {goal} but based on the "
-                  f"new insterted weight there's been a weight loss "
-                  f"of {old_weight - new_weight} kg.")
-        elif old_weight < new_weight:
-            print(f"Something needs to be changed.\n"
-                  f"{client_name} wants to {goal} but based on the "
-                  f"new insterted weight there's been a weight gain "
-                  f"of {new_weight - old_weight} kg.")
-        else:
-            print(f"Well done!\n"
-                  f"{client_name} original goal was to {goal} "
-                  f"and at today it has stayed the same!")
+            client_row = check_client_exists(client_name)
+            if not client_row:
+                continue
+            else:
+                print("Client exists in records!\n"
+                    "Getting the latest weight and body fat in the records...")
+                old_data = get_latest_data(client_row)
+                old_weight = int(old_data['weight'])
+                old_body_fat = int(old_data['body_fat'])
+                new_data = get_new_data()
+                new_weight = int(new_data['weight'])
+                new_body_fat = int(new_data['body_fat'])
+                goal = get_goal(client_name)
+                
+                if 'lose' in goal:
+                    if old_weight > new_weight:
+                        print(f"Well done! \n"
+                            f"{client_name} original goal was to {goal}c"
+                            f"and based on the new data insterted we can "
+                            f"establish a {old_weight - new_weight} kg weight loss.")
+                    elif old_weight < new_weight:
+                        print(f"Something needs to be changed.\n"
+                            f"{client_name} wants to {goal} but based on the "
+                            f"new insterted weight there's been a weight gain "
+                            f"of {new_weight - old_weight} kg.")
+                    else:
+                        print(f"We need to work harder!\n"
+                            f"{client_name}'s weight doesn't seems to want to change!")
+                elif 'gain' in goal:
+                    if old_weight > new_weight:
+                        print(f"Something needs to be changed. "
+                            f"{client_name} wants to {goal} but based on the "
+                            f"new insterted weight there's been a weight loss "
+                            f"of {old_weight - new_weight} kg.")
+                    elif old_weight < new_weight:
+                        print(f"Well done! \n"
+                            f"{client_name} original goal was to {goal} "
+                            f"and based on the new data insterted we can "
+                            f"establish a {new_weight - old_weight} kg weight gain.")
+                    else:
+                        print(f"We need to work harder!"
+                            f"{client_name}'s weight doesn't seems to want to change!")
+                else:
+                    if old_weight > new_weight:
+                        print(f"Something needs to be changed.\n"
+                            f"{client_name} wants to {goal} but based on the "
+                            f"new insterted weight there's been a weight loss "
+                            f"of {old_weight - new_weight} kg.")
+                    elif old_weight < new_weight:
+                        print(f"Something needs to be changed.\n"
+                            f"{client_name} wants to {goal} but based on the "
+                            f"new insterted weight there's been a weight gain "
+                            f"of {new_weight - old_weight} kg.")
+                    else:
+                        print(f"Well done!\n"
+                            f"{client_name} original goal was to {goal} "
+                            f"and at today it has stayed the same!")
 
     check_body_fat_improvement(client_name, old_body_fat, new_body_fat)
     update_clients_progress(client_name, new_weight, new_body_fat)
