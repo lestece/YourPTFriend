@@ -1,6 +1,8 @@
-# # Import packages
+# Import packages
 import os
 from time import sleep
+# https://medium.com/analytics-vidhya/how-to-print-emojis-using-python-2e4f93443f7e
+from emoji import emojize
 import sys
 import gspread
 from google.oauth2.service_account import Credentials
@@ -81,19 +83,27 @@ def task_validation(choice):
     or if the choice is not 1, 2 or 3.
     """
     try:
-        task = int(choice)
-        if (task != 1) and (task != 2) and (task != 3) and (task != 4):
-            raise ValueError(
-                f"{task} is not a valid option!"
-                )
+        if not choice.isnumeric():
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print(f"'{choice}' is not an option.\n"
+                  f"Please answer with a number from the available choices."
+                  f"\n\n")
+            return False
+        else:
+            task = int(choice)
+            if (task != 1) and (task != 2) and (task != 3) and (task != 4):
+                raise ValueError(
+                    f"{task} is not an option!"
+                    )
     except ValueError as e:
+        os.system('cls' if os.name == 'nt' else 'clear')
         print(
-            f"Invalid data: {e}. Please choose an option between"
-            f"the options above: "
+            f"{e}\nPlease choose a valid one.\n\n"
             )
         return False
 
     return True
+
 
 def typing_effect(words):
     """
@@ -103,7 +113,7 @@ def typing_effect(words):
     https://stackoverflow.com/questions/20302331/typing-effect-in-python
     """
     for char in words:
-        sleep(0.038)
+        sleep(0.02)
         sys.stdout.write(char)
         sys.stdout.flush()
 
@@ -142,16 +152,17 @@ def start_program():
     """)
     sleep(1.5)
     os.system('cls' if os.name == 'nt' else 'clear')
-    words = ("Welcome coach!\n\n\n"
-             "My job is to support you in your PT occupation\n" 
-             "by taking charge of the boring tasks so that\n"
-             "you can entirely focus on creating those sweaty workouts.\n\n"
-             "What do you want me to do for you today?\n\n"
-             "1. Add a new client to your client's records\n"
-             "2. Check a client's progress\n"
-             "3. Say goodbye to a client\n\n")
+    words = (f"Welcome coach!\n\n\n"
+             f"My job is to support you in your PT occupation\n" 
+             f"by taking charge of the boring tasks so that\n"
+             f"you can entirely focus on creating those sweaty workouts"
+             f"{emojize(':droplet:')}\n\n"
+             f"What do you want me to do for you today?\n\n"
+             f"1. Add a new client to your client's records "
+             f"{emojize(':plus:')}\n"
+             f"2. Check a client's progress {emojize(':chart_increasing:')}\n"
+             f"3. Say goodbye to a client {emojize(':minus:')}\n\n")
     typing_effect(words)
-
     option = (input("Choose an option from the above (1, 2 or 3):\n"))
     task(option)
 
@@ -236,6 +247,7 @@ def update_new_client_worksheet(data):
     sleep(1)
     print("New client correctly insterted in your clients records!\n\n")
     sleep(2)
+
 
 def take_client_data():
     """
@@ -460,13 +472,13 @@ def next_task():
     """
     Asks the user what to do next
     """
-    print("What do you want to do now?\n"
-          "1. Add a new client\n"
-          "2. Check a client's progress\n"
-          "3. Say goodbye to a client\n"
-          "4. Exit the program\n"
+    print(f"What do you want to do?\n\n"
+          f"1. Add a new client {emojize(':plus:')}\n"
+          f"2. Check a client's progress {emojize(':chart_increasing:')}\n"
+          f"3. Say goodbye to a client {emojize(':minus:')}\n"
+          f"4. Exit the program {emojize(':cross_mark:')}\n"
           ) 
-    option = int(input("Choose between the options above."))
+    option = input("Choose between the options above.")
     task(option)
 
 
