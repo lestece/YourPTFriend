@@ -168,7 +168,6 @@ def start_program():
     -Deleting a client from the records
     """
     print("""\
-
         
                     ██╗   ██╗ ██████╗ ██╗   ██╗██████╗       
                     ╚██╗ ██╔╝██╔═══██╗██║   ██║██╔══██╗      
