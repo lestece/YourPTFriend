@@ -156,28 +156,9 @@ def progress_bar() -> None:
     with click.progressbar(label="",
                            length=100,
                            show_eta=False) as progress_bar:
-        progress_bar.update(0)
-        sleep(1)
-        progress_bar.update(10)
-        sleep(1)
-        progress_bar.update(10)
-        sleep(1)
-        progress_bar.update(10)
-        sleep(1)
-        progress_bar.update(10)
-        sleep(1)
-        progress_bar.update(10)
-        sleep(1)
-        progress_bar.update(10)
-        sleep(1)
-        progress_bar.update(10)
-        sleep(1)
-        progress_bar.update(10)
-        sleep(1)
-        progress_bar.update(10)
-        sleep(1)
-        progress_bar.update(10)
-        sleep(1)
+        for i in range(100):
+            progress_bar.update(i)
+            sleep(0.05)
 
 
 def start_program():
@@ -826,10 +807,9 @@ def delete_client():
     client_find = clients_init_conditions.find(client_to_delete.capitalize())
     if client_find:
         # If client exists, remove from initial conditions worksheet
-        words = ("\n\nRemoving client from records...\n\n")
+        words = ("\n\nRemoving client from records...\n\n\n")
         typing_effect(words)
         progress_bar()
-        sleep(2)
         client_row = client_find.row
         clients_init_conditions.delete_rows(client_row)
     else:
@@ -845,9 +825,9 @@ def delete_client():
             clients_progress.delete_rows(client_progress_row)
             continue
         else:
-            print(f"{client_to_delete.capitalize()} successfully removed!\n")
+            print(f"\n\n{client_to_delete.capitalize()} successfully removed!\n")
             sleep(2)
-            print("What do you want to do next?\n\n")
+            print("\n\nWhat do you want to do next?\n\n")
             next_task()
 
 
