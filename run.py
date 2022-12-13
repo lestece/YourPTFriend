@@ -51,17 +51,17 @@ class Client:
                 click.style(self.age, fg="blue", bold=True) +
                 " years old " +
                 click.style(self.gender, fg="blue", bold=True) +
-                " client, " +
+                " client, \n" +
                 click.style(self.height, fg="blue", bold=True) +
                 " tall and that weights " +
                 click.style(self.weight, fg="blue", bold=True) +
-                " kg . The client's activity level is " +
+                " kg.\nThe client's activity level is " +
                 click.style(self.activity, fg="blue", bold=True) +
-                ", body fat is " + 
+                ",\nbody fat is " + 
                 click.style(self.body_fat, fg="blue", bold=True) +
                 " %, TDEE is " + 
                 click.style(self.tdee, fg="blue", bold=True) +
-                " kcal and the goal is to " + 
+                " kcal\nand the goal is to " + 
                 click.style(self.goal, fg="blue", bold=True) + ".\n\n")
             
 
@@ -85,7 +85,7 @@ def task(option):
             delete_client()
         else:
             os.system('cls' if os.name == 'nt' else 'clear')
-            words = (f"Thank you for relying on my service!\n"
+            words = (f"\n\nThank you for relying on my service!\n\n"
                      f"See you next time "
                      f"{emojize(':smiling_face_with_smiling_eyes:')}\n\n\n\n")
             typing_effect(words)
@@ -142,7 +142,7 @@ def typing_effect(words):
     https://stackoverflow.com/questions/20302331/typing-effect-in-python
     """
     for char in words:
-        sleep(0.003)
+        sleep(0.03)
         sys.stdout.write(char)
         sys.stdout.flush()
 
@@ -155,9 +155,9 @@ def progress_bar() -> None:
     with click.progressbar(label="",
                            length=100,
                            show_eta=False) as progress_bar:
-        for i in range(100):
+        for i in range(50):
             progress_bar.update(i)
-            sleep(0.05)
+            sleep(0.1)
 
 
 def start_program():
@@ -215,7 +215,7 @@ def is_empty_string(data):
     """
     try:
         if data == "":
-            raise ValueError("You need to provide"
+            raise ValueError("You need to provide "
                              "the requested information!\n")
     except ValueError as e:
         print(f"\nYou didn't answer. {e}")
@@ -288,9 +288,8 @@ def update_new_client_worksheet(data):
     typing_effect(words)
     progress_bar()
     clients_init_conditions.append_row(client_list)
-    sleep(1)
     print("\n\nNew client correctly insterted in your clients records!\n\n")
-    sleep(3)
+    sleep(5)
 
 
 def take_client_data():
@@ -298,8 +297,9 @@ def take_client_data():
     Takes the client data as input.
     After input validation, the data is inserted in a new_client list.
     """
-    print("You're adding a new client!\n\n"
-          "Please insert the following requested information.\n\n")
+    print("You're adding a new client!\n\n")
+    sleep(1)
+    print("Please insert the following requested information.\n\n")
     sleep(1)
     # Input name
     while True:
@@ -316,8 +316,8 @@ def take_client_data():
         # Checks if the name is already in the records
         elif clients_init_conditions.find(name.capitalize()):
             words = ("\nThere's already another client registered with "
-                     "the same name.\nPlease provide extra identification "
-                     "for this client so that he/she can be discerned "
+                     " the same name.\nPlease provide extra identification "
+                     "for this client so that \n he/she can be discerned "
                      "from the one already existing with the same name.\n\n"
                      )
             typing_effect(words)
@@ -367,7 +367,7 @@ def take_client_data():
     # Input height
     while True:
         sleep(0.3)
-        height = input("\nHeight(cm): ")
+        height = input("\nHeight(cm): \n")
         # Checks that the inputted height is not blank space
         if is_empty_string(height):
             print("\nPlease insert client's height.")
@@ -402,15 +402,15 @@ def take_client_data():
         os.system('cls' if os.name == 'nt' else 'clear')
         print("Please choose one of the following activity levels.\n")
         click.echo("- Sedentary: " + 
-                   click.style("SED\n", fg="magenta", underline=True) +
+                   click.style("SED\n", fg="magenta", bold=True) +
                    "- Lightly active: " +  
-                   click.style("LA\n", fg="magenta", underline=True) +
+                   click.style("LA\n", fg="magenta", bold=True) +
                    "- Moderately active: " + 
-                   click.style("MA\n", fg="magenta", underline=True) +
+                   click.style("MA\n", fg="magenta", bold=True) +
                    "- Very active: " + 
-                   click.style("VA\n", fg="magenta", underline=True) +
+                   click.style("VA\n", fg="magenta", bold=True) +
                    "- Extremely active: " + 
-                   click.style("EA\n", fg="magenta", underline=True))
+                   click.style("EA\n", fg="magenta", bold=True))
 
         activity = input("Activity level: \n")
         # Checks that the inputted activity level is not blank space
@@ -497,7 +497,7 @@ def calculate_weekly_kcal_burnt():
     Calculates an average of how many calories per week
     the client will burn from workouts
     """
-    sleep(0.3)
+    sleep(0.2)
     os.system('cls' if os.name == 'nt' else 'clear')
     words = ("How many days per week can the client train?\n\n")
     typing_effect(words)
@@ -566,6 +566,7 @@ def check_new_client_data(client_data):
 
     while True:
         correct = input("Does all of the data look correct? (y/n): ")
+        sleep(0.5)
         os.system('cls' if os.name == 'nt' else 'clear')
         if correct.lower() == 'y':
             update_new_client_worksheet(client_data)
@@ -577,13 +578,14 @@ def check_new_client_data(client_data):
             sleep(0.1)
             os.system('cls' if os.name == 'nt' else 'clear')                       
             words = (
-                    f"{client_data.name}'s recommended daily calorie intake, "
-                    f"based on the {client_data.goal} goal and "
+                    f"\n\n{client_data.name}'s recommended daily calorie "
+                    f"intake, based on the {client_data.goal} goal and "
                     f"on the number of workouts per week, "
                     f"is around {daily_calorie_intake} kcal.\n\n")
             typing_effect(words)
             sleep(4)
-            print("What do you want to do next?\n\n")
+            words = ("What do you want to do next?\n\n")
+            typing_effect(words)
             next_task()
 
         elif correct.lower() == 'n':
@@ -735,59 +737,59 @@ def check_progress():
                 client_capitalized = client_name.capitalize()
                 if 'lose' in goal:
                     if old_weight > new_weight:
-                        print(f"Well done! \n"
+                        print(f"\n\nWell done! \n"
                               f"{client_capitalized} original goal was to\n"
                               f"{goal} and based on the new data insterted we"
                               f"\n can establish a {old_weight - new_weight}" 
                               f" kg\nweight loss {emojize(':flexed_biceps:')}"
                               f"\n\n\n")
                     elif old_weight < new_weight:
-                        print(f"Something needs to be changed.\n"
+                        print(f"\n\nSomething needs to be changed.\n"
                               f"{client_capitalized} wants to {goal} but based"
                               f"\non the new insterted weight there's been a\n"
                               f"weight gain of {new_weight - old_weight} kg"
                               f" {emojize(':frowning_face:')}\n\n\n")
                     else:
-                        print(f"We need to work harder!\n"
+                        print(f"\n\nWe need to work harder!\n"
                               f"{client_capitalized}'s weight doesn't seem\n"
                               f"to want to change!{emojize(':confused_face:')}"
                               f"\n\n\n")
                     break
                 elif 'gain' in goal:
                     if old_weight > new_weight:
-                        print(f"Something needs to be changed. "
+                        print(f"\n\nSomething needs to be changed. "
                               f"{client_capitalized} wants to {goal} but based"
                               f" on the new insterted weight there's been "
                               f"a weightloss of {old_weight - new_weight} kg."
                               f" {emojize(':frowning_face:')}\n\n\n")
                     elif old_weight < new_weight:
-                        print(f"Well done! \n"
+                        print(f"\n\nWell done! \n"
                               f"{client_capitalized} original goal was to "
                               f"{goal} and based on the new data insterted "
                               f"we can establish a {new_weight - old_weight} "
                               f"kg weight gain {emojize(':flexed_biceps:')}"
                               f"\n\n\n")
                     else:
-                        print(f"We need to work harder!"
+                        print(f"\n\nWe need to work harder!"
                               f"{client_capitalized}'s weight doesn't seem to "
                               f"want to change! {emojize(':confused_face:')}"
                               f"\n\n\n")
                     break
                 else:
                     if old_weight > new_weight:
-                        print(f"Something needs to be changed.\n"
+                        print(f"\n\nSomething needs to be changed.\n"
                               f"{client_capitalized} wants to {goal} but based"
                               f" on the new insterted weight there's been a "
                               f"weight loss of {old_weight - new_weight} kg."
                               f" {emojize(':frowning_face:')}\n\n\n")
                     elif old_weight < new_weight:
-                        print(f"Something needs to be changed.\n"
+                        print(f"\n\nSomething needs to be changed.\n"
                               f"{client_capitalized} wants to {goal} but based"
                               f" on the new insterted weight there's been "
                               f"a weight gain of {new_weight - old_weight} kg."
                               f" {emojize(':frowning_face:')}\n\n\n")
                     else:
-                        print(f"Well done!\n"
+                        print(f"\n\nWell done!\n"
                               f"{client_capitalized} original goal was to "
                               f"{goal} and at today it has stayed the same!"
                               f"{emojize(':flexed_biceps:')}\n\n\n")
@@ -805,7 +807,7 @@ def delete_client():
     Client is removed both from the initial conditions worksheet
     and the progress worksheet.
     """
-    client_to_delete = input("Please insert the name of the client "
+    client_to_delete = input("\n\nPlease insert the name of the client "
                              "we are saying goodbye to: \n")
     # Check that the client exists in the records
     client_find = clients_init_conditions.find(client_to_delete.capitalize())
@@ -829,8 +831,8 @@ def delete_client():
             clients_progress.delete_rows(client_progress_row)
             continue
         else:
-            print(f"\n\n{client_to_delete.capitalize()}"
-                  f"successfully removed!\n")
+            print(f"\n\n{client_to_delete.capitalize()} "
+                  f"has been successfully removed!\n")
             sleep(3)
             print("\n\nWhat do you want to do next?\n\n")
             next_task()
