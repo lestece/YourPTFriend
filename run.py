@@ -149,8 +149,7 @@ def typing_effect(words):
 
 def progress_bar() -> None:
     """
-    Demonstrates a progress bar without an iterable to
-    iterate over.
+    Shows a progress bar 
     """
 
     with click.progressbar(label="",
@@ -216,7 +215,8 @@ def is_empty_string(data):
     """
     try:
         if data == "":
-            raise ValueError("You need to provide the requested information!\n")
+            raise ValueError("You need to provide"
+                             "the requested information!\n")
     except ValueError as e:
         print(f"\nYou didn't answer. {e}")
         return True
@@ -303,7 +303,7 @@ def take_client_data():
     sleep(1)
     # Input name
     while True:
-        name = input("Full name: ")
+        name = input("Full name: \n")
         # Checks that the inputted name is not blank space
         if is_empty_string(name):
             print("You need to insert the client's name.\n")
@@ -328,7 +328,7 @@ def take_client_data():
     # Input gender
     while True:
         sleep(0.3)
-        gender_letter = input("\nGender(F or M): ")
+        gender_letter = input("\nGender(F or M): \n")
         # Checks that the inputted gender is not blank space
         if is_empty_string(gender_letter):
             print("\nPlease insert client's gender.")
@@ -346,7 +346,7 @@ def take_client_data():
     # Input age
     while True:
         sleep(0.3)
-        age = input("\nAge: ")
+        age = input("\nAge: \n")
         # Checks that the inputted age is not blank space
         if is_empty_string(age):
             print("Please insert client's age.")
@@ -390,7 +390,7 @@ def take_client_data():
     # Input weight
     while True:
         sleep(0.3)
-        weight = input("\nWeight(kg): ")
+        weight = input("\nWeight(kg): \n")
         if weight_validation(weight):
             break
         else:
@@ -401,18 +401,18 @@ def take_client_data():
         sleep(0.2)
         os.system('cls' if os.name == 'nt' else 'clear')
         print("Please choose one of the following activity levels.\n")
-        click.echo("- Sedentary: " + click.style("SED\n"
-                   , fg="magenta", underline=True) + 
-                   "- Lightly active: " + click.style("LA\n"
-                   , fg="magenta", underline=True) +
-                   "- Moderately active: " + click.style("MA\n"
-                   , fg="magenta", underline=True) +
-                   "- Very active: " + click.style("VA\n"
-                   , fg="magenta", underline=True) +
-                   "- Extremely active: " + click.style("EA\n"
-                   , fg="magenta", underline=True))
+        click.echo("- Sedentary: " + 
+                   click.style("SED\n", fg="magenta", underline=True) +
+                   "- Lightly active: " +  
+                   click.style("LA\n", fg="magenta", underline=True) +
+                   "- Moderately active: " + 
+                   click.style("MA\n", fg="magenta", underline=True) +
+                   "- Very active: " + 
+                   click.style("VA\n", fg="magenta", underline=True) +
+                   "- Extremely active: " + 
+                   click.style("EA\n", fg="magenta", underline=True))
 
-        activity = input("Activity level: ")
+        activity = input("Activity level: \n")
         # Checks that the inputted activity level is not blank space
         if is_empty_string(activity):
             print("Please insert client's activity level.")
@@ -444,7 +444,7 @@ def take_client_data():
 
     # Input body fat percentage
     while True:
-        body_fat = input("\nBody fat: % ")
+        body_fat = input("\nBody fat: % \n")
         if body_fat_validation(body_fat):
             break
         else:
@@ -501,7 +501,7 @@ def calculate_weekly_kcal_burnt():
     os.system('cls' if os.name == 'nt' else 'clear')
     words = ("How many days per week can the client train?\n\n")
     typing_effect(words)
-    availability = int(input("Please insert a number between 1 - 5: "))
+    availability = int(input("Please insert a number between 1 - 5: \n"))
     # Client's availability input validation
     while True:
         # Checks that the insterted value is not an empty string
@@ -550,7 +550,7 @@ def next_task():
           f"3. Say goodbye to a client {emojize(':minus:')}\n"
           f"4. Exit the program {emojize(':cross_mark:')}\n"
           ) 
-    option = input("Choose between the options above.")
+    option = input("Choose between the options above.\n")
     task(option)
 
 
@@ -637,14 +637,14 @@ def get_new_data():
     """
     new_data_list = []
     while True:
-        new_weight = input("\n\nProvide client's new weight: ")
+        new_weight = input("\n\nProvide client's new weight: \n")
         if weight_validation(new_weight):
             new_data_list.append(new_weight)
             break
         else:
             continue
     while True:
-        new_body_fat = input("\n\nProvide client's new body fat: ")
+        new_body_fat = input("\n\nProvide client's new body fat: \n")
         if body_fat_validation(new_body_fat):
             new_data_list.append(new_body_fat)
             break
@@ -737,55 +737,59 @@ def check_progress():
                     if old_weight > new_weight:
                         print(f"Well done! \n"
                               f"{client_capitalized} original goal was to\n"
-                              f"{goal} and based on the new data insterted we\n"
-                              f"can establish a {old_weight - new_weight} kg\n" 
-                              f"weight loss {emojize(':flexed_biceps:')}\n\n\n")
+                              f"{goal} and based on the new data insterted we"
+                              f"\n can establish a {old_weight - new_weight}" 
+                              f" kg\nweight loss {emojize(':flexed_biceps:')}"
+                              f"\n\n\n")
                     elif old_weight < new_weight:
                         print(f"Something needs to be changed.\n"
-                              f"{client_capitalized} wants to {goal} but based\n"
-                              f"on the new insterted weight there's been a\n"
+                              f"{client_capitalized} wants to {goal} but based"
+                              f"\non the new insterted weight there's been a\n"
                               f"weight gain of {new_weight - old_weight} kg"
                               f" {emojize(':frowning_face:')}\n\n\n")
                     else:
                         print(f"We need to work harder!\n"
                               f"{client_capitalized}'s weight doesn't seem\n"
-                              f"to want to change! {emojize(':confused_face:')}\n\n\n")
+                              f"to want to change!{emojize(':confused_face:')}"
+                              f"\n\n\n")
                     break
                 elif 'gain' in goal:
                     if old_weight > new_weight:
                         print(f"Something needs to be changed. "
-                              f"{client_capitalized} wants to {goal} but based on the"
-                              f" new insterted weight there's been a weight "
-                              f"loss of {old_weight - new_weight} kg."
+                              f"{client_capitalized} wants to {goal} but based"
+                              f" on the new insterted weight there's been "
+                              f"a weightloss of {old_weight - new_weight} kg."
                               f" {emojize(':frowning_face:')}\n\n\n")
                     elif old_weight < new_weight:
                         print(f"Well done! \n"
-                              f"{client_capitalized} original goal was to {goal} "
-                              f"and based on the new data insterted we can "
-                              f"establish a {new_weight - old_weight} kg "
-                              f"weight gain {emojize(':flexed_biceps:')}\n\n\n")
+                              f"{client_capitalized} original goal was to "
+                              f"{goal} and based on the new data insterted "
+                              f"we can establish a {new_weight - old_weight} "
+                              f"kg weight gain {emojize(':flexed_biceps:')}"
+                              f"\n\n\n")
                     else:
                         print(f"We need to work harder!"
                               f"{client_capitalized}'s weight doesn't seem to "
-                              f"want to change! {emojize(':confused_face:')}\n\n\n")
+                              f"want to change! {emojize(':confused_face:')}"
+                              f"\n\n\n")
                     break
                 else:
                     if old_weight > new_weight:
                         print(f"Something needs to be changed.\n"
-                              f"{client_capitalized} wants to {goal} but based on the"
-                              f" new insterted weight there's been a weight "
-                              f"loss of {old_weight - new_weight} kg."
+                              f"{client_capitalized} wants to {goal} but based"
+                              f" on the new insterted weight there's been a "
+                              f"weight loss of {old_weight - new_weight} kg."
                               f" {emojize(':frowning_face:')}\n\n\n")
                     elif old_weight < new_weight:
                         print(f"Something needs to be changed.\n"
-                              f"{client_capitalized} wants to {goal} but based on the"
-                              f" new insterted weight there's been a weight "
-                              f"gain of {new_weight - old_weight} kg."
+                              f"{client_capitalized} wants to {goal} but based"
+                              f" on the new insterted weight there's been "
+                              f"a weight gain of {new_weight - old_weight} kg."
                               f" {emojize(':frowning_face:')}\n\n\n")
                     else:
                         print(f"Well done!\n"
-                              f"{client_capitalized} original goal was to {goal} "
-                              f"and at today it has stayed the same!"
+                              f"{client_capitalized} original goal was to "
+                              f"{goal} and at today it has stayed the same!"
                               f"{emojize(':flexed_biceps:')}\n\n\n")
                     break
 
@@ -825,8 +829,9 @@ def delete_client():
             clients_progress.delete_rows(client_progress_row)
             continue
         else:
-            print(f"\n\n{client_to_delete.capitalize()} successfully removed!\n")
-            sleep(2)
+            print(f"\n\n{client_to_delete.capitalize()}"
+                  f"successfully removed!\n")
+            sleep(3)
             print("\n\nWhat do you want to do next?\n\n")
             next_task()
 
