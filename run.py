@@ -142,9 +142,42 @@ def typing_effect(words):
     https://stackoverflow.com/questions/20302331/typing-effect-in-python
     """
     for char in words:
-        sleep(0.03)
+        sleep(0.003)
         sys.stdout.write(char)
         sys.stdout.flush()
+
+
+def progress_bar() -> None:
+    """
+    Demonstrates a progress bar without an iterable to
+    iterate over.
+    """
+
+    with click.progressbar(label="",
+                           length=100,
+                           show_eta=False) as progress_bar:
+        progress_bar.update(0)
+        sleep(1)
+        progress_bar.update(10)
+        sleep(1)
+        progress_bar.update(10)
+        sleep(1)
+        progress_bar.update(10)
+        sleep(1)
+        progress_bar.update(10)
+        sleep(1)
+        progress_bar.update(10)
+        sleep(1)
+        progress_bar.update(10)
+        sleep(1)
+        progress_bar.update(10)
+        sleep(1)
+        progress_bar.update(10)
+        sleep(1)
+        progress_bar.update(10)
+        sleep(1)
+        progress_bar.update(10)
+        sleep(1)
 
 
 def start_program():
@@ -272,10 +305,11 @@ def update_new_client_worksheet(data):
     client_list = list(client_dict.values())
     words = ("Updating clients records...\n\n")
     typing_effect(words)
+    progress_bar()
     clients_init_conditions.append_row(client_list)
     sleep(1)
-    print("New client correctly insterted in your clients records!\n\n")
-    sleep(2)
+    print("\n\nNew client correctly insterted in your clients records!\n\n")
+    sleep(3)
 
 
 def take_client_data():
@@ -529,7 +563,7 @@ def next_task():
     """
     Asks the user what to do next
     """
-    print(f"What do you want to do?\n\n"
+    print(
           f"1. Add a new client {emojize(':plus:')}\n"
           f"2. Check a client's progress {emojize(':chart_increasing:')}\n"
           f"3. Say goodbye to a client {emojize(':minus:')}\n"
@@ -567,6 +601,8 @@ def check_new_client_data(client_data):
                     f"on the number of workouts per week, "
                     f"is around {daily_calorie_intake} kcal.\n\n")
             typing_effect(words)
+            sleep(4)
+            print("What do you want to do next?\n\n")
             next_task()
 
         elif correct.lower() == 'n':
@@ -620,7 +656,7 @@ def get_new_data():
     """
     new_data_list = []
     while True:
-        new_weight = input("Provide client's new weight: ")
+        new_weight = input("\n\nProvide client's new weight: ")
         if weight_validation(new_weight):
             new_data_list.append(new_weight)
             break
@@ -701,6 +737,7 @@ def check_progress():
                 words = ("Getting the latest weight and " 
                          "body fat registered...\n\n")
                 typing_effect(words)
+                progress_bar()
                 old_data = get_latest_data(client_row)
                 old_weight = int(old_data['weight'])
                 old_body_fat = int(old_data['body_fat'])
@@ -711,6 +748,7 @@ def check_progress():
                 
                 words = "\n\nBear with me while I do some math..."
                 typing_effect(words)
+                progress_bar()
                 sleep(2)
                 os.system('cls' if os.name == 'nt' else 'clear')
                 client_capitalized = client_name.capitalize()
@@ -772,6 +810,7 @@ def check_progress():
 
     check_body_fat_improvement(client_capitalized, old_body_fat, new_body_fat)
     update_clients_progress(client_name, new_weight, new_body_fat)
+    print("What do you want to do next?\n\n")
     next_task()
 
 
@@ -787,7 +826,10 @@ def delete_client():
     client_find = clients_init_conditions.find(client_to_delete.capitalize())
     if client_find:
         # If client exists, remove from initial conditions worksheet
-        print("\n\nRemoving client from records...\n\n")
+        words = ("\n\nRemoving client from records...\n\n")
+        typing_effect(words)
+        progress_bar()
+        sleep(2)
         client_row = client_find.row
         clients_init_conditions.delete_rows(client_row)
     else:
@@ -803,9 +845,9 @@ def delete_client():
             clients_progress.delete_rows(client_progress_row)
             continue
         else:
-            print(f"{client_to_delete.capitalize()} successfully removed!\n"
-                  "Now you have an extra availability\n\n\n\n\n")
+            print(f"{client_to_delete.capitalize()} successfully removed!\n")
             sleep(2)
+            print("What do you want to do next?\n\n")
             next_task()
 
 
