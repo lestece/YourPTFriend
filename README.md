@@ -1,6 +1,6 @@
 # YourPTFriend
 
-
+![YourPTFriend](images/your-pt-friend-intro.png)
 **A Python based program to support Personal Trainers in their job**
 
 [View the program here]()
@@ -22,7 +22,7 @@
 - - - 
 ## 1. INTRODUCTION
 
-YourPTFriend is an interactable command-line based program that handles data automation as a supporting tool for personal trainers.
+YourPTFriend is an interactable command-line based program built in python that handles data automation as a supporting tool for personal trainers.
 
 Based on the client's data provided by the PT, the program calculates the client's TDEE and, based on the weight goal (maintenance, cutting, bulking) it returns the amount of daily calorie intake that the client should consume.
 
@@ -35,6 +35,7 @@ The program goal is to automate a repetitive task related to nutrition so that t
 ## 3. PROGRAM GOALS
 
 ## 4. FEATURES
+
 
 ## 5. TESTING
 
