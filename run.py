@@ -544,7 +544,7 @@ def user_done():
     when done with the outputted information
     """
     enter = input("Press ENTER when you are ready\n"
-                          "to close this information.")
+                  "to close this information.")
     while True:
         if enter == "":
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -592,14 +592,18 @@ def check_new_client_data(client_data):
                                    client_data.goal,
                                    client_data.tdee)
             sleep(0.1)
-            os.system('cls' if os.name == 'nt' else 'clear')                       
+            os.system('cls' if os.name == 'nt' else 'clear')     
+            print("Processing..\n\n")
+            progress_bar()
+            sleep(1.5)
+            os.system('cls' if os.name == 'nt' else 'clear')                  
             words = (
                     f"\n\n{client_data.name}'s recommended daily calorie "
-                    f"intake,\n based on the {client_data.goal} goal and\n"
+                    f"intake,\nbased on the {client_data.goal} goal and\n"
                     f"on the number of workouts per week,\n"
                     f"is around {daily_calorie_intake} kcal.\n\n")
             typing_effect(words)
-            sleep(1)
+            sleep(2)
             user_done()
 
         elif correct.lower() == 'n':
@@ -720,7 +724,7 @@ def check_progress():
     based on what the original goal was,
     gives a positive or negative response.
     """
-    words = (f"You're checking a client's progress!\n\n"
+    words = (f"\nYou're checking a client's progress!\n\n"
              f"Please provide the information requested below "
              f"{emojize(':down_arrow:')}\n\n")
     typing_effect(words)
