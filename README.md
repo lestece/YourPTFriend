@@ -11,14 +11,19 @@
 1. [INTRODUCTION](#1-introduction)
 2. [INSTRUCTIONS](#2-instructions)
 3. [USER STORIES](#3-user-stories)
-4. [FEATURES](#4-features)
+4. [FLOWCHART AND PROGRAM LOGIC](#4-flowchart-and-app-logic)
+   - [Flowchart](#flowchart)
+   - [App logic](#app-logic)
+      - [Formulas](#formulas)
+      - [Worksheets](#worksheets-for-storing-data)
+5. [FEATURES](#5-features)
    - [Existing features](#existing-features)
    - [Features to implement in the future](#features-to-implement-in-the-future)
-5. [TESTING](#5-testing)
-6. [TECHNOLOGIES USED](#6-technologies-used)
-7. [CREDITS](#6-credits)
-8. [DEPLOYMENT](#7-deployment)
-9. [ACKNOWLEDGEMENTS](#8-acknowledgements)
+6. [TESTING](#5-testing)
+7. [TECHNOLOGIES USED](#6-technologies-used)
+8. [CREDITS](#6-credits)
+9. [DEPLOYMENT](#7-deployment)
+10. [ACKNOWLEDGEMENTS](#8-acknowledgements)
 
 - - - 
 ## 1. INTRODUCTION & GOAL
@@ -30,7 +35,7 @@ Since working out and nutrition go hand in hand, it happens very often that phys
 This app provides support by taking charge of that nutritional aspect. By establishing the amount of daily calorie a new client should consume and allowing to keep track of clients' progress,
 the PT can then entirely focus on his/her main responsibility: 
 building an effective workout plan based on the client's need.
-
+- - - 
 ## 2. INSTRUCTIONS
 The user can decide to:
 
@@ -42,7 +47,7 @@ New weight and body fat percentages are required from the user.
 
 3) __Delete a client from the records.__ 
 Client's name is required.
-
+- - - 
 ## 3. USER PERSONA & THEIR GOALS/NEEDS
 As a user I want to:
 - have clear instructions/prompts on how to use the app
@@ -52,8 +57,47 @@ As a user I want to:
 - have the option to choose another task after I'm finished with the current action
 - have my inputs checked and validated so that the task outputs are even more reliable
 
+- - - 
+## 4. FLOWCHART AND APP LOGIC
+### Flowchart
+![Flowchart](images/flowchart.png)
+The flowchart above was designed to have a guide to follow during the program building process and to show how the app works from start to finish.
 
-## 4. FEATURES
+### App logic
+
+#### - __Formulas__
+When adding a new client, __the program's main output is the client's daily calorie intake__. 
+To calculate this, two pieces of data are needed:
+1) __TDEE__ (Total Daily Energy Expenditure): it's the amount of calories needed for that client to function. It's the result of the sum of three factors:
+- _BRM_(Basal Metabolic Rate): 
+   it's the result of LBM (Lean Body Mass, different formulas for men and women) * 21.6 + 370
+- _TEF_ (Termic Effect Of Food, 10% of bmr) 
+- _TEA_ (Termic Effect of activity): based on the activity level and the related factor
+
+All data requested to the user is needed for these formulas, contained in a separate module (tdee_formulas.py) and imported into the main run.py file.
+
+2. Client committment/Availability:
+Considering an estimated 300kcal burnt per workout, it determines an average of calories burnt per week due to working out (based on how many days x week of committment are inputted) and divides it by 7 to obtain the amount (avg) of calories burnt per day.
+
+So the daily calories burnt are added to the TDEE and based on the goal, 500kcal are added or removed (or nothing gets changed) from that total so that the program outputs a recommended daily calorie intake.
+   
+#### - __Worksheets for storing data__
+
+The program makes use of the gspread library to access a Google Sheets file that allows the program to push and pull data based on the task that it needs to work on.
+
+The file contains two worksheets:
+
+- Clients initial conditions Worksheet
+![Clients init conditions](images/clients-intial-conditions.png)
+Used to store all clients' data and needed when the program needs to retrieve the client's goal or delete a client from the records. 
+- Clients progress
+![Clients progress](images/clients-progress.png)
+This worksheet is used to store the latest inserted body weight and body fat of each client so that the program can retrieve them and compare them with the new data that the user is inserting to calculate a client's progress.
+
+## 5. FEATURES
+
+### EXISTING FEATURES 
+
 - __START SCREEN__
 ![Start screen](images/start-screen.png)
 The start screen displays the app name through an __ASCII art text__
@@ -84,15 +128,48 @@ This screen features a progress bar that has the purpose of giving the user a se
 The user is then prompted to inserting the client's committment to physical activity, choosing between 1 to 5 days per week. This piece of information is essential for calculating the daily calorie intake.
 ![Daily calorie intake](images/daily-calorie-intake.png)
 Finally, the newly added client's tailored daily calorie intake is displayed as the last feature of the adding a new client process. 
-The result is displayed alone on the screen for 4 seconds, so that the information displayed has time to be fully absorbed before the user is prompted to choosing between accomplishing another task or exiting the program (and the user doesn't feel rushed).
+The result is displayed alone on the screen for 2 seconds, so that the information displayed has time to be fully absorbed and the user doesn't feel rushed by the control for closing the screen appearing straight away.
+
+- __OPTION 2: CHECK A CLIENT'S PROGRESS__
+![Check that client exists](images/check-client-exists.png)
+The first piece of information requested for checking a client's progress is the client's name, to make sure that he/she exists in the records.
+The user is then made aware that the latest body weight and fat are being retrieved.
+![New data](images/new-data.png)
+The user is then prompted to insert the new weight and body fat percentage for the program to compare the old and the new data.
+![Progress results](images/progress-result.png)
+The progress results are showed one after the other, with a little pause in between (2 seconds) to give the user time to absorb the first response and give it the necessary importance.
+
+- __OPTION 3: DELETE A CLIENT__
+![Client deletion](images/client-deletion.png)
+After the user inserts the name of the client to delete, and is showed that the operation is being processed, a confirmation of deletion appears on the screen.
+
+- __OPTION 4: EXIT__
+![Exit](images/exit.png)
+This screen thanks the user for using the program and uses an ASCII art text to give goodbyes.
+- - - 
+
+### FEATURES TO IMPLEMENT IN THE FUTURE
+
+Possible future improvements for the program would be:
+
+- Adding an option for the PT to retrieve an organized table containing all the clients in the records and their data.
+
+- Inserting in the records also the date when the client registration occured and when a new set of data (weight and body fat) is inserted, so that the progress takes into account also the amount of time that has passed for that progress to occur and, maybe, inserting a functionality that checks how "healthy" is the progress obtained (i.e.: losing too much weight in a short amount of time is unhealthy and not sustainable etc.)
+
+- Expanding the client's possible goal (improving aerobic activity, endurance, preparing for competition etc.) and outputting a guidance of the training plan that the PT could use to build the single workouts
+
+- Improving the data validation when adding a new client, for example comparing the weight and height inserted to check if they are realistic?possible.
+---
 
 
-## 5. TESTING
 
-## 6. TECHNOLOGIES USED
 
-## 7. CREDITS
+## 6. TESTING
 
-## 8. DEPLOYMENT
+## 7. TECHNOLOGIES USED
 
-## 9. ACKNOWLEDGEMENTS
+## 8. CREDITS
+
+## 9. DEPLOYMENT
+
+## 10. ACKNOWLEDGEMENTS
