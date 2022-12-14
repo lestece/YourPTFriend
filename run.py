@@ -142,7 +142,7 @@ def typing_effect(words):
     https://stackoverflow.com/questions/20302331/typing-effect-in-python
     """
     for char in words:
-        sleep(0.03)
+        sleep(0.04)
         sys.stdout.write(char)
         sys.stdout.flush()
 
@@ -155,9 +155,9 @@ def progress_bar() -> None:
     with click.progressbar(label="",
                            length=100,
                            show_eta=False) as progress_bar:
-        for i in range(50):
+        for i in range(20):
             progress_bar.update(i)
-            sleep(0.1)
+            sleep(0.05)
 
 
 def start_program():
@@ -287,7 +287,7 @@ def update_new_client_worksheet(data):
     progress_bar()
     clients_init_conditions.append_row(client_list)
     print("\n\nNew client correctly insterted in your clients records!\n\n")
-    sleep(5)
+    sleep(2)
 
 
 def take_client_data():
@@ -442,7 +442,7 @@ def take_client_data():
 
     # Input body fat percentage
     while True:
-        body_fat = input("\nBody fat: % \n")
+        body_fat = input("\nBody fat:\n% ")
         if body_fat_validation(body_fat):
             break
         else:
@@ -538,6 +538,24 @@ def calculate_daily_calorie_intake(goal, tdee):
     return round(daily_kcal_intake)
 
 
+def user_done():
+    """
+    Waits for the user to press ENTER key
+    when done with the outputted information
+    """
+    enter = input("Press ENTER when you are ready\n"
+                          "to close this information.")
+    while True:
+        if enter == "":
+            os.system('cls' if os.name == 'nt' else 'clear')
+            words = ("What do you want to do next?\n\n")
+            typing_effect(words)
+            next_task()
+        else:
+            enter = input("\nPlease press ENTER.")
+            continue  
+
+
 def next_task():
     """
     Asks the user what to do next
@@ -577,20 +595,18 @@ def check_new_client_data(client_data):
             os.system('cls' if os.name == 'nt' else 'clear')                       
             words = (
                     f"\n\n{client_data.name}'s recommended daily calorie "
-                    f"intake, based on the {client_data.goal} goal and "
-                    f"on the number of workouts per week, "
+                    f"intake,\n based on the {client_data.goal} goal and\n"
+                    f"on the number of workouts per week,\n"
                     f"is around {daily_calorie_intake} kcal.\n\n")
             typing_effect(words)
-            sleep(4)
-            words = ("What do you want to do next?\n\n")
-            typing_effect(words)
-            next_task()
+            sleep(1)
+            user_done()
 
         elif correct.lower() == 'n':
             print("Please reinstert the new client data!")
             take_client_data()
         else:
-            print("Please answer with yes or no.")
+            print("Please answer with 'y' or 'n'.")
             continue
 
 
@@ -635,6 +651,8 @@ def get_new_data():
     and stores the values
     in a list
     """
+    sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear') 
     new_data_list = []
     while True:
         new_weight = input("\n\nProvide client's new weight: \n")
@@ -678,19 +696,20 @@ def check_body_fat_improvement(client_name, old_body_fat, new_body_fat):
     """
     sleep(2)
     if old_body_fat > new_body_fat:
-        print(f"And we can notice a body fat reduction of\n"
-              f"{old_body_fat - new_body_fat} so "
-              f"{client_name}'s overall health " 
-              f"has improved. {emojize(':party_popper:')}\n\n\n\n\n")
+        words = (f"And we can notice a body fat reduction of\n"
+                 f"{old_body_fat - new_body_fat} so "
+                 f"{client_name}'s overall health " 
+                 f"has improved. {emojize(':party_popper:')}\n\n\n\n\n")
     elif old_body_fat < new_body_fat:
-        print(f"And {client_name}'s body fat has increased since last time "
-              f"{emojize(':face_screaming_in_fear:')}\n"
-              f"With a {new_body_fat - old_body_fat} % more body fat, "
-              f"some changes need to occur.\n\n\n\n\n")
+        words = (f"And {client_name}'s body fat has increased since last time "
+                 f"{emojize(':face_screaming_in_fear:')}\n"
+                 f"With a {new_body_fat - old_body_fat} % more body fat, "
+                 f"some changes need to occur.\n\n\n\n\n")
     else:
-        print(f"And {client_name}'s body fat has stayed the same, "
-              f"so maybe we should consider tweaking up a bit the program "
-              f"{emojize(':face_with_monocle:')}\n\n\n\n\n")
+        words = (f"And {client_name}'s body fat has stayed the same, "
+                 f"so maybe we should consider tweaking up a bit the program "
+                 f"{emojize(':face_with_monocle:')}\n\n\n\n\n")
+    typing_effect(words)
 
 
 def check_progress():
@@ -714,8 +733,10 @@ def check_progress():
             if not client_row:
                 continue
             else:
-                print("\nClient exists in records!\n")
-                words = ("Getting the latest weight and " 
+                print(f"\nGreat! {client_name.capitalize()} is "
+                      f"in your records.")
+                sleep(0.5)
+                words = ("\nGetting the latest weight and " 
                          "body fat registered...\n\n")
                 typing_effect(words)
                 progress_bar()
@@ -727,75 +748,76 @@ def check_progress():
                 new_body_fat = int(new_data['body_fat'])
                 goal = get_goal(client_name)
                 
-                words = "\n\nBear with me while I do some math..."
+                words = "\n\nBear with me while I do some math...\n"
                 typing_effect(words)
                 progress_bar()
-                sleep(2)
+                sleep(2.5)
                 os.system('cls' if os.name == 'nt' else 'clear')
                 client_capitalized = client_name.capitalize()
                 if 'lose' in goal:
                     if old_weight > new_weight:
-                        print(f"\n\nWell done! \n"
-                              f"{client_capitalized} original goal was to\n"
-                              f"{goal} and based on the new data insterted we"
-                              f"\n can establish a {old_weight - new_weight}" 
-                              f" kg\nweight loss {emojize(':flexed_biceps:')}"
-                              f"\n\n\n")
+                        words = (f"\n\nWell done! \n"
+                                 f"{client_capitalized} original goal was to\n"
+                                 f"{goal} and based on the new data insterted we"
+                                 f"\n can establish a {old_weight - new_weight}" 
+                                 f" kg\nweight loss {emojize(':flexed_biceps:')}"
+                                 f"\n\n\n")
                     elif old_weight < new_weight:
-                        print(f"\n\nSomething needs to be changed.\n"
-                              f"{client_capitalized} wants to {goal} but based"
-                              f"\non the new insterted weight there's been a\n"
-                              f"weight gain of {new_weight - old_weight} kg"
-                              f" {emojize(':frowning_face:')}\n\n\n")
+                        words = (f"\n\nSomething needs to be changed.\n"
+                                 f"{client_capitalized} wants to {goal} but based"
+                                 f"\non the new insterted weight there's been a\n"
+                                 f"weight gain of {new_weight - old_weight} kg"
+                                 f" {emojize(':frowning_face:')}\n\n\n")
                     else:
-                        print(f"\n\nWe need to work harder!\n"
-                              f"{client_capitalized}'s weight doesn't seem\n"
-                              f"to want to change!{emojize(':confused_face:')}"
-                              f"\n\n\n")
+                        words = (f"\n\nWe need to work harder!\n"
+                                 f"{client_capitalized}'s weight doesn't seem\n"
+                                 f"to want to change!{emojize(':confused_face:')}"
+                                 f"\n\n\n")
                     break
                 elif 'gain' in goal:
                     if old_weight > new_weight:
-                        print(f"\n\nSomething needs to be changed. "
-                              f"{client_capitalized} wants to {goal} but based"
-                              f" on the new insterted weight there's been "
-                              f"a weightloss of {old_weight - new_weight} kg."
-                              f" {emojize(':frowning_face:')}\n\n\n")
+                        words = (f"\n\nSomething needs to be changed. "
+                                 f"{client_capitalized} wants to {goal} but based"
+                                 f" on the new insterted weight there's been "
+                                 f"a weightloss of {old_weight - new_weight} kg."
+                                 f" {emojize(':frowning_face:')}\n\n\n")
                     elif old_weight < new_weight:
-                        print(f"\n\nWell done! \n"
-                              f"{client_capitalized} original goal was to "
-                              f"{goal} and based on the new data insterted "
-                              f"we can establish a {new_weight - old_weight} "
-                              f"kg weight gain {emojize(':flexed_biceps:')}"
-                              f"\n\n\n")
+                        words = (f"\n\nWell done! \n"
+                                 f"{client_capitalized} original goal was to "
+                                 f"{goal} and based on the new data insterted "
+                                 f"we can establish a {new_weight - old_weight} "
+                                 f"kg weight gain {emojize(':flexed_biceps:')}"
+                                 f"\n\n\n")
                     else:
-                        print(f"\n\nWe need to work harder!"
-                              f"{client_capitalized}'s weight doesn't seem to "
-                              f"want to change! {emojize(':confused_face:')}"
-                              f"\n\n\n")
+                        words = (f"\n\nWe need to work harder!"
+                                 f"{client_capitalized}'s weight doesn't seem to "
+                                 f"want to change! {emojize(':confused_face:')}"
+                                 f"\n\n\n")
                     break
                 else:
                     if old_weight > new_weight:
-                        print(f"\n\nSomething needs to be changed.\n"
-                              f"{client_capitalized} wants to {goal} but based"
-                              f" on the new insterted weight there's been a "
-                              f"weight loss of {old_weight - new_weight} kg."
-                              f" {emojize(':frowning_face:')}\n\n\n")
+                        words = (f"\n\nSomething needs to be changed.\n"
+                                 f"{client_capitalized} wants to {goal} but based"
+                                 f" on the new insterted weight there's been a "
+                                 f"weight loss of {old_weight - new_weight} kg."
+                                 f" {emojize(':frowning_face:')}\n\n\n")
                     elif old_weight < new_weight:
-                        print(f"\n\nSomething needs to be changed.\n"
-                              f"{client_capitalized} wants to {goal} but based"
-                              f" on the new insterted weight there's been "
-                              f"a weight gain of {new_weight - old_weight} kg."
-                              f" {emojize(':frowning_face:')}\n\n\n")
+                        words = (f"\n\nSomething needs to be changed.\n"
+                                 f"{client_capitalized} wants to {goal} but based"
+                                 f" on the new insterted weight there's been "
+                                 f"a weight gain of {new_weight - old_weight} kg."
+                                 f" {emojize(':frowning_face:')}\n\n\n")
                     else:
-                        print(f"\n\nWell done!\n"
-                              f"{client_capitalized} original goal was to "
-                              f"{goal} and at today it has stayed the same!"
-                              f"{emojize(':flexed_biceps:')}\n\n\n")
+                        words = (f"\n\nWell done!\n"
+                                 f"{client_capitalized} original goal was to "
+                                 f"{goal} and at today it has stayed the same!"
+                                 f"{emojize(':flexed_biceps:')}\n\n\n")
                     break
-
+    typing_effect(words)
     check_body_fat_improvement(client_capitalized, old_body_fat, new_body_fat)
     update_clients_progress(client_name, new_weight, new_body_fat)
-    print("What do you want to do next?\n\n")
+    sleep(2)
+    user_done()
     next_task()
 
 
@@ -830,8 +852,9 @@ def delete_client():
             continue
         else:
             print(f"\n\n{client_to_delete.capitalize()} "
-                  f"has been successfully removed!\n")
+                  f"has been successfully removed!\n")     
             sleep(3)
+            os.system('cls' if os.name == 'nt' else 'clear')
             print("\n\nWhat do you want to do next?\n\n")
             next_task()
 
