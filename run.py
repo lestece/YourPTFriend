@@ -252,7 +252,6 @@ def body_fat_validation(body_fat):
     """
     # Checks that the inputted body fat % is not an empty string
     if is_empty_string(body_fat):
-        print("\nPlease insert client's body fat %.")
         return False
     # Makes sure the insterted body fat percentage is a number
     elif not body_fat.isnumeric():
@@ -594,6 +593,7 @@ def check_new_client_data(client_data):
     typing_effect(words)
 
     while True:
+        sleep(1)
         correct = input("Does all of the data look correct? (y/n): ")
         sleep(0.5)
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -623,7 +623,10 @@ def check_new_client_data(client_data):
             print("Please reinstert the new client data!")
             take_client_data()
         else:
-            print("Please answer with 'y' or 'n'.")
+            words = ("\nPlease answer with 'y' or 'n'.\n\n")
+            typing_effect(words)
+            sleep(1.2)
+            print(f"{client_data.client_description()}")
             continue
 
 
