@@ -428,7 +428,8 @@ def take_client_data():
             (activity.upper() != 'VA') and
             (activity.upper() != 'EA')
              ):
-            words = (f"\n'{activity}' is not an option!")
+            words = (f"\n'{activity}' is not an option!\n"
+                     f"\n'Please insert client's activity level.\n\n")
             typing_effect(words)
             sleep(1)
             continue
