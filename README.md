@@ -161,9 +161,6 @@ Possible future improvements for the program would be:
 - Improving the data validation when adding a new client, for example comparing the weight and height inserted to check if they are realistic?possible.
 ---
 
-
-
-
 ## 6. TESTING
 
 ## 7. TECHNOLOGIES USED
