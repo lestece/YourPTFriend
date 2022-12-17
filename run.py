@@ -217,7 +217,8 @@ def is_empty_string(data):
             raise ValueError("You need to provide "
                              "the requested information!\n")
     except ValueError as e:
-        print(f"\nYou didn't answer. {e}")
+        words = (f"\nYou didn't answer. {e}")
+        typing_effect(words)
         return True
     return False
 
@@ -396,10 +397,13 @@ def take_client_data():
             continue
 
     # Input activity level
-    sleep(0.2)
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print("Please choose one of the following activity levels.\n")
+    # sleep(0.2)
+    # os.system('cls' if os.name == 'nt' else 'clear')
+    # print("Please choose one of the following activity levels.\n")
     while True:
+        sleep(0.2)
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("Please choose one of the following activity levels.\n")
         click.echo("- Sedentary: " +
                    click.style("SED\n", fg="magenta", bold=True) +
                    "- Lightly active: " +
@@ -415,10 +419,6 @@ def take_client_data():
         # Checks that the inputted activity level is not blank space
         if is_empty_string(activity):
             sleep(2)
-            os.system('cls' if os.name == 'nt' else 'clear')
-            words = ("Please insert client's activity level.\n\n")
-            typing_effect(words)
-            sleep(0.3)
             continue
         # Checks that the inserted activity level is valid
         elif (
@@ -429,7 +429,7 @@ def take_client_data():
             (activity.upper() != 'EA')
              ):
             words = (f"\n'{activity}' is not an option!\n"
-                     f"\n'Please insert client's activity level.\n\n")
+                     f"\nPlease insert client's activity level.\n\n")
             typing_effect(words)
             sleep(1)
             continue
@@ -468,7 +468,10 @@ def take_client_data():
         goal_capitalize = goal_letter.upper()
         # Checks that the inputted goal is not an empty string
         if is_empty_string(goal_capitalize):
-            print("\nPlease insert client's goal!")
+            sleep(2)
+            os.system('cls' if os.name == 'nt' else 'clear')
+            words = ("\nPlease insert client's goal!\n\n")
+            typing_effect(words)
             continue
         # Checks that the inserted goal is one of the available options
         elif (
@@ -476,8 +479,12 @@ def take_client_data():
               (goal_capitalize != 'B') and
               (goal_capitalize != 'C')
         ):
+            print("\nPlease choose one of the available options.\n")
+            sleep(2.2)
             os.system('cls' if os.name == 'nt' else 'clear')
-            print("\nPlease choose one of the available options.")
+            words = ("\nInsert client's goal:\n\n")
+            typing_effect(words)
+            sleep(1)
             continue
         else:
             goal = ""
