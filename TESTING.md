@@ -10,13 +10,15 @@
         - [Task 3 option tested](TESTING.md/#task-3-option-tested)
         - [Task 4 option tested](TESTING.md/#task-4-option-tested)
     - [Add new client](TESTING.md/#external-links)
-    - [Check client's progress](TESTING.md/#emailjs)
-    - [Delete client](TESTING.md/#quiz--quiz-result)
-    - [Exit program](TESTING.md/#quiz--quiz-result)
-    - [Daily calorie intake functions](TESTING.md/#quiz--quiz-result)
+        - [Inputs validation](TESTING.md/#inputs-validation)
+        - [Client's data confirmation](TESTING.md/#clients-data-confirmation)
+        - [Formulas](TESTING.md/#formulas)
+    - [Check client's progress](TESTING.md/#check-clients-progress)
+    - [Delete client](TESTING.md/#delete-client-from-records)
+    - [Exit program](TESTING.md/#exit-the-program)
+    - [User control 'Enter'](TESTING.md/#user-control-enter)
 2) [Code Validation](TESTING.md/#2-code-validation)
 3) [Bugs and fixes](TESTING.md/#3-bugs-and-fixes)
-3) [User testing](TESTING.md/#4-user-testing)
 
 [⬅ Back to the README.md file](README.md)
 - - - 
@@ -33,7 +35,7 @@ If option 1(_add a new client_) is chosen, the program correctly calls the _take
 ![Task one tested](images/testing-images/task-one-option-tested.gif)
 
 #### - __Task 2 option tested__
-Option 2(_check a client's progress) selection correctly triggers the _check_progress()_ function.
+Option 2(_check a client's progress_) selection correctly triggers the _check_progress()_ function.
 ![Task two tested](images/testing-images/task-two-option-tested.gif)
 
 #### - __Task 3 option tested__
@@ -43,6 +45,8 @@ The _delete_client()_ function to delete a client from the records is correctly 
 #### - __Task 4 option tested__
 When option 4 is chosen, the program correctly closes by giving the user goobye.
 ![Task four tested](images/testing-images/task-four-option-tested.gif)
+
+[Back to top ↑](TESTING.md/#yourptfriend-testing)
 - - -
 ### ADD NEW CLIENT
 
@@ -106,7 +110,7 @@ All of the functions containing the formulas to calculate TDEE and reach the dai
 ![Clients examples](images/testing-images/clients-example-testing.png)
 
 
-##### __tdee_formulas file__
+##### __TDEE_FORMULAS FILE__
 If manually calculating the TDEE  using the formulas contained in _tdee_formulas.py_ file, the TDEE results obtained in the _clients initial conditions_ worksheet (screenshot above) prove to be accurate. 
 
 1) __Rick__
@@ -121,6 +125,7 @@ TEA = (2088.6904 * 1.2) - 2088.6904 = 417.73808
 
 __TDEE__ = 2088.6904 + 208.86904 + 417.73808 = _2715.29_(__2715__)
 
+
 2) __Sarah__
 
 LBM = 0.252 * 52 + 0.473 * 158 - 48.3 = 39.538  
@@ -132,6 +137,7 @@ TEF = 1224.0208 * 0.1 = 122.40208
 TEA = (1224.0208 * 1.725) - 1224.0208 = 887.41508  
 
 __TDEE__ = 1224.0208 + 122.40208 + 887.41508 = _2233.83_(__2234__)
+
 
 3) __Jenna__
 
@@ -145,11 +151,14 @@ TEA = (1337.0752 * 1.375) - 1337.0752 = 501.4032
 
 __TDEE__ = 1337.0752 + 133.70752 + 501.4032 = _1972.18_(__1972__)
 
+- - - 
+
 ##### __Daily calorie intake formulas__
 To test the daily calorie intake function and related ones, I set a different availability parameter for each client in the examples.
 
 1) Rick
 ![Rick's daily calorie intake](images/testing-images/rick-testing-example.png)
+
 Rick's availability to workouts was set to 2 days per week.
 
 Weekly kcal burnt from workouts = 300 * 2 days x week = 600 kcal
@@ -158,8 +167,10 @@ Daily kcal burnt from workout = 600kcal / 7 = 85.71
 
 __Daily calorie intake__ = 2715 + 85.71 - 500 = 2300.71 (__2301__)
 
+
 2) Sarah
 ![Sarah's daily calorie intake](images/testing-images/sarah-testing-example.png)
+
 Sarah's availability to workouts was set to 4 days per week.
 
 Weekly kcal burnt from workouts = 300 * 4 days x week = 1200 kcal
@@ -168,8 +179,10 @@ Daily kcal burnt from workout = 1200kcal / 7 = 171.42
 
 __Daily calorie intake__ = 2234 + 171.42 = 2405.42 (__2405__)
 
+
 2) Jenna
 ![Jenna's daily calorie intake](images/testing-images/jenna-testing-example.png)
+
 Jenna's availability to workouts was set to 3 days per week.
 
 Weekly kcal burnt from workouts = 300 * 3 days x week = 900 kcal
@@ -177,7 +190,10 @@ Weekly kcal burnt from workouts = 300 * 3 days x week = 900 kcal
 Daily kcal burnt from workout = 900kcal / 7 = 128.57
 
 __Daily calorie intake__ = 1972 + 128.57 + 500 = 2600.57 (__2601__)
+
+[Back to top ↑](TESTING.md/#yourptfriend-testing)
 - - -
+
 ### CHECK CLIENT'S PROGRESS
 
 #### - __Existing client's name__
@@ -194,19 +210,24 @@ For testing the accuracy of the client's progress result, I used the same fictio
 ![Client progress examples testing](images/testing-images/progress-results-testing.png)
 
 1) Rick
+
 Rick's new weight and body fat have been inputted so that the progress results would return a __negative/fail response__:
 Considering his initial goal was to lose weight and latest registered weight and body fat were respectively 120kg and 35%, the new data provided have been 122kg and 36%. 
 ![Client progress fail testing](images/testing-images/client-progress-fail-testing.png)
 
 2) Sarah
+
 Sarah's new new data was to test a __successful response__:
 Being the initial goal to maintain weight, I used the same latest recorded data: 52kg and 16%. 
 ![Client progress success testing](images/testing-images/client-progress-success-testing.png)
 
 3) Jenna
+
 Jenna has been used to test a __neutral/no change occured response__:
 To gain weight was the initial goal, so I used the same latest recorded data of 54kg and 12%. 
 ![Client progress neutral testing](images/testing-images/client-progress-neutral-testing.png)
+
+[Back to top ↑](TESTING.md/#yourptfriend-testing)
 
 - - - 
 ### DELETE CLIENT FROM RECORDS
@@ -223,3 +244,54 @@ When the user selects the fourth option to exit, the program successfully displa
 !['Enter' user control](images/testing-images/enter-validation-and-next-task.gif)
 
 The 'Enter' input to give some control to the user after the outputs required from each task have been displayed, is correctly validated to only accept the return key(empty string) and successfully calls the _next_task()_ function.
+
+- - - 
+## 2) CODE VALIDATION
+All the .py files have been passed through the [CI Python Linter Validator](https://pep8ci.herokuapp.com/#) and __no errors__ were returned.
+
+![Python validation main](images/testing-images/ci-python-linter-main.png)
+
+![Python validation tdee formulas](images/testing-images/ci-python-linter-tdee-formulas.png)
+
+[Back to top ↑](TESTING.md/#yourptfriend-testing)
+- - -
+## 3) BUGS AND FIXES
+
+### - CLIENT AVAILABILITY INPUT BUG
+![Availability bug](images/testing-images/workouts-per-week-bug.gif)
+While testing all of the inputs when adding a new client to the records and their validations, a bug was found in the client's availability to workouts per week: a __value error__ was triggered when trying to input a letter to check the validation, because of the statement to convert the string into an integer.
+Fixed by adding an extra validation to that input to check if the inserted value was not a number and, in that case, prompt the user to a correct value insertion.
+
+### - ACTIVITY LEVEL BUG 
+While testing the activity level validations, I noticed that the message to the user to notify the invalidity of the inputted empty string was showing up for only milliseconds (and it was barely interceptable). The issue was coming from the _'clear screen' method set too soon at the start of the While loop_.
+Fixed by removing the clearing screen from the while loop and adding it instead, together with some added time, at the beginning of the if statement validating the empty string.
+![Activity level bug](images/testing-images/activity-level-bug-1.png)
+
+### - CLIENT'S GOAL INPUT BUG 
+Also when testing the validations for the client's goal input, the same error regarding the invalid inputted value message disappearing too soon was noticed:
+![Client's goal input bug](images/testing-images/client-goal-input-bug.gif)
+
+Fixed by adding more time to the message showing.
+
+### - CLIENT DATA CONFIRMATION VALIDATION BUG
+When checking the validity of the inputted value regarding the confirmation of the new client's data, I noticed that the input request was repeating itself after the screen had been cleaned and the user had no chance to check the client description containing the inserted data anymore:
+![Client data confirmation validation bug](images/testing-images/new-client-conf-validation-bug.png)
+
+The issue has been resolved by recalling the client description from the client class before continuing the loop:
+![Client data confirmation validation fix](images/testing-images/client-data-confirmation-bug-fix.png)
+
+### - TDEE FORMULA BUG
+In the process of testing the reliability of the formulas to calculate the client's TDEE, I found that the TDEE reported in the clients init conditions worksheet weren't right. 
+The problem only seemed to happen with female clients, because the male client's result was right:
+![TDEE bug](images/testing-images/tdee-bug.png)
+
+Trying to undertand where the issue was coming from, I calculated the female clients' TDEE using the male formula for calculating the LBM: this time the result obtained was the same as the one reported in the worksheet.
+
+It was then clear that the problem was coming from the calculate_lbm() function and, particularly, from the "gender" argument passed into the function. Going back to the run.py file and checking the value of the gender variable, I discovered that it didn't match with the value contained in the if statement condition that was checking if the client was female ('f'):
+![Gender bug](images/testing-images/gender-bug.png)
+
+Easily fixed by changing the if statement condition with the correct value of the passed argument:
+![Gender bug fix](images/testing-images/gender-bug-fix.gif)
+
+
+[Back to top ↑](TESTING.md/#yourptfriend-testing)
