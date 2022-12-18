@@ -511,21 +511,22 @@ def calculate_weekly_kcal_burnt():
     os.system('cls' if os.name == 'nt' else 'clear')
     words = ("How many days per week can the client train?\n\n")
     typing_effect(words)
-    availability = int(input("Please insert a number between 1 - 5: \n"))
     # Client's availability input validation
     while True:
+        sleep(1)
+        availability = input("\nPlease insert a number between 1 - 5: \n")
         # Checks that the insterted value is not an empty string
         if is_empty_string(availability):
-            print("Please type an answer.")
             continue
-        elif (availability < 1) or (availability > 5):
-            print("Please insert a valid number of times per week.")
+        elif not availability.isnumeric():
+            continue
+        elif (int(availability) < 1) or (int(availability) > 5):
             continue
         else:
             # Calculates an avg of how many kcal per week
             # are burnt from workouts
             kcal_per_workout = 300
-            weekly_kcal_burnt = kcal_per_workout * availability
+            weekly_kcal_burnt = kcal_per_workout * int(availability)
             break
 
     return weekly_kcal_burnt
