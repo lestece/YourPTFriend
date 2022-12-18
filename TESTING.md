@@ -145,6 +145,38 @@ TEA = (1337.0752 * 1.375) - 1337.0752 = 501.4032
 
 __TDEE__ = 1337.0752 + 133.70752 + 501.4032 = _1972.18_(__1972__)
 
+##### __Daily calorie intake formulas__
+To test the daily calorie intake function and related ones, I set a different availability parameter for each client in the examples.
+
+1) Rick
+![Rick's daily calorie intake](images/testing-images/rick-testing-example.png)
+Rick's availability to workouts was set to 2 days per week.
+
+Weekly kcal burnt from workouts = 300 * 2 days x week = 600 kcal
+
+Daily kcal burnt from workout = 600kcal / 7 = 85.71
+
+__Daily calorie intake__ = 2715 + 85.71 - 500 = 2300.71 (__2301__)
+
+2) Sarah
+![Sarah's daily calorie intake](images/testing-images/sarah-testing-example.png)
+Sarah's availability to workouts was set to 4 days per week.
+
+Weekly kcal burnt from workouts = 300 * 4 days x week = 1200 kcal
+
+Daily kcal burnt from workout = 1200kcal / 7 = 171.42
+
+__Daily calorie intake__ = 2234 + 171.42 = 2405.42 (__2405__)
+
+2) Jenna
+![Jenna's daily calorie intake](images/testing-images/jenna-testing-example.png)
+Jenna's availability to workouts was set to 3 days per week.
+
+Weekly kcal burnt from workouts = 300 * 3 days x week = 900 kcal
+
+Daily kcal burnt from workout = 900kcal / 7 = 128.57
+
+__Daily calorie intake__ = 1972 + 128.57 + 500 = 2600.57 (__2601__)
 - - -
 ### CHECK CLIENT'S PROGRESS
 
