@@ -780,7 +780,7 @@ def check_progress():
                         words = (f"\n\nWell done! \n"
                                  f"{client_capitalized} original goal was to\n"
                                  f"{goal} and based on the new data insterted "
-                                 f"we\n can establish a "
+                                 f"we\ncan establish a "
                                  f"{old_weight - new_weight} kg\nweight loss "
                                  f"{emojize(':flexed_biceps:')}\n\n\n")
                     elif old_weight < new_weight:
