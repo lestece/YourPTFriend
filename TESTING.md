@@ -208,3 +208,18 @@ Jenna has been used to test a __neutral/no change occured response__:
 To gain weight was the initial goal, so I used the same latest recorded data of 54kg and 12%. 
 ![Client progress neutral testing](images/testing-images/client-progress-neutral-testing.png)
 
+- - - 
+### DELETE CLIENT FROM RECORDS
+![Delete client testing](images/testing-images/delete-client-testing.gif)
+The third task choice option (for deleting a client from the records) has been thoroughly tested. The user needs to insert the name of a client that exists in the records and, upon correct insertion of a valid one, the client is successfully removed from the worksheets.
+
+- - - 
+### EXIT THE PROGRAM
+![Exit the program testing](images/testing-images/exit-program-testing.gif)
+When the user selects the fourth option to exit, the program successfully displays the goodbye.
+- - -
+
+### USER CONTROL 'ENTER'
+!['Enter' user control](images/testing-images/enter-validation-and-next-task.gif)
+
+The 'Enter' input to give some control to the user after the outputs required from each task have been displayed, is correctly validated to only accept the return key(empty string) and successfully calls the _next_task()_ function.

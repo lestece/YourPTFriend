@@ -1,9 +1,9 @@
 # Import packages
 import os
 from time import sleep
+import sys
 # https://medium.com/analytics-vidhya/how-to-print-emojis-using-python-2e4f93443f7e
 from emoji import emojize
-import sys
 # https://mauricebrg.com/article/2020/08/cli_text_styling_progress_bars_and_prompts_with_click.html
 import click
 import gspread
@@ -822,8 +822,8 @@ def check_progress():
                     elif old_weight < new_weight:
                         words = (f"\n\nWell done! \n"
                                  f"{client_capitalized} original goal was to "
-                                 f"{goal} and based on the new data insterted\n"
-                                 f"we can establish a "
+                                 f"{goal} and based on the new data insterted"
+                                 f"\nwe can establish a "
                                  f"{new_weight - old_weight} kg weight gain "
                                  f"{emojize(':flexed_biceps:')}\n\n\n")
                     else:
@@ -850,8 +850,8 @@ def check_progress():
                     else:
                         words = (f"\n\nWell done!\n"
                                  f"{client_capitalized} original goal was to "
-                                 f"{goal} and at today\nit has stayed the same!"
-                                 f"{emojize(':flexed_biceps:')}\n\n\n")
+                                 f"{goal} and at today\nit has stayed the "
+                                 f"same! {emojize(':flexed_biceps:')}\n\n\n")
                     break
     typing_effect(words)
     check_body_fat_improvement(client_capitalized, old_body_fat, new_body_fat)

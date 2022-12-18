@@ -6,7 +6,7 @@ def calculate_lbm(gender, weight, height):
         lbm = 0.252 * weight + 0.473 * height - 48.3
     else:
         lbm = 0.407 * weight + 0.267 * height - 19.2
-    
+
     return lbm
 
 
@@ -27,14 +27,14 @@ def calculate_tef(bmr):
     It multiplies the BMR by 0.1
     """
     tef = bmr * 0.1
-    
+
     return tef
 
 
 def calculate_tea(bmr, activity_level):
     """
     Calculates the Thermic Effect of Activity.
-    It first translates the activity level 
+    It first translates the activity level
     to a specific activity factor.
     Then it multiplies this last one for the BMR
     """
@@ -50,7 +50,7 @@ def calculate_tea(bmr, activity_level):
         activity_factor = 1.725
     else:
         activity_factor = 1.9
-    
+
     tea = (bmr * activity_factor) - bmr
 
     return tea
