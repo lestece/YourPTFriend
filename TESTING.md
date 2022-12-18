@@ -188,4 +188,23 @@ When checking a client's progress, the input that asks for the client's name cor
 I tested that also the new body weight and body fat inputs validation is working. 
 ![New body weight and fat validation](images/testing-images/client-new-weight-and-body-fat-testing.gif)
 
+#### - Progress results
+
+For testing the accuracy of the client's progress result, I used the same fictional clients used above for the daily calorie intake functions.
+![Client progress examples testing](images/testing-images/progress-results-testing.png)
+
+1) Rick
+Rick's new weight and body fat have been inputted so that the progress results would return a __negative/fail response__:
+Considering his initial goal was to lose weight and latest registered weight and body fat were respectively 120kg and 35%, the new data provided have been 122kg and 36%. 
+![Client progress fail testing](images/testing-images/client-progress-fail-testing.png)
+
+2) Sarah
+Sarah's new new data was to test a __successful response__:
+Being the initial goal to maintain weight, I used the same latest recorded data: 52kg and 16%. 
+![Client progress success testing](images/testing-images/client-progress-success-testing.png)
+
+3) Jenna
+Jenna has been used to test a __neutral/no change occured response__:
+To gain weight was the initial goal, so I used the same latest recorded data of 54kg and 12%. 
+![Client progress neutral testing](images/testing-images/client-progress-neutral-testing.png)
 

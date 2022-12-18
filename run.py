@@ -814,22 +814,22 @@ def check_progress():
                 elif 'gain' in goal:
                     if old_weight > new_weight:
                         words = (f"\n\nSomething needs to be changed. "
-                                 f"{client_capitalized} wants to {goal} but "
+                                 f"{client_capitalized} wants to {goal}\nbut "
                                  f"based on the new insterted weight "
-                                 f"there's been a weightloss of "
+                                 f"there's been a weight loss of "
                                  f"{old_weight - new_weight} kg."
                                  f" {emojize(':frowning_face:')}\n\n\n")
                     elif old_weight < new_weight:
                         words = (f"\n\nWell done! \n"
                                  f"{client_capitalized} original goal was to "
-                                 f"{goal} and based on the new data insterted "
+                                 f"{goal} and based on the new data insterted\n"
                                  f"we can establish a "
                                  f"{new_weight - old_weight} kg weight gain "
                                  f"{emojize(':flexed_biceps:')}\n\n\n")
                     else:
-                        words = (f"\n\nWe need to work harder!"
+                        words = (f"\n\nWe need to work harder!\n"
                                  f"{client_capitalized}'s weight doesn't seem "
-                                 f"towant to change! "
+                                 f"to want to change! "
                                  f"{emojize(':confused_face:')}\n\n\n")
                     break
                 else:
@@ -843,14 +843,14 @@ def check_progress():
                     elif old_weight < new_weight:
                         words = (f"\n\nSomething needs to be changed.\n"
                                  f"{client_capitalized} wants to {goal} but "
-                                 f"based on the new insterted weight "
+                                 f"based on the new insterted weight\n"
                                  f"there's been a weight gain of "
                                  f"{new_weight - old_weight} kg."
                                  f" {emojize(':frowning_face:')}\n\n\n")
                     else:
                         words = (f"\n\nWell done!\n"
                                  f"{client_capitalized} original goal was to "
-                                 f"{goal} and at today it has stayed the same!"
+                                 f"{goal} and at today\nit has stayed the same!"
                                  f"{emojize(':flexed_biceps:')}\n\n\n")
                     break
     typing_effect(words)
