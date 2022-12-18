@@ -530,7 +530,7 @@ def calculate_weekly_kcal_burnt():
     while True:
         sleep(1)
         availability = input("\nPlease insert a number between 1 - 5: \n")
-        # Checks that the insterted value is not an empty string
+        # Checks that the inserted value is not an empty string
         if is_empty_string(availability):
             continue
         elif not availability.isnumeric():
