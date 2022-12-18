@@ -223,6 +223,15 @@ def is_empty_string(data):
     return False
 
 
+def contains_special_char(string):
+    """
+    Checks if a string contains special characters
+    """
+    for char in string:
+        if not char.isalnum():
+            return True
+
+
 def weight_validation(weight):
     """
     Validates the inputted weight
@@ -311,7 +320,13 @@ def take_client_data():
         elif name.isnumeric():
             print("\nClient's name cannot be a number.\n"
                   "\nPlease insert a valid one.\n")
-
+            continue
+        elif contains_special_char(name):
+            print("\nPlease insert a valid name.\n")
+            continue
+        elif len(name) < 3:
+            print("\nThe name needs to be at least 3 characters long.\n")
+            continue
         # Checks if the name is already in the records
         elif clients_init_conditions.find(name.capitalize()):
             words = ("\nThere's already another client registered with "
