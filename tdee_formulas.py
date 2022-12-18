@@ -2,7 +2,7 @@ def calculate_lbm(gender, weight, height):
     """
     Calculates the Lean Body Mass based on the Boer formula
     """
-    if gender.lower() == 'f':
+    if gender.lower() == 'female':
         lbm = 0.252 * weight + 0.473 * height - 48.3
     else:
         lbm = 0.407 * weight + 0.267 * height - 19.2
