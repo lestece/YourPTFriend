@@ -159,13 +159,39 @@ Possible future improvements for the program would be:
 
 - Expanding the client's possible goal (improving aerobic activity, endurance, preparing for competition etc.) and outputting a guidance of the training plan that the PT could use to build the single workouts
 
-- Improving the data validation when adding a new client, for example comparing the weight and height inserted to check if they are realistic?possible.
+- Improving the data validation when adding a new client, for example comparing the weight and height inserted to check if they are realistic/possible.
 ---
 
 ## 6. TESTING
-All of the information regarding the testing can be found [here](TESTING.md).
 
+All of the information regarding the testing can be found [here](TESTING.md).
+- - -
 ## 7. TECHNOLOGIES USED
+
+### Main languages used:
+
+__Python__ is the programming language used to create this project
+
+### Python Modules and APIs:
+
+- [os](https://docs.python.org/3/library/os.html) : used to clear the terminal to improve user experience
+- __sleep__ function from the [time](https://docs.python.org/3/library/time.html) module: to suspend execution for a specific amount of time and improve ux
+- [sys](https://docs.python.org/3/library/sys.html): for implementing the typing effect used for the display of some data to the user
+- __emojize__ from [emoji](https://pypi.org/project/emoji/): used for being able to display the emojis used in the app
+- [click](https://click.palletsprojects.com/en/8.1.x/): used for implementing the progress bar and changing the foreground color of some key words
+- [gspread](https://docs.gspread.org/en/v5.7.0/): to interact with the file specifically created on Google Sheets for storing clients' data
+- __credentials__ from [oauth2](https://pypi.org/project/python-oauth2/): to get the credentials to access the Google Sheet file 
+
+### Others:
+- [GitPod](https://gitpod.io): used for writing the code for this program, committing and pushing to GitHub.
+- [GitHub](https://github.com/): used for hosting and storing the project.
+- [Heroku](https://www.heroku.com/): used to deploy the project.
+- [Lucidchart](https://www.lucidchart.com/): used for designing the flowchart that represents the logic behind the app
+- [Patorjk](http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20): to create the ASCII art text used in the project
+- [CI Python Linter](https://pep8ci.herokuapp.com/#): to validate the Python code for this program
+- [GifCap (by João Moreno)](https://gifcap.dev/): used for creating the gifs from the screen recordings during the testing process (for the TESTING.md) and for this README file.
+- [Flaticon.com](https://www.flaticon.com/): used for the title bar icon
+- [Icoconverter.com](https://www.icoconverter.com/): used for converting the title bar icon into the .ico format
 
 ## 8. CREDITS
 
