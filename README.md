@@ -190,8 +190,6 @@ __Python__ is the programming language used to create this project
 - [Patorjk](http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20): to create the ASCII art text used in the project
 - [CI Python Linter](https://pep8ci.herokuapp.com/#): to validate the Python code for this program
 - [GifCap (by João Moreno)](https://gifcap.dev/): used for creating the gifs from the screen recordings during the testing process (for the TESTING.md) and for this README file.
-- [Flaticon.com](https://www.flaticon.com/): used for the title bar icon
-- [Icoconverter.com](https://www.icoconverter.com/): used for converting the title bar icon into the .ico format
 
 ## 8. CREDITS
 
@@ -204,4 +202,34 @@ __Python__ is the programming language used to create this project
 
 ## 9. DEPLOYMENT
 
+This program has been deployed to [Heroku](https://www.heroku.com/) following these steps:
+
+1) Log in to your personal account and, after clicking on the __New__ button in the top-right corner of the page, select the __Create new app__ option from the dropdown menu.
+
+2) Insert an __app name__ and choose a __region__ (Europe or United States) and click on the __Create app__ button.
+
+3) From the __Settings__, select __"Config Vars"__
+
+4) Add a new Config Var with KEY of __PORT__ and VALUE of __8000__
+
+5) Add another Config Var with KEY of __CREDS__ and as VALUE copy and paste the __credentials__ for using the Google Cloud API that are kept safe (and not pushed to Github) in the _creds.json_ file
+
+6) From the _"Buildpacks"_, click on __Add buildpack__ and select both __Python__ and __Nodejs__, making sure that they appear in that order after selection.
+
+7) Exit the Settings and go to the __Deploy__ section
+
+8) From the _"Deployment method"_, select __Github/ connect to GitHub__
+
+9) Underneath it, in the "connect to Github" section, make sure your __github username__ is correct and insert the repository name of the project you want to deploy in the search bar next to it. Click "Search" and select the __Connect__ button that appears next to the found repository.
+
+10) Under _"Automatic deploys"_, select __Enable automatic deploys__
+
+11) Under _"Manual Deploy"_, make sure the __main branch__ is selected and click on __Deploy branch__
+
+12) Your app is successfully deployed at the address that opens up after clicking on the __Open App__ button at the top of the page
+
 ## 10. ACKNOWLEDGEMENTS
+
+This program was built as the _Project Portfolio 3_ for the _Diploma in Full Stack Software Development_ with [Code Institute](https://codeinstitute.net/).
+
+A special thanks goes to my family and friends for their invaluable support and their availability to test my projects as users; and to my mentor Seun for her vital and constructive feedback and guidance.
