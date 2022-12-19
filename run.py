@@ -714,9 +714,6 @@ def get_goal(client_name):
     Gets client's goal from the
     clients initial conditions worksheet
     """
-    # clients = clients_init_conditions.col_values(1)
-    # clients_lower = clients.lower()
-    # print(clients)
     client_find = clients_init_conditions.find(client_name.capitalize())
     client_row = clients_init_conditions.row_values(client_find.row)
     for data in client_row:

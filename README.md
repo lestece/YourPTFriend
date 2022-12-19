@@ -195,6 +195,13 @@ __Python__ is the programming language used to create this project
 
 ## 8. CREDITS
 
+- Instructions on how to implement the emojis used when displaying the app task options and the client progress results where taken from [here](https://medium.com/analytics-vidhya/how-to-print-emojis-using-python-2e4f93443f7e)
+- The answers to [this question on StackOverflow](https://stackoverflow.com/questions/20302331/typing-effect-in-python) were used to accomplish the __'typing effect'__ used for improving the user experience
+- [This](https://www.programiz.com/python-programming/time) and [this](https://www.digitalocean.com/community/tutorials/python-time-sleep) guide were followed to implement the improved execution timing in the program to accomplish a better ux
+- Guidance on how to clear the screen using the _os module_ was found [here](https://www.geeksforgeeks.org/clear-screen-python/)
+- The __progress bar__ and __foreground colors and text styling__ were made possible thanks to [this guide](https://mauricebrg.com/article/2020/08/cli_text_styling_progress_bars_and_prompts_with_click.html) 
+- Theinstructions to accomplish getting the latest insertion row position of a client in the client progress worksheet, were found [here](https://stackoverflow.com/questions/529424/traverse-a-list-in-reverse-order-in-python)
+
 ## 9. DEPLOYMENT
 
 ## 10. ACKNOWLEDGEMENTS
