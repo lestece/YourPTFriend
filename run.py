@@ -301,6 +301,30 @@ def age_validation(age):
         return True
 
 
+def height_validation(height):
+    """
+    Validates inputted client's height
+    """
+    # Checks that the inputted height is not blank space
+    if is_empty_string(height):
+        print("\nPlease insert client's height.")
+        return False
+    # Checks that the insterted height is a number
+    elif not height.isnumeric():
+        print("\nInserted height needs to be a number.")
+        return False
+    # Makes sure the height is in cm and not feet
+    # Also checks that the inserted height is realistic
+    # Takes into account the heights of shortest and
+    # tallest people in the world
+    elif (int(height) < 63) or (int(height) > 272):
+        print("\nPlease insert a valid height in cm.\n"
+              "Example: 167")
+        return False
+    else:
+        return True
+
+
 def weight_validation(weight):
     """
     Validates the inputted weight
@@ -324,6 +348,31 @@ def weight_validation(weight):
         return True
 
 
+def activity_validation(activity):
+    """
+    Validates the inputted activity level
+    """
+    # Checks that the inputted activity level is not blank space
+    if is_empty_string(activity):
+        sleep(2)
+        return False
+    # Checks that the inserted activity level is valid
+    elif (
+        (activity.upper() != 'SED') and
+        (activity.upper() != 'LA') and
+        (activity.upper() != 'MA') and
+        (activity.upper() != 'VA') and
+        (activity.upper() != 'EA')
+            ):
+        words = (f"\n'{activity}' is not an option!\n"
+                 f"\nPlease insert client's activity level.\n\n")
+        typing_effect(words)
+        sleep(1)
+        return False
+    else:
+        return True
+
+
 def body_fat_validation(body_fat):
     """
     Validates the inputted body fat
@@ -339,6 +388,34 @@ def body_fat_validation(body_fat):
     # Checks that the inserted body fat percentage is realistic
     elif (int(body_fat) < 5) or (int(body_fat) > 40):
         print("\nPlease insert a correct body fat percentage.")
+        return False
+    else:
+        return True
+
+
+def goal_validation(goal):
+    """
+    Validates client's inputted goal
+    """
+    # Checks that the inputted goal is not an empty string
+    if is_empty_string(goal):
+        sleep(2)
+        os.system('cls' if os.name == 'nt' else 'clear')
+        words = ("\nPlease insert client's goal!\n\n")
+        typing_effect(words)
+        return False
+    # Checks that the inserted goal is one of the available options
+    elif (
+            (goal != 'A') and
+            (goal != 'B') and
+            (goal != 'C')
+    ):
+        print("\nPlease choose one of the available options.\n")
+        sleep(2.2)
+        os.system('cls' if os.name == 'nt' else 'clear')
+        words = ("\nInsert client's goal:\n\n")
+        typing_effect(words)
+        sleep(1)
         return False
     else:
         return True
@@ -413,24 +490,10 @@ def take_client_data():
     while True:
         sleep(0.3)
         height = input("\nHeight(cm): \n")
-        # Checks that the inputted height is not blank space
-        if is_empty_string(height):
-            print("\nPlease insert client's height.")
-            continue
-        # Checks that the insterted height is a number
-        elif not height.isnumeric():
-            print("\nInserted height needs to be a number.")
-            continue
-        # Makes sure the height is in cm and not feet
-        # Also checks that the inserted height is realistic
-        # Takes into account the heights of shortest and
-        # tallest people in the world
-        elif (int(height) < 63) or (int(height) > 272):
-            print("\nPlease insert a valid height in cm.\n"
-                  "Example: 167")
-            continue
-        else:
+        if height_validation(height):
             break
+        else:
+            continue
 
     # Input weight
     while True:
@@ -440,11 +503,8 @@ def take_client_data():
             break
         else:
             continue
-
+    
     # Input activity level
-    # sleep(0.2)
-    # os.system('cls' if os.name == 'nt' else 'clear')
-    # print("Please choose one of the following activity levels.\n")
     while True:
         sleep(0.2)
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -461,24 +521,7 @@ def take_client_data():
                    click.style("EA\n", fg="magenta", bold=True))
 
         activity = input("Activity level: \n")
-        # Checks that the inputted activity level is not blank space
-        if is_empty_string(activity):
-            sleep(2)
-            continue
-        # Checks that the inserted activity level is valid
-        elif (
-            (activity.upper() != 'SED') and
-            (activity.upper() != 'LA') and
-            (activity.upper() != 'MA') and
-            (activity.upper() != 'VA') and
-            (activity.upper() != 'EA')
-             ):
-            words = (f"\n'{activity}' is not an option!\n"
-                     f"\nPlease insert client's activity level.\n\n")
-            typing_effect(words)
-            sleep(1)
-            continue
-        else:
+        if activity_validation(activity):
             if activity.upper() == 'SED':
                 activity_level = 'sedentary'
             elif activity.upper() == 'LA':
@@ -490,6 +533,8 @@ def take_client_data():
             elif activity.upper() == 'EA':
                 activity_level = 'extremely active'
             break
+        else:
+            continue
 
     # Input body fat percentage
     while True:
@@ -511,27 +556,7 @@ def take_client_data():
                    " Weight gain / bulking\n")
         goal_letter = input("Client's goal (A, B or C): ")
         goal_capitalize = goal_letter.upper()
-        # Checks that the inputted goal is not an empty string
-        if is_empty_string(goal_capitalize):
-            sleep(2)
-            os.system('cls' if os.name == 'nt' else 'clear')
-            words = ("\nPlease insert client's goal!\n\n")
-            typing_effect(words)
-            continue
-        # Checks that the inserted goal is one of the available options
-        elif (
-              (goal_capitalize != 'A') and
-              (goal_capitalize != 'B') and
-              (goal_capitalize != 'C')
-        ):
-            print("\nPlease choose one of the available options.\n")
-            sleep(2.2)
-            os.system('cls' if os.name == 'nt' else 'clear')
-            words = ("\nInsert client's goal:\n\n")
-            typing_effect(words)
-            sleep(1)
-            continue
-        else:
+        if goal_validation(goal_capitalize):
             goal = ""
             if goal_capitalize == 'A':
                 goal = 'maintain weight'
@@ -540,6 +565,8 @@ def take_client_data():
             else:
                 goal = 'gain weight'
             break
+        else:
+            continue
 
     tdee = tdee_formulas.calculate_tdee(gender, int(weight), int(height),
                                         activity.upper())
