@@ -53,7 +53,7 @@ class Client:
                 click.style(self.gender, fg="blue", bold=True) +
                 " client, \n" +
                 click.style(self.height, fg="blue", bold=True) +
-                " tall and that weights " +
+                " cm tall and that weights " +
                 click.style(self.weight, fg="blue", bold=True) +
                 " kg.\nThe client's activity level is " +
                 click.style(self.activity, fg="blue", bold=True) +
@@ -201,9 +201,10 @@ def start_program():
              f"1. Add a new client to your client's records "
              f"{emojize(':plus:')}\n"
              f"2. Check a client's progress {emojize(':chart_increasing:')}\n"
-             f"3. Say goodbye to a client {emojize(':minus:')}\n\n")
+             f"3. Say goodbye to a client {emojize(':minus:')}\n"
+             f"4. Exit the program {emojize(':cross_mark:')}\n")
     typing_effect(words)
-    option = (input("Choose an option from the above (1, 2 or 3):\n"))
+    option = (input("\nChoose an option from the above (1, 2, 3 or 4):\n"))
     task(option)
 
 
@@ -215,7 +216,7 @@ def is_empty_string(data):
     try:
         if data == "":
             raise ValueError("You need to provide "
-                             "the requested information!\n")
+                             "the requested information!\n\n")
     except ValueError as e:
         words = (f"\nYou didn't answer. {e}")
         typing_effect(words)
@@ -230,6 +231,74 @@ def contains_special_char(string):
     for char in string:
         if not char.isalnum():
             return True
+
+
+def name_validation(name):
+    """
+    Validates the inputted client's name
+    """
+    if is_empty_string(name):
+        return False
+        # Checks that the inserted name is not a number
+    elif name.isnumeric():
+        print("\nClient's name cannot be a number.\n"
+              "\nPlease insert a valid one.\n")
+        return False
+    elif contains_special_char(name):
+        print("\nPlease insert a valid name.\n")
+        return False
+    elif len(name) < 3:
+        print("\nThe name needs to be at least 3 characters long.\n")
+        return False
+    # Checks if the name is already in the records
+    elif clients_init_conditions.find(name.capitalize()):
+        words = ("\nThere's already another client registered with "
+                 " the same name.\nPlease provide extra identification "
+                 "for this client so that \nhe/she can be discerned "
+                 "from the one already existing with the same name.\n\n"
+                 )
+        typing_effect(words)
+        return False
+    else:
+        return True
+
+
+def gender_validation(gender_letter):
+    """
+    Validates the client's inputted gender
+    """
+    # Checks that the inputted gender is not blank space
+    if is_empty_string(gender_letter):
+        print("\nPlease insert client's gender.")
+        return False
+    # Makes sure the gender is either F or M
+    elif (gender_letter.upper() != 'F') and (gender_letter.upper() != 'M'):
+        print("\nPlease answer with either 'F' or 'M'.")
+        return False
+    else:
+        return True
+
+
+def age_validation(age):
+    """
+    Validates the inputted age
+    """
+    # Checks that the inputted age is not blank space
+    if is_empty_string(age):
+        print("Please insert client's age.")
+        return False
+    # Checks that the insterted age is a number
+    elif not age.isnumeric():
+        print("\nAge needs to be a number.")
+        return False
+    # Makes sure the age is a realistic value
+    elif (int(age) < 14) or (int(age) > 100):
+        print("\nPlease insert a valid age.\n"
+              "Clients cannot be younger than 14\n"
+              "or older than 100.\n")
+        return False
+    else:
+        return True
 
 
 def weight_validation(weight):
@@ -311,72 +380,34 @@ def take_client_data():
     sleep(1)
     # Input name
     while True:
-        name = input("Full name: \n")
+        name = input("Client's name: \n")
         # Checks that the inputted name is not blank space
-        if is_empty_string(name):
-            print("You need to insert the client's name.\n")
-            continue
-        # Checks that the inserted name is not a number
-        elif name.isnumeric():
-            print("\nClient's name cannot be a number.\n"
-                  "\nPlease insert a valid one.\n")
-            continue
-        elif contains_special_char(name):
-            print("\nPlease insert a valid name.\n")
-            continue
-        elif len(name) < 3:
-            print("\nThe name needs to be at least 3 characters long.\n")
-            continue
-        # Checks if the name is already in the records
-        elif clients_init_conditions.find(name.capitalize()):
-            words = ("\nThere's already another client registered with "
-                     " the same name.\nPlease provide extra identification "
-                     "for this client so that \nhe/she can be discerned "
-                     "from the one already existing with the same name.\n\n"
-                     )
-            typing_effect(words)
-            continue
-        else:
+        if name_validation(name):
             break
+        else:
+            continue
 
     # Input gender
     while True:
         sleep(0.3)
         gender_letter = input("\nGender(F or M): \n")
-        # Checks that the inputted gender is not blank space
-        if is_empty_string(gender_letter):
-            print("\nPlease insert client's gender.")
-            continue
-        # Makes sure the gender is either F or M
-        elif (gender_letter.upper() != 'F') and (gender_letter.upper() != 'M'):
-            print("\nPlease answer with either 'F' or 'M'.")
-            continue
-        else:
+        if gender_validation(gender_letter):
             if gender_letter.upper() == 'F':
                 gender = "female"
             else:
                 gender = "male"
             break
+        else:
+            continue
+
     # Input age
     while True:
         sleep(0.3)
         age = input("\nAge: \n")
-        # Checks that the inputted age is not blank space
-        if is_empty_string(age):
-            print("Please insert client's age.")
-            continue
-        # Checks that the insterted age is a number
-        elif not age.isnumeric():
-            print("\nAge needs to be a number.")
-            continue
-        # Makes sure the age is a realistic value
-        elif (int(age) < 14) or (int(age) > 100):
-            print("\nPlease insert a valid age.\n"
-                  "Clients cannot be younger than 14\n"
-                  "or older than 100.\n")
-            continue
-        else:
+        if age_validation(age):
             break
+        else:
+            continue
 
     # Input height
     while True:
