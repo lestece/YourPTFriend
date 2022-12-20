@@ -1,10 +1,12 @@
 # Import packages
 import os
 from time import sleep
+# sys is needed for implementing the typing effect
 import sys
+# Instructions on how to insert emojis were found at:
 # https://medium.com/analytics-vidhya/how-to-print-emojis-using-python-2e4f93443f7e
 from emoji import emojize
-# https://mauricebrg.com/article/2020/08/cli_text_styling_progress_bars_and_prompts_with_click.html
+# click is needed for the progress bar and text styling
 import click
 import gspread
 from google.oauth2.service_account import Credentials
@@ -107,9 +109,9 @@ def task(option):
 
 def task_validation(choice):
     """
-    Inside the try, convert the chosen option into an integer.
+    Inside the try, converts the chosen option into an integer.
     Raises a value error if the string can't be converted into an integer
-    or if the choice is not 1, 2 or 3.
+    or if the choice is not 1, 2, 3 or 4.
     """
     try:
         if not choice.isnumeric():
@@ -149,7 +151,9 @@ def typing_effect(words):
 
 def progress_bar() -> None:
     """
-    Shows a progress bar
+    Shows a progress bar.
+    Instructions found at:
+    https://mauricebrg.com/article/2020/08/cli_text_styling_progress_bars_and_prompts_with_click.html
     """
 
     with click.progressbar(label="",
@@ -166,6 +170,7 @@ def start_program():
     -Adding a new client
     -Checking an existing client's progress
     -Deleting a client from the records
+    -Exiting the program
     """
     print("""\
 
@@ -316,7 +321,7 @@ def height_validation(height):
     # Makes sure the height is in cm and not feet
     # Also checks that the inserted height is realistic
     # Takes into account the heights of shortest and
-    # tallest people in the world
+    # tallest person in the world
     elif (int(height) < 63) or (int(height) > 272):
         print("\nPlease insert a valid height in cm.\n"
               "Example: 167")
@@ -339,7 +344,7 @@ def weight_validation(weight):
         return False
     # Makes sure the weight insterted is realistic
     # Takes into account the weights of heaviest and
-    # lightest people in the world
+    # lightest person in the world
     elif (int(weight) < 24) or (int(weight) > 635):
         print("\nPlease insert a valid weight in kg.\n"
               "Example: 87\n\n")
@@ -503,7 +508,7 @@ def take_client_data():
             break
         else:
             continue
-    
+
     # Input activity level
     while True:
         sleep(0.2)
