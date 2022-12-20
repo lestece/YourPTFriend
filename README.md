@@ -33,7 +33,7 @@ __YourPTFriend__ is an interactable command-line based program built in Python t
 
 Since working out and nutrition go hand in hand, it happens very often that physical instructors are also required, besides their duties, to provide nutritional advice when first contacted.
 
-This app provides support by taking charge of that nutritional aspect. By establishing the amount of daily calorie a new client should consume and allowing to keep track of clients' progress,
+This app provides support by taking charge of that nutritional aspect. By establishing the amount of daily calories a new client should consume and keeping track of the clients' progress,
 the PT can then entirely focus on his/her main responsibility: 
 building an effective workout plan based on the client's need.
 - - - 
@@ -58,6 +58,7 @@ As a user I want to:
 - have the option to choose another task after I'm finished with the current action
 - have my inputs checked and validated so that the task outputs are even more reliable
 
+[Back to top ↑](README.md/#yourptfriend)
 - - - 
 ## 4. FLOWCHART AND APP LOGIC
 ### Flowchart
@@ -95,6 +96,8 @@ Used to store all clients' data and needed when the program needs to retrieve th
 ![Clients progress](images/readme-images/clients-progress.png)
 This worksheet is used to store the latest inserted body weight and body fat of each client so that the program can retrieve them and compare them with the new data that the user is inserting to calculate a client's progress.
 
+[Back to top ↑](README.md/#yourptfriend)
+- - - 
 ## 5. FEATURES
 
 ### EXISTING FEATURES 
@@ -113,23 +116,25 @@ Each option is accompanied by an _emoji_, for the purpose of making the app more
 ![Add new client](images/readme-images/add-new-client.png)
 When choosing the option to add a new client to the records, the PT is asked for the client's name, gender, age, height and weight.
 ![Activity level](images/readme-images/activity-level.png)
-The next piece of information requested is the client's activity level. The answer needs to be the actvity level's initials, as prompted from the magenta coloured foreground color of the answer options available.
-Also the body fat percentage is requested in this screen.
+The next piece of information requested is the client's activity level. The answer needs to be the activity level's initials, as prompted from the magenta coloured foreground color of the answer options available.
+Also the body fat percentage is requested on this screen.
 ![Goal](images/readme-images/goal-input.png)
-The last data needed is the client's goal regarding the body weight. The client's name inserted in the previous screens is retrieved and displayed here to make the process less sterile. 3 options are made available and the answer needs to be one of the letters highlighted by the green foreground color.
+The last data needed is the client's goal regarding the body weight. The client's name inserted on the previous screens is retrieved and displayed here to make the process less sterile. 3 options are made available and the answer needs to be one of the letters highlighted by the green foreground color.
 ![Add client confirmation](images/readme-images/add-client-confirmation.png)
 The user is asked for confirmation of all of the inserted data before proceeding.
 The inputted data are highlighted in a foreground blue color, that makes it easier to identify wrongly inserted data.
 
-If the data is incorrect and the user insterts 'n', then all data will be asked again.
+If the data is incorrect and the user inserts 'n', then all data will be asked again.
 ![Add client to records](images/readme-images/update-client-records.png)
-After approving the insterted data, the user is brought to a screen that confirms the successfull updating of the clients records.
+After approving the inserted data, the user is brought to a screen that confirms the successfull updating of the clients records.
 This screen features a progress bar that has the purpose of giving the user a sense of awareness about the action that is happening behind the scenes.
 ![Workouts per week](images/readme-images/workouts-per-week.png)
 The user is then prompted to inserting the client's committment to physical activity, choosing between 1 to 5 days per week. This piece of information is essential for calculating the daily calorie intake.
 ![Daily calorie intake](images/readme-images/daily-calorie-intake.png)
 Finally, the newly added client's tailored daily calorie intake is displayed as the last feature of the adding a new client process. 
-The result is displayed alone on the screen for 2 seconds, so that the information displayed has time to be fully absorbed and the user doesn't feel rushed by the control for closing the screen appearing straight away.
+The result is displayed alone on the screen for 2 seconds, so that the information displayed has time to be fully absorbed and the user doesn't feel rushed by the control for closing the screen that would have otherwise appeared straight away.
+
+[Back to top ↑](README.md/#yourptfriend)
 
 - __OPTION 2: CHECK A CLIENT'S PROGRESS__
 ![Check that client exists](images/readme-images/check-client-exists.png)
@@ -160,6 +165,9 @@ Possible future improvements for the program would be:
 - Expanding the client's possible goal (improving aerobic activity, endurance, preparing for competition etc.) and outputting a guidance of the training plan that the PT could use to build the single workouts
 
 - Improving the data validation when adding a new client, for example comparing the weight and height inserted to check if they are realistic/possible.
+
+[Back to top ↑](README.md/#yourptfriend)
+
 ---
 
 ## 6. TESTING
@@ -190,7 +198,7 @@ __Python__ is the programming language used to create this project
 - [Patorjk](http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20): to create the ASCII art text used in the project
 - [CI Python Linter](https://pep8ci.herokuapp.com/#): to validate the Python code for this program
 - [GifCap (by João Moreno)](https://gifcap.dev/): used for creating the gifs from the screen recordings during the testing process (for the TESTING.md) and for this README file.
-
+- - -
 ## 8. CREDITS
 
 - Instructions on how to implement the emojis used when displaying the app task options and the client progress results where taken from [here](https://medium.com/analytics-vidhya/how-to-print-emojis-using-python-2e4f93443f7e)
@@ -199,6 +207,9 @@ __Python__ is the programming language used to create this project
 - Guidance on how to clear the screen using the _os module_ was found [here](https://www.geeksforgeeks.org/clear-screen-python/)
 - The __progress bar__ and __foreground colors and text styling__ were made possible thanks to [this guide](https://mauricebrg.com/article/2020/08/cli_text_styling_progress_bars_and_prompts_with_click.html) 
 - Theinstructions to accomplish getting the latest insertion row position of a client in the client progress worksheet, were found [here](https://stackoverflow.com/questions/529424/traverse-a-list-in-reverse-order-in-python)
+
+[Back to top ↑](README.md/#yourptfriend)
+- - - 
 
 ## 9. DEPLOYMENT
 
@@ -227,9 +238,11 @@ This program has been deployed to [Heroku](https://www.heroku.com/) following th
 11) Under _"Manual Deploy"_, make sure the __main branch__ is selected and click on __Deploy branch__
 
 12) Your app is successfully deployed at the address that opens up after clicking on the __Open App__ button at the top of the page
-
+- - -
 ## 10. ACKNOWLEDGEMENTS
 
 This program was built as the _Project Portfolio 3_ for the _Diploma in Full Stack Software Development_ with [Code Institute](https://codeinstitute.net/).
 
 A special thanks goes to my family and friends for their invaluable support and their availability to test my projects as users; and to my mentor Seun for her vital and constructive feedback and guidance.
+
+[Back to top ↑](README.md/#yourptfriend)

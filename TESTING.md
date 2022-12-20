@@ -111,7 +111,7 @@ All of the functions containing the formulas to calculate TDEE and reach the dai
 
 
 ##### __TDEE_FORMULAS FILE__
-If manually calculating the TDEE  using the formulas contained in _tdee_formulas.py_ file, the TDEE results obtained in the _clients initial conditions_ worksheet (screenshot above) prove to be accurate. 
+If manually calculating the TDEE  using the formulas contained in _tdee_formulas.py_ file, the TDEE results obtained on the _clients initial conditions_ worksheet (screenshot above) prove to be accurate. 
 
 1) __Rick__
 
@@ -285,7 +285,7 @@ In the process of testing the reliability of the formulas to calculate the clien
 The problem only seemed to happen with female clients, because the male client's result was right:
 ![TDEE bug](images/testing-images/tdee-bug.png)
 
-Trying to undertand where the issue was coming from, I calculated the female clients' TDEE using the male formula for calculating the LBM: this time the result obtained was the same as the one reported in the worksheet.
+Trying to understand where the issue was coming from, I calculated the female clients' TDEE using the male formula for calculating the LBM: this time the result obtained was the same as the one reported in the worksheet.
 
 It was then clear that the problem was coming from the calculate_lbm() function and, particularly, from the "gender" argument passed into the function. Going back to the run.py file and checking the value of the gender variable, I discovered that it didn't match with the value contained in the if statement condition that was checking if the client was female ('f'):
 ![Gender bug](images/testing-images/gender-bug.png)
