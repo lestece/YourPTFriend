@@ -2,23 +2,23 @@
 
 ## TABLE OF CONTENTS
 
-1) [Manual Testing](TESTING.md/#1-manual-testing)
-    - [Task choice](TESTING.md/#task-choice)
-        - [Input validation](TESTING.md/#input-validation)
-        - [Task 1 option tested](TESTING.md/#task-1-option-tested)
-        - [Task 2 option tested](TESTING.md/#task-2-option-tested)
-        - [Task 3 option tested](TESTING.md/#task-3-option-tested)
-        - [Task 4 option tested](TESTING.md/#task-4-option-tested)
-    - [Add new client](TESTING.md/#external-links)
-        - [Inputs validation](TESTING.md/#inputs-validation)
-        - [Client's data confirmation](TESTING.md/#clients-data-confirmation)
-        - [Formulas](TESTING.md/#formulas)
-    - [Check client's progress](TESTING.md/#check-clients-progress)
-    - [Delete client](TESTING.md/#delete-client-from-records)
-    - [Exit program](TESTING.md/#exit-the-program)
-    - [User control 'Enter'](TESTING.md/#user-control-enter)
-2) [Code Validation](TESTING.md/#2-code-validation)
-3) [Bugs and fixes](TESTING.md/#3-bugs-and-fixes)
+1) [Manual Testing](#1-manual-testing)
+    - [Task choice](#task-choice)
+        - [Input validation](#input-validation)
+        - [Task 1 option tested](#task-1-option-tested)
+        - [Task 2 option tested](#task-2-option-tested)
+        - [Task 3 option tested](#task-3-option-tested)
+        - [Task 4 option tested](#task-4-option-tested)
+    - [Add new client](#add-new-client)
+        - [Inputs validation](#inputs-validation)
+        - [Client's data confirmation](#clients-data-confirmation)
+        - [Formulas](#formulas)
+    - [Check client's progress](#check-clients-progress)
+    - [Delete client](#delete-client-from-records)
+    - [Exit program](#exit-the-program)
+    - [User control 'Enter'](#user-control-enter)
+2) [Code Validation](#2-code-validation)
+3) [Bugs and fixes](#3-bugs-and-fixes)
 
 [⬅ Back to the README.md file](README.md)
 - - - 
@@ -156,7 +156,7 @@ __TDEE__ = 1337.0752 + 133.70752 + 501.4032 = _1972.18_(__1972__)
 ##### __Daily calorie intake formulas__
 To test the daily calorie intake function and related ones, I set a different availability parameter for each client in the examples.
 
-1) Rick
+1) __Rick__
 ![Rick's daily calorie intake](images/testing-images/rick-testing-example.png)
 
 Rick's availability to workouts was set to 2 days per week.
@@ -168,7 +168,7 @@ Daily kcal burnt from workout = 600kcal / 7 = 85.71
 __Daily calorie intake__ = 2715 + 85.71 - 500 = 2300.71 (__2301__)
 
 
-2) Sarah
+2) __Sarah__
 ![Sarah's daily calorie intake](images/testing-images/sarah-testing-example.png)
 
 Sarah's availability to workouts was set to 4 days per week.
@@ -180,7 +180,7 @@ Daily kcal burnt from workout = 1200kcal / 7 = 171.42
 __Daily calorie intake__ = 2234 + 171.42 = 2405.42 (__2405__)
 
 
-2) Jenna
+2) __Jenna__
 ![Jenna's daily calorie intake](images/testing-images/jenna-testing-example.png)
 
 Jenna's availability to workouts was set to 3 days per week.
@@ -207,24 +207,28 @@ I tested that also the new body weight and body fat inputs validation is working
 #### - Progress results
 
 For testing the accuracy of the client's progress result, I used the same fictional clients used above for the daily calorie intake functions.
+
 ![Client progress examples testing](images/testing-images/progress-results-testing.png)
 
 1) Rick
 
 Rick's new weight and body fat have been inputted so that the progress results would return a __negative/fail response__:
 Considering his initial goal was to lose weight and latest registered weight and body fat were respectively 120kg and 35%, the new data provided have been 122kg and 36%. 
+
 ![Client progress fail testing](images/testing-images/client-progress-fail-testing.png)
 
 2) Sarah
 
 Sarah's new new data was to test a __successful response__:
 Being the initial goal to maintain weight, I used the same latest recorded data: 52kg and 16%. 
+
 ![Client progress success testing](images/testing-images/client-progress-success-testing.png)
 
 3) Jenna
 
 Jenna has been used to test a __neutral/no change occured response__:
 To gain weight was the initial goal, so I used the same latest recorded data of 54kg and 12%. 
+
 ![Client progress neutral testing](images/testing-images/client-progress-neutral-testing.png)
 
 [Back to top ↑](TESTING.md/#yourptfriend-testing)

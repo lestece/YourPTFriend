@@ -9,22 +9,20 @@
 
 ## TABLE OF CONTENTS
 
-1. [INTRODUCTION](#1-introduction)
+1. [INTRODUCTION](#1-introduction--goal)
 2. [INSTRUCTIONS](#2-instructions)
-3. [USER STORIES](#3-user-stories)
+3. [USER STORIES](#3-user-persona--their-goalsneeds)
 4. [FLOWCHART AND PROGRAM LOGIC](#4-flowchart-and-app-logic)
    - [Flowchart](#flowchart)
    - [App logic](#app-logic)
-      - [Formulas](#formulas)
-      - [Worksheets](#worksheets-for-storing-data)
 5. [FEATURES](#5-features)
    - [Existing features](#existing-features)
    - [Features to implement in the future](#features-to-implement-in-the-future)
-6. [TESTING](#5-testing)
-7. [TECHNOLOGIES USED](#6-technologies-used)
-8. [CREDITS](#6-credits)
-9. [DEPLOYMENT](#7-deployment)
-10. [ACKNOWLEDGEMENTS](#8-acknowledgements)
+6. [TESTING](#6-testing)
+7. [TECHNOLOGIES USED](#7-technologies-used)
+8. [CREDITS](#8-credits)
+9. [DEPLOYMENT](#9-deployment)
+10. [ACKNOWLEDGEMENTS](#10-acknowledgements)
 
 - - - 
 ## 1. INTRODUCTION & GOAL
@@ -63,6 +61,7 @@ As a user I want to:
 ## 4. FLOWCHART AND APP LOGIC
 ### Flowchart
 ![Flowchart](images/readme-images/flowchart.png)
+
 The flowchart above was designed to have a guide to follow during the program building process and to show how the app works from start to finish.
 
 ### App logic
@@ -91,9 +90,11 @@ The file contains two worksheets:
 
 - Clients initial conditions Worksheet
 ![Clients init conditions](images/readme-images/clients-intial-conditions.png)
+
 Used to store all clients' data and needed when the program needs to retrieve the client's goal or delete a client from the records. 
 - Clients progress
 ![Clients progress](images/readme-images/clients-progress.png)
+
 This worksheet is used to store the latest inserted body weight and body fat of each client so that the program can retrieve them and compare them with the new data that the user is inserting to calculate a client's progress.
 
 [Back to top ↑](README.md/#yourptfriend)
@@ -104,33 +105,42 @@ This worksheet is used to store the latest inserted body weight and body fat of 
 
 - __START SCREEN__
 ![Start screen](images/readme-images/start-screen.png)
+
 The start screen displays the app name through an __ASCII art text__
 that shows for the duration of _3.5 seconds_ (an appropriate time for allowing the user to take in the intro and at the same time not to get impatient) before the screen is cleared to show the next screen.
 
 - __TASK CHOICE__
 ![Task choice](images/readme-images/task-choice.png)
+
 The introductory screen contains a brief explanation of the app's goal and prompts the user to choose between __3 different tasks__ that the app can perform.
 Each option is accompanied by an _emoji_, for the purpose of making the app more engaging.
 
 - __OPTION 1: ADD A NEW CLIENT__
 ![Add new client](images/readme-images/add-new-client.png)
+
 When choosing the option to add a new client to the records, the PT is asked for the client's name, gender, age, height and weight.
 ![Activity level](images/readme-images/activity-level.png)
+
 The next piece of information requested is the client's activity level. The answer needs to be the activity level's initials, as prompted from the magenta coloured foreground color of the answer options available.
 Also the body fat percentage is requested on this screen.
 ![Goal](images/readme-images/goal-input.png)
+
 The last data needed is the client's goal regarding the body weight. The client's name inserted on the previous screens is retrieved and displayed here to make the process less sterile. 3 options are made available and the answer needs to be one of the letters highlighted by the green foreground color.
 ![Add client confirmation](images/readme-images/add-client-confirmation.png)
+
 The user is asked for confirmation of all of the inserted data before proceeding.
 The inputted data are highlighted in a foreground blue color, that makes it easier to identify wrongly inserted data.
 
 If the data is incorrect and the user inserts 'n', then all data will be asked again.
 ![Add client to records](images/readme-images/update-client-records.png)
+
 After approving the inserted data, the user is brought to a screen that confirms the successfull updating of the clients records.
 This screen features a progress bar that has the purpose of giving the user a sense of awareness about the action that is happening behind the scenes.
 ![Workouts per week](images/readme-images/workouts-per-week.png)
+
 The user is then prompted to inserting the client's committment to physical activity, choosing between 1 to 5 days per week. This piece of information is essential for calculating the daily calorie intake.
 ![Daily calorie intake](images/readme-images/daily-calorie-intake.png)
+
 Finally, the newly added client's tailored daily calorie intake is displayed as the last feature of the adding a new client process. 
 The result is displayed alone on the screen for 2 seconds, so that the information displayed has time to be fully absorbed and the user doesn't feel rushed by the control for closing the screen that would have otherwise appeared straight away.
 
@@ -138,19 +148,24 @@ The result is displayed alone on the screen for 2 seconds, so that the informati
 
 - __OPTION 2: CHECK A CLIENT'S PROGRESS__
 ![Check that client exists](images/readme-images/check-client-exists.png)
+
 The first piece of information requested for checking a client's progress is the client's name, to make sure that he/she exists in the records.
 The user is then made aware that the latest body weight and fat are being retrieved.
 ![New data](images/readme-images/new-data.png)
+
 The user is then prompted to insert the new weight and body fat percentage for the program to compare the old and the new data.
-![Progress results](images/progress-result.png)
+![Progress results](images/readme-images/progress-result.png)
+
 The progress results are showed one after the other, with a little pause in between (2 seconds) to give the user time to absorb the first response and give it the necessary importance.
 
 - __OPTION 3: DELETE A CLIENT__
 ![Client deletion](images/readme-images/client-deletion.png)
+
 After the user inserts the name of the client to delete, and is showed that the operation is being processed, a confirmation of deletion appears on the screen.
 
 - __OPTION 4: EXIT__
 ![Exit](images/readme-images/exit.png)
+
 This screen thanks the user for using the program and uses an ASCII art text to give goodbyes.
 - - - 
 
@@ -165,6 +180,8 @@ Possible future improvements for the program would be:
 - Expanding the client's possible goal (improving aerobic activity, endurance, preparing for competition etc.) and outputting a guidance of the training plan that the PT could use to build the single workouts
 
 - Improving the data validation when adding a new client, for example comparing the weight and height inserted to check if they are realistic/possible.
+
+- The chance to only change the wrong piece of inputted data when the user doesn't confirm the new client data for adding a new client, instead of having to reinsert all of them. 
 
 [Back to top ↑](README.md/#yourptfriend)
 
@@ -206,7 +223,7 @@ __Python__ is the programming language used to create this project
 - [This](https://www.programiz.com/python-programming/time) and [this](https://www.digitalocean.com/community/tutorials/python-time-sleep) guide were followed to implement the improved execution timing in the program to accomplish a better ux
 - Guidance on how to clear the screen using the _os module_ was found [here](https://www.geeksforgeeks.org/clear-screen-python/)
 - The __progress bar__ and __foreground colors and text styling__ were made possible thanks to [this guide](https://mauricebrg.com/article/2020/08/cli_text_styling_progress_bars_and_prompts_with_click.html) 
-- Theinstructions to accomplish getting the latest insertion row position of a client in the client progress worksheet, were found [here](https://stackoverflow.com/questions/529424/traverse-a-list-in-reverse-order-in-python)
+- The instructions to accomplish getting the latest insertion row position of a client in the client progress worksheet, were found [here](https://stackoverflow.com/questions/529424/traverse-a-list-in-reverse-order-in-python)
 
 [Back to top ↑](README.md/#yourptfriend)
 - - - 
