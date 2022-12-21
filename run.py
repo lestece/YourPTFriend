@@ -939,7 +939,8 @@ def delete_client():
         client_row = client_find.row
         clients_init_conditions.delete_rows(client_row)
     else:
-        print(f"\n\nThere's no client under name of {client_to_delete}.\n\n")
+        print(f"\n\nThere's no client under the name of '{client_to_delete}'"
+              f".\n\n")
         delete_client()
     # Loop that deletes every row containing that client name
     # in the client progress worksheet
